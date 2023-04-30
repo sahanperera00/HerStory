@@ -7,8 +7,12 @@
 #Technologies used - MERN
 
 #Project team
+
 •	IT21008146- Sahan Perera
+
 •	IT21004322- Chanukya Serasinghe
+
 •	IT21003332- Devindu Samarasinghe
+
 •	IT21004636- Nashali Perera
 
