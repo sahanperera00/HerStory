@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { GoArrowUp, GoArrowDown } from "react-icons/go";
-
 import { BsFillChatLeftFill } from "react-icons/bs";
-
-
-
-
 
 const Post = () => {
   const [active, isActive] = useState(false);
@@ -17,7 +12,6 @@ const Post = () => {
   const [animation, setAnimation] = useState(false);
   const [animation2, setAnimation2] = useState(false);
   const [activePostId, setActivePostId] = useState(null);
-  
 
   const handlePostClick = (postId) => {
     setActivePostId(postId);
@@ -54,13 +48,13 @@ const Post = () => {
   };
   return (
     <div
-          key={2}
-          onClick={() => handlePostClick(2)}
-          className={` 
-          ${activePostId === 2 ? "border-2 border-blue-500" : ""
+      key={2}
+      onClick={() => handlePostClick(2)}
+      className={` 
+          ${
+            activePostId === 2 ? "border-2 border-blue-500" : ""
           } ml-[19px] mt-[20px] h-fit w-[93%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-2`}
-        >
-    
+    >
       <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-blue-400"></div>
 
       <div className=" inline-block h-fit w-[calc(100%-17vw+32px)] px-4">
