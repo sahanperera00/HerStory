@@ -9,3 +9,5 @@ export { default as ChartsHeader } from "./ChartsHeader";
 export { default as Header } from "./Header";
 export { default as DashTopBox } from "./DashTopBox";
 export { default as DashTopButton } from "./DashTopButton";
+export { default as TableHeader } from "./Table/TableHeader";
+export { default as TableData } from "./Table/TableData";

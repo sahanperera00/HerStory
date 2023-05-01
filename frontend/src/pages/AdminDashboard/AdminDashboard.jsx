@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
 import { useStateContext } from "../../contexts/ContextProvider";
-import { FiUser } from "react-icons/fi";
-import { DashTopBox, DashTopButton } from "../../components";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, Sidebar, ThemeSettings } from "../../components";
+import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
+import { Header, TableHeader, TableData } from "../../components";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
@@ -31,10 +28,32 @@ export default function AdminDashboard() {
   ------------------------------------------------
   */
 
+  const orders = [
+    {
+      id: 1,
+      client: "John Doe",
+      grossPrice: "1000",
+      commission: "100",
+      status: "Confirmed",
+    },
+    {
+      id: 2,
+      client: "John Doe",
+      grossPrice: "1000",
+      commission: "100",
+      status: "Confirmed",
+    },
+    {
+      id: 3,
+      client: "John Doe",
+      grossPrice: "1000",
+      commission: "100",
+      status: "Confirmed",
+    },
+  ];
+
   return (
     <div>
-      {/* DON'T CHANGE ANYTHING HERE */}
-
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
@@ -64,7 +83,6 @@ export default function AdminDashboard() {
 
           <div
             className={
-              // MAIN BACKGROUND IMPLEMENTATION
               activeMenu
                 ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
                 : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
@@ -77,13 +95,49 @@ export default function AdminDashboard() {
 
             <div>
               {themeSettings && <ThemeSettings />}
-              <div>
-                {/* Paste your content Here */}
+              <div className="bg-[#c5c5c5] md:m-6 p-5">
+                <Header title="Topic" />
 
-                <h1 className="ml-5">Hello My Name is Billy Balloon Head</h1>
+                <div className="block w-full overflow-x-auto rounded-lg">
+                  <table className="w-full rounded-lg">
+                    <thead>
+                      <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
+                        <TableHeader value="Order ID" />
+                        <TableHeader value="Client" />
+                        <TableHeader value="Gross Price" />
+                        <TableHeader value="Commission" />
+                        <TableHeader value="Status" />
+                        <TableHeader value="Action" />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders && orders.map((data) => {
+                        return (
+                          <tr
+                            key={data.id}
+                            className="bg-white border-b-2 border-gray-200 dark:bg-slate-800"
+                          >
+                            <TableData value={data.id} />
+                            <TableData value={data.client} />
+                            <TableData value={data.grossPrice} />
+                            <TableData value={data.commission} />
+                            <TableData value={data.status} />
+                            <TableData>
+                              <Link to="/admin/order-details">
+                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+                                  View
+                                </button>
+                              </Link>
+                            </TableData>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <Footer />
             </div>
+            <Footer />
           </div>
         </div>
       </div>
