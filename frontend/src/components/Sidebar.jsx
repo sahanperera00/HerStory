@@ -25,7 +25,7 @@ import {
 import { FaHouseDamage, FaRegMoneyBillAlt, FaChartLine } from "react-icons/fa";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import { useStateContext } from "../../../../src/contexts/ContextProvider";
+import { useStateContext } from "../contexts/ContextProvider";
 
 export default function Sidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =

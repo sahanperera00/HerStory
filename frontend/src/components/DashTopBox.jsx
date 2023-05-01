@@ -1,4 +1,4 @@
-import { useStateContext } from "../../../../src/contexts/ContextProvider";
+import { useStateContext } from "../contexts/ContextProvider";
 
 export default function DashTopBox({ icon, label, data }) {
   const { currentColor } = useStateContext();

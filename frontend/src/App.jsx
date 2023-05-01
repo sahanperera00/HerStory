@@ -1,13 +1,17 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Forum from "./pages/Forum/Forum";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
   return (
     <div>
-      <Forum />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        {/* <Forum /> */}
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
     </div>
   );
 }
