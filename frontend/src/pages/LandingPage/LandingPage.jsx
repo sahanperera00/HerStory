@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../components/Tailwind/components";
+import { Button } from "../../components";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {

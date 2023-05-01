@@ -4,17 +4,9 @@ import axios from "axios";
 
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiUser } from "react-icons/fi";
-import {
-  DashTopBox,
-  DashTopButton,
-} from "../../components/Tailwind/components";
+import { DashTopBox, DashTopButton } from "../../components";
 import { FiSettings } from "react-icons/fi";
-import {
-  Navbar,
-  Footer,
-  Sidebar,
-  ThemeSettings,
-} from "../../components/Tailwind/components";
+import { Navbar, Footer, Sidebar, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 

@@ -2,8 +2,8 @@ import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Button } from ".";
 // import { userProfileData } from "../../../data/dummy";
-import { useStateContext } from "../../../../src/contexts/ContextProvider";
-import KG from "../../../data/KG.png";
+import { useStateContext } from "../contexts/ContextProvider";
+import KG from "../data/KG.png";
 
 export default function UserProfile() {
   const { currentColor } = useStateContext();
