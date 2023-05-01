@@ -16,6 +16,7 @@ import {
   ThemeSettings,
 } from "../../components/Tailwind/components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import AdminSidebar from "./AdminSidebar";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
@@ -61,11 +62,11 @@ export default function AdminDashboard() {
 
           {activeMenu ? ( // SIDEBAR IMPLEMENTATION
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-              <Sidebar />
+              <AdminSidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
+              <AdminSidebar />
             </div>
           )}
 
