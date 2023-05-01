@@ -17,7 +17,7 @@ export default function AdminSidebar() {
   const activeLink =
     "flex items-center gap-5 px-4 pt-3 pb-2.5 rounded-lg  text-white text-md my-3";
   const normalLink =
-    "flex items-center gap-5 px-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 transition duration-300 ease-in-out";
+    "flex items-center gap-5 px-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700  my-3 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray transition duration-300 ease-in-out";
 
   return (
     <div className=" h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -50,7 +50,7 @@ export default function AdminSidebar() {
             </p>
 
             <NavLink
-              to=""
+              to="/coming-soon"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
@@ -58,7 +58,7 @@ export default function AdminSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <FiUser /> {/*  icon  */}
-              <span className="capitalize ">Complaint Management</span>{" "}
+              <span className="capitalize ">Complaint Management</span>
               {/*  link name  */}
             </NavLink>
 
@@ -67,7 +67,7 @@ export default function AdminSidebar() {
             </p>
 
             <NavLink
-              to=""
+              to="/admin/category-management"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
@@ -80,7 +80,7 @@ export default function AdminSidebar() {
             </NavLink>
 
             <NavLink
-              to=""
+              to="/admin/manage-consultants"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
@@ -97,7 +97,7 @@ export default function AdminSidebar() {
             </p>
 
             <NavLink
-              to=""
+              to="/admin/manage-forum"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
