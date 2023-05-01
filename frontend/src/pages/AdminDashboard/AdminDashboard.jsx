@@ -95,7 +95,7 @@ export default function AdminDashboard() {
 
             <div>
               {themeSettings && <ThemeSettings />}
-              <div className="bg-[#c5c5c5] md:m-6 p-5">
+              <div className="md:m-6 p-5">
                 <Header title="Topic" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
                         return (
                           <tr
                             key={data.id}
-                            className="bg-white border-b-2 border-gray-200 dark:bg-slate-800"
+                            className="bg-white  hover:bg-[#fafafa] border-b-2 border-gray-200 dark:bg-slate-800"
                           >
                             <TableData value={data.id} />
                             <TableData value={data.client} />
