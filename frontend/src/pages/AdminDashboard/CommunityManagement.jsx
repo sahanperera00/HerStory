@@ -10,7 +10,7 @@ import Forum from "../Forum/Forum";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function ForumManagement() {
+export default function CommunityManagement() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
