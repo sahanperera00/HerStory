@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Forum from "./pages/Forum/Forum";
+import ForumManagement from "./pages/AdminDashboard/ForumManagement";
 import Community from "./pages/Forum/Community";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -24,7 +25,7 @@ function App() {
           path="/admin/category-management"
           element={<CategoryManagement />}
         />
-        <Route path="/admin/manage-forum" element={<Forum />} />
+        <Route path="/admin/manage-forum" element={<ForumManagement />} />
       </Routes>
     </div>
   );
