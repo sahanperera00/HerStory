@@ -1,4 +1,4 @@
-// import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ForumNavbar";
 import Communities from "../../components/Communities/Communities";
 import { Modal, Input, Button, Upload } from "antd";
 import { useState } from "react";
@@ -42,7 +42,7 @@ function Community() {
   };
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Modal
         destroyOnClose={true}
         title="Create a Community"
