@@ -6,6 +6,7 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ManageConsultants from "./pages/AdminDashboard/ManageConsultants";
 import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
+import ForumPost from "./pages/Forum/ForumPost";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/post" element={<ForumPost />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
         <Route
