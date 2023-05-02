@@ -168,10 +168,6 @@ const Post = () => {
                 />
               </>
             )}
-            <BsFillChatLeftFill
-              fill="#02C8AC"
-              className="h-6 w-6 absolute top-5 right-2 hover:drop-shadow-[0_0_5px_rgba(0,255,0,1)]"
-            />
           </div>
         </div>
       </div>

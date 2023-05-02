@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
+import { BsPeople } from "react-icons/bs";
+import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
 
@@ -93,19 +95,30 @@ export default function AdminSidebar() {
             </NavLink>
 
             <p className="text-[12px] text-gray-400 dark:text-gray-400 mt-4 uppercase">
-              Forum Service
+              Forum Management
             </p>
-
             <NavLink
-              to="/admin/manage-forum"
+              to="/admin/manage-community"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <FiUser /> {/*  icon  */}
-              <span className="capitalize ">Forum Management</span>{" "}
+              <BsPeople /> {/*  icon  */}
+              <span className="capitalize ">Community Management</span>{" "}
+              {/*  link name  */}
+            </NavLink>
+            <NavLink
+              to="/admin/manage-post"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <MdOutlineForum /> {/*  icon  */}
+              <span className="capitalize ">Post Management</span>{" "}
               {/*  link name  */}
             </NavLink>
           </div>
