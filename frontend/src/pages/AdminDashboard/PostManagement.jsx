@@ -103,9 +103,10 @@ export default function ForumManagement() {
                   <table className="w-full rounded-lg">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Community title" />
-                        <TableHeader value="Description" />
-                        <TableHeader value="Number of members" />
+                        <TableHeader value="Post ID" />
+                        <TableHeader value="Title" />
+                        <TableHeader value="User Email" />
+                        <TableHeader value="Date" />
                         <TableHeader value="Action" />
                       </tr>
                     </thead>
@@ -120,8 +121,7 @@ export default function ForumManagement() {
                               <TableData value={data.id} />
                               <TableData value={data.client} />
                               <TableData value={data.grossPrice} />
-                              {/* <TableData value={data.commission} />
-                              <TableData value={data.status} /> */}
+                              <TableData value={data.commission} />
                               <TableData>
                                 <Link to="/admin/order-details">
                                   <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">

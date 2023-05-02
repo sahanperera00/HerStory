@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
+import { BsPeople } from "react-icons/bs";
+import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
 
@@ -103,7 +105,7 @@ export default function AdminSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <FiUser /> {/*  icon  */}
+              <BsPeople /> {/*  icon  */}
               <span className="capitalize ">Community Management</span>{" "}
               {/*  link name  */}
             </NavLink>
@@ -115,7 +117,7 @@ export default function AdminSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <FiUser /> {/*  icon  */}
+              <MdOutlineForum /> {/*  icon  */}
               <span className="capitalize ">Post Management</span>{" "}
               {/*  link name  */}
             </NavLink>
