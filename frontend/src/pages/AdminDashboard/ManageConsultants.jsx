@@ -7,11 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
-/* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
-
-export default function AdminDashboard() {
-  // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
-
+export default function ManageConsultants() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -22,11 +18,6 @@ export default function AdminDashboard() {
     setThemeSettings,
   } = useStateContext();
 
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
 
   const orders = [
     {
@@ -57,7 +48,6 @@ export default function AdminDashboard() {
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            {" "}
             {/* THEME SETTINGS BUTTON */}
             <TooltipComponent content="Settings" position="Top">
               <button
@@ -71,7 +61,8 @@ export default function AdminDashboard() {
             </TooltipComponent>
           </div>
 
-          {activeMenu ? ( // SIDEBAR IMPLEMENTATION
+          {/* SIDEBAR IMPLEMENTATION */}
+          {activeMenu ? ( 
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
               <AdminSidebar />
             </div>
@@ -96,7 +87,7 @@ export default function AdminDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Manage Consultants" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg">
@@ -115,7 +106,7 @@ export default function AdminDashboard() {
                         return (
                           <tr
                             key={data.id}
-                            className="bg-white  hover:bg-[#fafafa] border-b-2 border-gray-200 dark:bg-slate-800"
+                            className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                           >
                             <TableData value={data.id} />
                             <TableData value={data.client} />

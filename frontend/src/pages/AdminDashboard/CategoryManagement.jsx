@@ -9,7 +9,7 @@ import { Header, TableHeader, TableData } from "../../components";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function AdminDashboard() {
+export default function CategoryManagement() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
@@ -22,11 +22,32 @@ export default function AdminDashboard() {
     setThemeSettings,
   } = useStateContext();
 
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
+  const categories = [
+    {
+      id: 1,
+      name: "Category 1",
+      description: "Category 1 Description",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Category 2",
+      description: "Category 2 Description",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Category 3",
+      description: "Category 3 Description",
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "Category 4",
+      description: "Category 4 Description",
+      status: "Active",
+    },
+  ];
 
   const orders = [
     {
@@ -96,44 +117,38 @@ export default function AdminDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Category Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg">
-                    <thead>
-                      <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Action" />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className="bg-white  hover:bg-[#fafafa] border-b-2 border-gray-200 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                  {/* category cards */}
+                  <div className="flex flex-wrap flex-row w-[100%] p-3">
+                      {/* card */}
+                      {categories.map((category) => (
+                        <div
+                          key={category.id}
+                          className="w-[400px] m-3 bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                        >
+                          <div className="px-3 py-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                                {category.name}
+                              </span>
+                              <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                {category.status}
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center mt-2">
+                              <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                                {category.description}
+                              </span>
+                              <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                                Edit
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
