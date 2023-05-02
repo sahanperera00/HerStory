@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Posts from "../../components/homeSection/Posts";
 import RightSideBar from "../../components/homeSection/RightSideBar";
 import Modal from "../../components/Modal/Modal";
+import Navbar from "../../components/ForumNavbar";
 //import AlertComp from "../../components/Alert";
 
 function Forum() {
@@ -11,7 +12,8 @@ function Forum() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
+
       {success && <AlertComp setSuccess={setSuccess} />}
       <div className="h-[80vh] w-full max-xl:w-[100vw] flex flex-row justify-around mr-[30%] ">
         <div className=" max-md:w-[90vw] max-md:left-[5vw]  w-[57vw] max-xl:w-[70vw] mr-[20%]  h-[80vh] absolute">
