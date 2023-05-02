@@ -5,6 +5,9 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FaConnectdevelop } from "react-icons/fa";
 import { BiMessage } from "react-icons/bi";
 import { Input, Button, Drawer } from "antd";
+import { AiOutlineMenu } from "react-icons/ai";
+import { GrClose } from "react-icons/gr";
+import { IconContext } from "react-icons";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import KG from "../data/KG.png";
@@ -12,19 +15,31 @@ import UserProfile from "./UserProfile";
 import { useStateContext } from "../contexts/ContextProvider";
 
 export default function Navbar() {
-  const { handleClick, isClicked } = useStateContext();
+  const { handleClick, isClicked, setScreenSize, screenSize } =
+    useStateContext();
 
   const user = JSON.parse(localStorage.getItem("userInfo"));
+  // const location = useLocation();
+  // console.log(location.pathname);
+  // const [open, setOpen] = useState(false);
+  // const showDrawer = () => {
+  //   setOpen(true);
+  // };
 
-  const location = useLocation();
-  console.log(location.pathname);
-  const [open, setOpen] = useState(false);
-
-  
+  // const onClose = () => {
+  //   setOpen(false);
+  // };
   return (
     <>
       <nav className=" md:hidden flex w-1/1 items-center justify-start flex-wrap py-3 navbar">
-        
+        <Link to="/">
+          <h1
+            className=" font-bold text-2xl navbar_text"
+            style={{ color: "#02C8AC" }}
+          >
+            Forum
+          </h1>
+        </Link>
         <Input.Search
           placeholder="Type here to search ..."
           id="search"
@@ -32,6 +47,14 @@ export default function Navbar() {
         />
       </nav>
       <nav className="max-md:hidden flex w-1/1 items-center justify-around flex-wrap p-3 navbar">
+        <Link to="/">
+          <h1
+            className=" font-bold text-2xl navbar_text"
+            style={{ color: "#02C8AC" }}
+          >
+            Forum
+          </h1>
+        </Link>
         <div className="search flex w-1/2 justify-evenly">
           <Link
             to="/home"
@@ -43,7 +66,7 @@ export default function Navbar() {
             <AiOutlineHome fontSize="20px" />
           </Link>
           <Link
-            to="/community"
+            to="/Community"
             className={`${
               location.pathname === "/Community" ? "bg-[#02C8AC]" : ""
             } px-3 py-2 rounded-sm mx-2 shadow-md`}
@@ -56,6 +79,16 @@ export default function Navbar() {
             id="search"
             className="pt-[-8px] h-fit text-sm bg-gray-100 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+
+          <Link
+            to="/Chat"
+            className={`${
+              location.pathname === "/Chat" ? "bg-[#02C8AC]" : ""
+            } py-2 px-3 rounded-sm mx-2 bg-gray-200`}
+            style={{ borderRadius: "10px" }}
+          >
+            <BiMessage fontSize="20px" />
+          </Link>
         </div>
         <div className="flex">
           <TooltipComponent content="Profile" position="BottomCenter">
