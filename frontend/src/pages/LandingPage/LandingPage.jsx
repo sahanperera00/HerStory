@@ -38,12 +38,13 @@ export default function LandingPage() {
         borderRadius={"10px"}
         color={"white"}
       />
+      <Link to={"/counsellor-dashboard"}>
       <Button
         text={"Counsellor Dashboard"}
         bgColor={"#ef86c1"}
         borderRadius={"10px"}
         color={"white"}
-      />
+      /></Link>
       <Link to={"/admin"}>
         <Button
           text={"Admin Dashboard"}
