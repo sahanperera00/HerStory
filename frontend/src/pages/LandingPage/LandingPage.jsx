@@ -7,30 +7,30 @@ export default function LandingPage() {
     <div>
       <h1>Landing Page</h1>
       <Link to={"/login"}>
-      <Button
-        text={"Login"}
-        bgColor={"#ef86c1"}
-        borderRadius={"10px"}
-        color={"white"}
+        <Button
+          text={"Login"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
         />
-        </Link>
+      </Link>
       <Link to={"/consultant-signup"}>
-      <Button
-        text={"Register as a Consultant"}
-        bgColor={"#ef86c1"}
-        borderRadius={"10px"}
-        color={"white"}
+        <Button
+          text={"Register as a Consultant"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
         />
-        </Link>
+      </Link>
 
-        <Link to={"/client-signup"}>
-      <Button
-        text={"Register as a Client"}
-        bgColor={"#ef86c1"}
-        borderRadius={"10px"}
-        color={"white"}
+      <Link to={"/client-signup"}>
+        <Button
+          text={"Register as a Client"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
         />
-        </Link>
+      </Link>
 
       <Button
         text={"Client Dashboard"}
@@ -39,15 +39,24 @@ export default function LandingPage() {
         color={"white"}
       />
       <Link to={"/counsellor-dashboard"}>
-      <Button
-        text={"Counsellor Dashboard"}
-        bgColor={"#ef86c1"}
-        borderRadius={"10px"}
-        color={"white"}
-      /></Link>
+        <Button
+          text={"Counsellor Dashboard"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
+        />
+      </Link>
       <Link to={"/admin"}>
         <Button
           text={"Admin Dashboard"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
+        />
+      </Link>
+      <Link to={"/forum"}>
+        <Button
+          text={"Forum"}
           bgColor={"#ef86c1"}
           borderRadius={"10px"}
           color={"white"}
