@@ -44,7 +44,7 @@ export default function Navbar() {
           <Link
             to="/home"
             className={`${
-              location.pathname === "/home" ? "bg-[#02C8AC]" : ""
+              location.pathname === "/home" ? "bg-pink-300" : ""
             } px-3 py-2 rounded-sm  mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
@@ -53,7 +53,7 @@ export default function Navbar() {
           <Link
             to="/Community"
             className={`${
-              location.pathname === "/Community" ? "bg-[#02C8AC]" : ""
+              location.pathname === "/Community" ? "bg-pink-300" : ""
             } px-3 py-2 rounded-sm mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
