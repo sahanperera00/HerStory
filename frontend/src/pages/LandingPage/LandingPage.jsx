@@ -17,7 +17,9 @@ export default function LandingPage() {
       <img src={wave} alt="wave" className="w-[100%] absolute bottom-0 z-2" />
 
       <div className="w-[38%] absolute top-[16%] right-[15%] z-1 flex flex-col items-center gap-[10px]">
-        <p className="text-[#00000065]">Powered by Code Crusaders</p>
+        <p className="text-[#00000055]">
+          Powered by <span className="text-[#000000b5]">Code Crusaders</span>
+        </p>
         <img
           src="https://firebasestorage.googleapis.com/v0/b/herstory-6a3c0.appspot.com/o/logo-no-background.png?alt=media&token=08cba1bc-5127-4a4a-8ea6-75cf010b01b1"
           alt="logo"
@@ -43,9 +45,13 @@ export default function LandingPage() {
         </p>
         <div className="flex gap-9">
           <Link to={"/login"}>
-            <button className="border border-[#353530] text-[#353530] font-caveat px-10 py-4 rounded-full uppercase hover:bg-[#ef86c1] hover:border-[transparent] hover:text-white">
-              Login
-            </button>
+            <Button
+              text={"Login"}
+              bgColor={"#ef86c1"}
+              borderRadius={"10px"}
+              color={"white"}
+              width={220}
+            />
           </Link>
         </div>
       </div>
