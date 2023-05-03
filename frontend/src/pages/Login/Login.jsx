@@ -115,6 +115,14 @@ export default function Login() {
           color={"white"}
         />
       </Link>
+      <Link to={"/forum"}>
+        <Button
+          text={"Forum"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
+        />
+      </Link>
                 </div>
               </form>
             </div>
