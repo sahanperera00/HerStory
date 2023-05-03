@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Button } from "../../components";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -73,15 +74,48 @@ export default function Login() {
                   Log in
                 </button>
 
-                {/* <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don't have an account?{" "}
-                  <a
-                    href="/signup"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Sign up here
-                  </a>
-                </p> */}
+                
+                <div className="grid grid-cols-3 gap-5">
+                <Link to={"/consultant-signup"}>
+      <Button
+        text={"Register as a Consultant"}
+        bgColor={"#ef86c1"}
+        borderRadius={"10px"}
+        color={"white"}
+        />
+        </Link>
+
+        <Link to={"/client-signup"}>
+      <Button
+        text={"Register as a Client"}
+        bgColor={"#ef86c1"}
+        borderRadius={"10px"}
+        color={"white"}
+        />
+        </Link>
+
+      <Button
+        text={"Client Dashboard"}
+        bgColor={"#ef86c1"}
+        borderRadius={"10px"}
+        color={"white"}
+      />
+      <Link to={"/counsellor-dashboard"}>
+      <Button
+        text={"Counsellor Dashboard"}
+        bgColor={"#ef86c1"}
+        borderRadius={"10px"}
+        color={"white"}
+      /></Link>
+      <Link to={"/admin"}>
+        <Button
+          text={"Admin Dashboard"}
+          bgColor={"#ef86c1"}
+          borderRadius={"10px"}
+          color={"white"}
+        />
+      </Link>
+                </div>
               </form>
             </div>
           </div>
