@@ -140,9 +140,9 @@ import ForumPost from "./pages/Forum/ForumPost";
 
 
 // Shagg add here
-
-
-
+import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
+import ClientSignup from "./pages/ClientSignup/ClientSignup";
+import Login from "./pages/Login/Login";
 
 
 
@@ -484,9 +484,9 @@ function App() {
 
 
         {/* Shagg add here */}
-
-
-
+        <Route path="/consultant-signup" element={<ConsultantSignup />} />
+        <Route path="/client-signup" element={<ClientSignup />} />
+        <Route path="/login" element={<Login />} />
 
 
 
