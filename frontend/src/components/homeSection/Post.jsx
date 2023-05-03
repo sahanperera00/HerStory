@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { GoArrowUp, GoArrowDown } from "react-icons/go";
 import { BsFillChatLeftFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const [active, isActive] = useState(false);
@@ -12,8 +13,10 @@ const Post = () => {
   const [animation, setAnimation] = useState(false);
   const [animation2, setAnimation2] = useState(false);
   const [activePostId, setActivePostId] = useState(null);
+  const navigate = useNavigate();
 
   const handlePostClick = (postId) => {
+    navigate("/post");
     setActivePostId(postId);
     setTimeout(() => setActivePostId(null), 200);
   };
@@ -52,10 +55,10 @@ const Post = () => {
       onClick={() => handlePostClick(2)}
       className={` 
           ${
-            activePostId === 2 ? "border-2 border-blue-500" : ""
+            activePostId === 2 ? "border-2 border-pink-300" : ""
           } ml-[19px] mt-[20px] h-fit w-[93%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-2`}
     >
-      <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-blue-400"></div>
+      <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-[#f2b8c6]"></div>
 
       <div className=" inline-block h-fit w-[calc(100%-17vw+32px)] px-4">
         <div className=" w-full h-full relative">
@@ -81,7 +84,7 @@ const Post = () => {
             to.........
           </div>
           <div className="mt-4 h-fit   relative">
-            <div className="bg-green-400 h-12 w-12 rounded-full  mt-1 mx-2 inline-block"></div>
+            <div className="bg-pink-400 h-12 w-12 rounded-full  mt-1 mx-2 inline-block"></div>
             <div className="inline-block w-[calc(100%-192px)]  h-[100%] absolute">
               <div className="h-[50%] text-xs p-2 pb-0 text-[#777777]">
                 Yash Gupta
@@ -92,11 +95,11 @@ const Post = () => {
             </div>
             {like ? (
               <>
-                <span className="font-bold text-xl  text-[#02C8AC] top-5 right-[158px] absolute">
+                <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
                   {likeCount}
                 </span>
                 <GoArrowUp
-                  fill="#02C8AC"
+                  fill="#ea76b8"
                   className={`${
                     animation ? "likeAnimation" : ""
                   }  h-10 w-10 absolute top-3 right-[120px] hover:drop-shadow-[0_0_10px_rgba(0,255,0,1)]`}
@@ -111,11 +114,11 @@ const Post = () => {
               </>
             ) : (
               <>
-                <span className="font-bold text-xl  text-[#02C8AC] top-5 right-[158px] absolute">
+                <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
                   {likeCount}
                 </span>
                 <BiUpvote
-                  fill="#02C8AC"
+                  fill="#ea76b8"
                   className={`${
                     animation ? "likeAnimation" : ""
                   }  h-8 w-8 absolute top-4 right-[124px] hover:drop-shadow-[0_0_10px_rgba(0,255,0,1)]`}
@@ -131,11 +134,11 @@ const Post = () => {
             )}
             {dislike ? (
               <>
-                <span className="font-bold text-xl text-[#02C8AC] top-5 right-[94px] absolute">
+                <span className="font-bold text-xl text-[#ea76b8] top-5 right-[94px] absolute">
                   {dislikeCount}
                 </span>
                 <GoArrowDown
-                  fill="#02C8AC"
+                  fill="#ea76b8"
                   className={`${
                     animation2 ? "likeAnimation" : ""
                   } h-10 w-10 absolute top-3 right-[58px] hover:drop-shadow-[0_0_10px_rgba(0,255,0,1)]`}
@@ -150,7 +153,7 @@ const Post = () => {
               </>
             ) : (
               <>
-                <span className="font-bold text-xl text-[#02C8AC] top-5 right-[94px] absolute">
+                <span className="font-bold text-xl text-[#ea76b8] top-5 right-[94px] absolute">
                   {dislikeCount}
                 </span>
                 <BiDownvote
@@ -161,7 +164,7 @@ const Post = () => {
                   onAnimationEnd={() => {
                     setAnimation2(false);
                   }}
-                  fill="#02C8AC"
+                  fill="#ea76b8"
                   className={`${
                     animation2 ? "likeAnimation" : ""
                   } h-8 w-8 absolute top-4 right-[62px] hover:drop-shadow-[0_0_10px_rgba(0,255,0,1)]`}

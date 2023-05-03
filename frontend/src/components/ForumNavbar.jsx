@@ -28,14 +28,6 @@ export default function Navbar() {
   return (
     <>
       <nav className=" md:hidden flex w-1/1 items-center justify-start flex-wrap py-3 navbar">
-        <Link to="/">
-          <h1
-            className=" font-bold text-2xl navbar_text"
-            style={{ color: "#02C8AC" }}
-          >
-            Forum
-          </h1>
-        </Link>
         {/* <Input.Search
           placeholder="Type here to search ..."
           id="search"
@@ -43,14 +35,11 @@ export default function Navbar() {
         /> */}
       </nav>
       <nav className="max-md:hidden flex w-1/1 items-center justify-around flex-wrap p-3 navbar">
-        <Link to="/">
-          <h1
-            className=" font-bold text-2xl navbar_text"
-            style={{ color: "#02C8AC" }}
-          >
-            Forum
-          </h1>
-        </Link>
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/herstory-6a3c0.appspot.com/o/logo-no-background.png?alt=media&token=08cba1bc-5127-4a4a-8ea6-75cf010b01b1"
+          alt="herstory logo"
+          className="w-[180px]"
+        />
         <div className="search flex w-1/2 justify-evenly">
           <Link
             to="/home"
