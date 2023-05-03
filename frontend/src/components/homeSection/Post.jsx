@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { GoArrowUp, GoArrowDown } from "react-icons/go";
 import { BsFillChatLeftFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const [active, isActive] = useState(false);
@@ -12,8 +13,10 @@ const Post = () => {
   const [animation, setAnimation] = useState(false);
   const [animation2, setAnimation2] = useState(false);
   const [activePostId, setActivePostId] = useState(null);
+  const navigate = useNavigate();
 
   const handlePostClick = (postId) => {
+    navigate("/post");
     setActivePostId(postId);
     setTimeout(() => setActivePostId(null), 200);
   };
@@ -52,7 +55,7 @@ const Post = () => {
       onClick={() => handlePostClick(2)}
       className={` 
           ${
-            activePostId === 2 ? "border-2 border-blue-500" : ""
+            activePostId === 2 ? "border-2 border-pink-300" : ""
           } ml-[19px] mt-[20px] h-fit w-[93%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-2`}
     >
       <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-[#f2b8c6]"></div>
