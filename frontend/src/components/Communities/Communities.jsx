@@ -31,11 +31,11 @@ const Communities = () => {
                 <div className="h-fit font-[500] text-base text-[#777777] text-[14px] text-center my-[5px]">
                   Join this awesome community of Web Developers and learn!!
                 </div>
-                <div className="h-fit font-[500] text-base text-[#02C8AC] text-[16px] text-center ">
+                <div className="h-fit font-[500] text-base text-[#fc46aa] text-[16px] text-center ">
                   120 Members
                 </div>
                 <div className=" flex flex-1 items-center justify-center">
-                  <button className="inline-block bg-[#02C8AC] h-[40px] w-[145px] rounded-[7px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[35px] ">
+                  <button className="inline-block bg-pink-300  h-[40px] w-[145px] rounded-[7px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[35px] ">
                     Join
                   </button>
                 </div>
