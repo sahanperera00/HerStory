@@ -1,6 +1,6 @@
 //import Navbar from "../../components/Navbar/Navbar";
 import React, { useState } from "react";
-import Posts from "../../components/homeSection/Posts";
+import Post from "../../components/homeSection/Post";
 import RightSideBar from "../../components/homeSection/RightSideBar";
 import Modal from "../../components/Modal/Modal";
 import Navbar from "../../components/ForumNavbar";
@@ -31,7 +31,7 @@ function Forum() {
             </div>
             <div className="inline-block w-[calc(10%+32px)] h-[100%] relative"></div>
           </div>
-          <Posts />
+          <Post />
         </div>
         <RightSideBar />
         {modalOpen && (
