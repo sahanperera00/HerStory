@@ -18,6 +18,7 @@ module.exports = {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
       caveat: ["Caveat", "cursive"],
+      poppins: ["Poppins", "sans-serif"],
     },
     extend: {
       fontSize: {
