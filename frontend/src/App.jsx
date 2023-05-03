@@ -143,6 +143,7 @@ import ForumPost from "./pages/Forum/ForumPost";
 import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
+import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 
 
 
@@ -487,6 +488,7 @@ function App() {
         <Route path="/consultant-signup" element={<ConsultantSignup />} />
         <Route path="/client-signup" element={<ClientSignup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
 
 
 
