@@ -8,10 +8,6 @@ const RightSideBarContainer = ({ title }) => {
         {title}
       </div>
       <ContainerElement />
-      <ContainerElement />
-      <ContainerElement />
-      <ContainerElement />
-      <ContainerElement />
     </div>
   );
 };
