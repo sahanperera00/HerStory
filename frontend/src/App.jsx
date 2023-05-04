@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import ManageConsultants from "./pages/AdminDashboard/ManageConsultants";
 import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
 import ForumPost from "./pages/Forum/ForumPost";
+import ClientDashboard from "./pages/ClientDashboard/ClientDashboard";
 // chanu add here
 
 
@@ -247,57 +248,9 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         {/* Devs add here */}
-
+        <Route path="/client" element={<ClientDashboard />} />
 
 
 
