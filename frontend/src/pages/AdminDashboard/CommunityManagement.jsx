@@ -6,6 +6,8 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import { AiOutlineEdit } from "react-icons/ai";
+import { RiDeleteBin2Line } from "react-icons/ri";
 
 export default function CommunityManagement() {
   const {
@@ -20,33 +22,38 @@ export default function CommunityManagement() {
 
   const community = [
     {
-      id: "Com1",
+      id: "Community 1",
       title: "Survivor Support Community",
       desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
+      date: "2023-04-04",
       members: "8 members",
     },
     {
-      id: "Com3",
+      id: "Community 2",
       title: "Legal Advice and Resources Community",
       desc: "Providing legal resources and advice",
+      date: "2023-05-02",
       members: "10 members",
     },
     {
-      id: "Com3",
+      id: "Community 3",
       title: "Mental Health and Wellness Community",
       desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
+      date: "2023-05-04",
       members: "50 members",
     },
     {
-      id: "Com4",
+      id: "Community 4",
       title: "Workplace Harassment Community",
       desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
+      date: "2023-05-06",
       members: "20 members",
     },
     {
-      id: "Com5",
+      id: "Community 5",
       title: "Education and Prevention Community",
       desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
+      date: "2023-05-09",
       members: "30 members",
     },
   ];
@@ -102,9 +109,10 @@ export default function CommunityManagement() {
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Community ID" />
-                        <TableHeader value="Community title" />
-                        <TableHeader value="Number of members" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Community Title" />
+                        <TableHeader value="Date Created" />
+                        <TableHeader value="Number of Members" />
+                        <TableHeader value="Actions" />
                       </tr>
                     </thead>
                     <tbody>
@@ -117,15 +125,26 @@ export default function CommunityManagement() {
                             >
                               <TableData value={data.id} />
                               <TableData value={data.title} />
-                              {/* <TableData value={data.desc} /> */}
+                              <TableData value={data.date} />
                               <TableData value={data.members} />
-                              <TableData>
-                                <Link to="/admin/order-details">
-                                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                    View
-                                  </button>
-                                </Link>
-                              </TableData>
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                    <button
+                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
+                                      title="Edit"
+                                    >
+                                      <AiOutlineEdit />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Remove"
+                                    >
+                                      <RiDeleteBin2Line />
+                                    </button>
+                                  </div>
+                                }
+                              />
                             </tr>
                           );
                         })}
