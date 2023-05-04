@@ -122,7 +122,7 @@ export default function ClientSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <MdOutlineForum /> {/*  icon  */}
-              <span className="capitalize ">Talk with friendsd</span>{" "}
+              <span className="capitalize ">Talk with friends</span>{" "}
               {/*  link name  */}
             </NavLink>
 
@@ -142,15 +142,14 @@ export default function ClientSidebar() {
               {/*  link name  */}
             </NavLink>
 
-            <div id="dropdown-cta" class="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-blue-900 mr-4" role="alert">
+            <div id="dropdown-cta" class="p-4 mt-6 rounded-lg mr-4 " role="alert" style={{background: currentColor, opacity: '50%'}}>
               <div class="flex items-center mb-3">
                 <span class="bg-orange-100 text-orange-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Beta</span>
-
               </div>
-              <p class="mb-3 text-sm text-blue-800 dark:text-blue-400">
+              <p class="mb-3 text-sm text-black dark:text-black ">
                 The current version of HerStory is a prototype and we will be back with a bang! 
               </p>
-              <a class="text-sm text-blue-800 underline hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" href="https://www.linkedin.com/in/devindusamarasinghe/">Project by Code Crusaders</a>
+              <a class="text-sm  underline hover:text-blue-900 text-white dark:hover:text-blue-300" href="https://www.linkedin.com/in/devindusamarasinghe/">Project by Code Crusaders</a>
             </div>
           </div>
         </>
