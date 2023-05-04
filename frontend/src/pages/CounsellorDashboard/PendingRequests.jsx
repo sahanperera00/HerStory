@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, ThemeSettings } from "../../components";
+import { Navbar, Footer, ThemeSettings, Button } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-import StarRatings from "react-star-ratings";
-import {RxEnvelopeClosed, RxEyeOpen, RxEyeNone} from "react-icons/rx";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
+import {BiDetail} from "react-icons/bi";
+import CounsellorSidebar from "./CounsellorSidebar";
 
-export default function ConsultantManagement() {
+export default function PendingRequests() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -25,17 +25,17 @@ export default function ConsultantManagement() {
       id: 1,
       name: "Sahan Perera",
       email: "sahan@gmail.com",
-      category: "Safty planing and support",
-      rate: 4.5,
-      status: "Active",
+      phoneNumber: "0778635445",
+      dob: "2000-01-31",
+      category: "Legal Consultation",
     },
     {
       id: 2,
       name: "Devindu Samarasinghe",
       email: "devindu@gmail.com",
-      category: "Workplace harassment consultation",
-      rate: 2,
-      status: "Deactive",
+      phoneNumber: "0715646235",
+      dob: "1999-05-12",
+      category: "Couseling & Therapy",
     },
   ];
 
@@ -60,11 +60,11 @@ export default function ConsultantManagement() {
           {/* SIDEBAR IMPLEMENTATION */}
           {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
-              <AdminSidebar />
+              <CounsellorSidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
-              <AdminSidebar />
+              <CounsellorSidebar />
             </div>
           )}
 
@@ -83,7 +83,7 @@ export default function ConsultantManagement() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Consultant Management" />
+                <Header title="Pending Requests" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
@@ -91,9 +91,9 @@ export default function ConsultantManagement() {
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Name" />
                         <TableHeader value="Email" />
+                        <TableHeader value="Date of Birth" />
                         <TableHeader value="Category" />
-                        <TableHeader value="Ratings" />
-                        <TableHeader value="Status" />
+                        <TableHeader value="Phone Number" />
                         <TableHeader value="Actions" />
                       </tr>
                     </thead>
@@ -107,50 +107,20 @@ export default function ConsultantManagement() {
                             >
                               <TableData value={data.name} />
                               <TableData value={data.email} />
+                              <TableData value={data.dob} />
                               <TableData value={data.category} />
-                              <TableData
-                                value={
-                                  <StarRatings
-                                    starDimension="24px"
-                                    starSpacing="0px"
-                                    rating={data.rate}
-                                    starRatedColor="#feb400"
-                                    numberOfStars={5}
-                                    name="rating"
-                                  />
-                                }
-                              />
-                              {data.status === "Active" ? (
-                                <TableData
-                                  color={"#79de79"}
-                                  value={data.status}
-                                />
-                              ) : (
-                                <TableData
-                                  color={"#fb6962"}
-                                  value={data.status}
-                                />
-                              )}
+                              <TableData value={data.phoneNumber} />
                               <TableData
                                 value={
                                   <div className="flex gap-4">
-                                    <button
-                                      className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]"
-                                      title="Action"
-                                    >
-                                      <RxEnvelopeClosed />
+                                  <button className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]" title="View">
+                                    <BiDetail />
+                                  </button>
+                                    <button className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]" title="Accept">
+                                      <AiOutlineCheck />
                                     </button>
-                                    <button
-                                      className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]"
-                                      title="Activate"
-                                    >
-                                      <RxEyeOpen />
-                                    </button>
-                                    <button
-                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
-                                      title="Deactivate"
-                                    >
-                                      <RxEyeNone />
+                                    <button className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]" title="Reject">
+                                      <AiOutlineClose />
                                     </button>
                                   </div>
                                 }
