@@ -7,7 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { BiGitPullRequest } from "react-icons/bi";
 
-export default function AdminSidebar() {
+export default function CounsellorSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
     useStateContext();
 
@@ -64,9 +64,9 @@ export default function AdminSidebar() {
               <BiGitPullRequest />
               <span className="capitalize ">Manage Appointments</span>
             </NavLink>
-            
+
             <NavLink
-              to=""
+              to="/counsellor/pending-requests"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
