@@ -6,9 +6,10 @@ import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
 import Community from "./pages/Forum/Community";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import ManageConsultants from "./pages/AdminDashboard/ManageConsultants";
+import ConsultantManagement from "./pages/AdminDashboard/ConsultantManagement";
 import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
 import ForumPost from "./pages/Forum/ForumPost";
+import ClientDashboard from "./pages/ClientDashboard/ClientDashboard";
 // chanu add here
 
 
@@ -144,6 +145,7 @@ import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
+import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
 
 
 
@@ -200,7 +202,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route
           path="/admin/manage-consultants"
-          element={<ManageConsultants />}
+          element={<ConsultantManagement />}
         />
         <Route
           path="/admin/category-management"
@@ -247,57 +249,9 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         {/* Devs add here */}
-
+        <Route path="/client" element={<ClientDashboard />} />
 
 
 
@@ -489,7 +443,7 @@ function App() {
         <Route path="/client-signup" element={<ClientSignup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
-
+        <Route path="/admin/manage-requests" element={<RequestsManagement />} />
 
 
 
