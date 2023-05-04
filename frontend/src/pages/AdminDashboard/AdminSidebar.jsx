@@ -86,7 +86,7 @@ export default function AdminSidebar() {
             </NavLink>
 
             <NavLink
-              to="/admin/manage-consultants"
+              to="/admin/manage-requests"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",

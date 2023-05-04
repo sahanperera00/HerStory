@@ -7,7 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
-export default function ConsultantManagement() {
+export default function RequestsManagement() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -87,7 +87,7 @@ export default function ConsultantManagement() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Consultant Management" />
+                <Header title="Requests Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
