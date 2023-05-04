@@ -1,11 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
-import { FiUser } from "react-icons/fi";
-import { BsPeople } from "react-icons/bs";
-import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
-import { BiGitPullRequest } from "react-icons/bi";
+import {RxClipboard} from 'react-icons/rx';
+import {RxLapTimer} from 'react-icons/rx';
+import {AiOutlineSchedule} from 'react-icons/ai';
+import {BiTransfer} from 'react-icons/bi';
+import {RiFeedbackLine} from 'react-icons/ri';
 
 export default function CounsellorSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
@@ -54,14 +55,14 @@ export default function CounsellorSidebar() {
             </p>
 
             <NavLink
-              to=""
+              to="/counsellor/manage-appointments"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <BiGitPullRequest />
+              <RxClipboard />
               <span className="capitalize ">Manage Appointments</span>
             </NavLink>
 
@@ -73,43 +74,43 @@ export default function CounsellorSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <BiGitPullRequest />
+              <RxLapTimer />
               <span className="capitalize ">Pending Requests</span>
             </NavLink>
 
             <NavLink
-              to=""
+              to="/counsellor/schedulings"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <BiGitPullRequest />
+              <AiOutlineSchedule />
               <span className="capitalize ">Schedulings</span>
             </NavLink>
 
             <NavLink
-              to=""
+              to="/counsellor/transfers"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <BiGitPullRequest />
+              <BiTransfer />
               <span className="capitalize ">Transfers</span>
             </NavLink>
 
             <NavLink
-              to=""
+              to="/counsellor/feedbacks"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <BiGitPullRequest />
+              <RiFeedbackLine />
               <span className="capitalize ">Feedbacks</span>
             </NavLink>
 
