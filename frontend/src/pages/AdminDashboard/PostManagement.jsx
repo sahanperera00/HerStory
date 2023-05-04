@@ -6,6 +6,10 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import { AiOutlineEdit } from "react-icons/ai";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { MdPreview } from "react-icons/md";
+import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 
 export default function ForumManagement() {
   const {
@@ -23,20 +27,47 @@ export default function ForumManagement() {
       id: 1,
       title: "Violence against women isn't cultural, it's criminal.",
       email: "Chanukya@gmail.com",
-      date: "2023-04-05",
+      date: "2023-02-05",
     },
     {
       id: 2,
       title:
-        "Women's mental health is an important element in one's overall well-being and contentedness",
+        "Women's mental health is an important element in one's overall well-being",
       email: "Nashali@gmail.com",
-      date: "2023-05-05",
+      date: "2023-02-12",
     },
     {
       id: 3,
       title: "Why We Need To Pay Attention to Women's Mental Health",
       email: "XimBot@123gmail.com",
-      date: "2023-05-08",
+      date: "2023-03-08",
+    },
+
+    {
+      id: 4,
+      title: "Women's Health Matters: Prioritizing Self-Care and Wellness",
+      email: "kylie@ymail.com",
+      date: "2023-03-29",
+    },
+    {
+      id: 5,
+      title:
+        "Building Strong Relationships: Communication and Connection for Women",
+      email: "unknown89@gmail.com",
+      date: "2023-04-05",
+    },
+    {
+      id: 6,
+      title: "Balancing Work and Life: Strategies for Busy Women",
+      email: "Shfa@gmail.com",
+      date: "2023-04-08",
+    },
+
+    {
+      id: 7,
+      title: "Breaking Down Barriers: Women in Male-Dominated Industries",
+      email: "Anne@gmail.com",
+      date: "2023-05-05",
     },
   ];
   return (
@@ -85,6 +116,25 @@ export default function ForumManagement() {
               <div className="md:m-6 p-5">
                 <Header title="Forum Posts Management" />
 
+                <div className=" flex items-center mb-5 ">
+                  {" "}
+                  <div className=" bg-slate-100 pt-1 rounded-lg px-5 w-56">
+                    <DateRangePickerComponent
+                      //ref={dateRangeRef}
+                      placeholder="Select a date range"
+                    />
+                  </div>
+                  <div className="ml-5">
+                    <button
+                      type="button"
+                      className="py-2 px-4 rounded-lg text-white hover:bg-slate-700 bg-slate-500"
+                      onClick={() => filterDate()}
+                    >
+                      Filter
+                    </button>
+                  </div>
+                </div>
+
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
@@ -108,13 +158,30 @@ export default function ForumManagement() {
                               <TableData value={data.title} />
                               <TableData value={data.email} />
                               <TableData value={data.date} />
-                              <TableData>
-                                <Link to="/admin/order-details">
-                                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                    View
-                                  </button>
-                                </Link>
-                              </TableData>
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                    <button
+                                      className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
+                                      title="View"
+                                    >
+                                      <MdPreview />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
+                                      title="Edit"
+                                    >
+                                      <AiOutlineEdit />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Remove"
+                                    >
+                                      <RiDeleteBin2Line />
+                                    </button>
+                                  </div>
+                                }
+                              />
                             </tr>
                           );
                         })}
