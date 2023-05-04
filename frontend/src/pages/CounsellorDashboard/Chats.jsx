@@ -96,7 +96,7 @@ export default function Schedulings() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Schedulings" />
+                <Header title="Chats" />
 
                 
               </div>

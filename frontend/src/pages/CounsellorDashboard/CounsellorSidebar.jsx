@@ -5,7 +5,7 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import {RxClipboard} from 'react-icons/rx';
 import {RxLapTimer} from 'react-icons/rx';
 import {AiOutlineSchedule} from 'react-icons/ai';
-import {BiTransfer} from 'react-icons/bi';
+import {BsChatSquareText} from 'react-icons/bs';
 import {RiFeedbackLine} from 'react-icons/ri';
 
 export default function CounsellorSidebar() {
@@ -54,7 +54,7 @@ export default function CounsellorSidebar() {
               Counseling Service
             </p>
 
-            <NavLink
+            {/* <NavLink
               to="/counsellor/manage-appointments"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
@@ -64,7 +64,7 @@ export default function CounsellorSidebar() {
             >
               <RxClipboard />
               <span className="capitalize ">Manage Appointments</span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/counsellor/pending-requests"
@@ -79,18 +79,18 @@ export default function CounsellorSidebar() {
             </NavLink>
 
             <NavLink
-              to="/counsellor/schedulings"
+              to="/counsellor/chats"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <AiOutlineSchedule />
-              <span className="capitalize ">Schedulings</span>
+              <BsChatSquareText />
+              <span className="capitalize ">Chats</span>
             </NavLink>
 
-            <NavLink
+            {/* <NavLink
               to="/counsellor/transfers"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
@@ -100,7 +100,7 @@ export default function CounsellorSidebar() {
             >
               <BiTransfer />
               <span className="capitalize ">Transfers</span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/counsellor/feedbacks"

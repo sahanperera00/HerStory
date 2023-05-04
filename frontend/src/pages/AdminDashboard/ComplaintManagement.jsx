@@ -6,6 +6,8 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
+import {BiDetail} from "react-icons/bi";
 
 export default function ComplaintManagement() {
   var date = new Date().toISOString().split("T")[0];
@@ -18,6 +20,23 @@ export default function ComplaintManagement() {
     themeSettings,
     setThemeSettings,
   } = useStateContext();
+
+  const orders = [
+    {
+      id: 1,
+      name: "Sahan Perera",
+      email: "sahan@gmail.com",
+      phoneNumber: "0778635445",
+      status: "Pending",
+    },
+    {
+      id: 2,
+      name: "Devindu Samarasinghe",
+      email: "devindu@gmail.com",
+      phoneNumber: "0715646235",
+      status: "Resolved",
+    },
+  ];
 
   return (
     <div>
@@ -63,12 +82,39 @@ export default function ComplaintManagement() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div>
-                {/* YOUR COMPONENT IMPLEMENTATION GOES HERE */}
-                {/* COPY YOUR ORIGINAL COMPONENT CODE HERE */}
-                {/* PART AFTER THE RETURN STATEMENT */}
-                <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl  dark:bg-secondary-dark-bg dark:text-white ">
-                  <Header title=" Add a complaint" />
-                  <div className=" flex items-center justify-center ">
+                <div className="md:m-6 p-5">
+                  <Header title=" Complaint Management" />
+
+                  <div className="block w-full overflow-x-auto rounded-lg">
+                  <table className="w-full rounded-lg dark:text-white">
+                    <thead>
+                      <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
+                        <TableHeader value="Name" />
+                        <TableHeader value="Email" />
+                        <TableHeader value="Phone Number" />
+                        <TableHeader value="Status" />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders &&
+                        orders.map((data) => {
+                          return (
+                            <tr
+                              key={data.id}
+                              className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                            >
+                              <TableData value={data.name} />
+                              <TableData value={data.email} />
+                              <TableData value={data.phoneNumber} />
+                              <TableData value={data.status} />
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </div>
+
+                  {/* <div className=" flex items-center justify-center ">
                     <form
                       onSubmit={async (e) => {
                         e.preventDefault();
@@ -178,7 +224,9 @@ export default function ComplaintManagement() {
                         Add Complaint
                       </button>
                     </form>
-                  </div>
+                  </div> */}
+
+
                 </div>
               </div>
             </div>
