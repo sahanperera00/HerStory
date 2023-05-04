@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, ThemeSettings } from "../../components";
+import { Navbar, Footer, ThemeSettings, Button } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
+import {BiDetail} from "react-icons/bi";
 
 export default function RequestsManagement() {
   const {
@@ -18,28 +20,22 @@ export default function RequestsManagement() {
     setThemeSettings,
   } = useStateContext();
 
-
   const orders = [
     {
       id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Sahan Perera",
+      email: "sahan@gmail.com",
+      phoneNumber: "0778635445",
+      dob: "2000-01-31",
+      category: "Legal Consultation",
     },
     {
       id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
-    },
-    {
-      id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Devindu Samarasinghe",
+      email: "devindu@gmail.com",
+      phoneNumber: "0715646235",
+      dob: "1999-05-12",
+      category: "Couseling & Therapy",
     },
   ];
 
@@ -62,7 +58,7 @@ export default function RequestsManagement() {
           </div>
 
           {/* SIDEBAR IMPLEMENTATION */}
-          {activeMenu ? ( 
+          {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
@@ -93,36 +89,45 @@ export default function RequestsManagement() {
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Name" />
+                        <TableHeader value="Email" />
+                        <TableHeader value="Date of Birth" />
+                        <TableHeader value="Category" />
+                        <TableHeader value="Phone Number" />
+                        <TableHeader value="Actions" />
                       </tr>
                     </thead>
                     <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
+                      {orders &&
+                        orders.map((data) => {
+                          return (
+                            <tr
+                              key={data.id}
+                              className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                            >
+                              <TableData value={data.name} />
+                              <TableData value={data.email} />
+                              <TableData value={data.dob} />
+                              <TableData value={data.category} />
+                              <TableData value={data.phoneNumber} />
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                  <button className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]" title="View">
+                                    <BiDetail />
+                                  </button>
+                                    <button className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]" title="Accept">
+                                      <AiOutlineCheck />
+                                    </button>
+                                    <button className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]" title="Reject">
+                                      <AiOutlineClose />
+                                    </button>
+                                  </div>
+                                }
+                              />
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
