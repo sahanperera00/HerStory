@@ -6,13 +6,8 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-import Forum from "../Forum/Forum";
-
-/* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
 export default function CommunityManagement() {
-  // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
-
   const {
     setCurrentColor,
     setCurrentMode,
@@ -22,12 +17,6 @@ export default function CommunityManagement() {
     themeSettings,
     setThemeSettings,
   } = useStateContext();
-
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
 
   const community = [
     {
@@ -65,9 +54,8 @@ export default function CommunityManagement() {
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
-        <div className="flex relative dark:bg-main-dark-bg">
+        <div className="flex relative dark:bg-main-dark-bg bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            {" "}
             {/* THEME SETTINGS BUTTON */}
             <TooltipComponent content="Settings" position="Top">
               <button
@@ -81,8 +69,9 @@ export default function CommunityManagement() {
             </TooltipComponent>
           </div>
 
-          {activeMenu ? ( // SIDEBAR IMPLEMENTATION
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+          {/* SIDEBAR IMPLEMENTATION */}
+          {activeMenu ? (
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
           ) : (
@@ -94,27 +83,26 @@ export default function CommunityManagement() {
           <div
             className={
               activeMenu
-                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                ? "dark:bg-main-dark-bg min-h-screen md:ml-72 w-full  "
+                : " dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
             {/* NAVBAR IMPLEMENTATION */}
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full ">
+            <div className="fixed md:static dark:bg-main-dark-bg w-full ">
               <Navbar />
             </div>
 
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Manage Communities" />
+                <Header title="Forum Communities Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg">
+                  <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Community ID" />
                         <TableHeader value="Community title" />
-
                         <TableHeader value="Number of members" />
                         <TableHeader value="Action" />
                       </tr>
@@ -131,7 +119,6 @@ export default function CommunityManagement() {
                               <TableData value={data.title} />
                               {/* <TableData value={data.desc} /> */}
                               <TableData value={data.members} />
-
                               <TableData>
                                 <Link to="/admin/order-details">
                                   <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
