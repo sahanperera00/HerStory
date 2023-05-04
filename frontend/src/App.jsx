@@ -146,11 +146,11 @@ import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
-
-
-
-
-
+import PendingRequests from "./pages/CounsellorDashboard/PendingRequests";
+import Schedulings from "./pages/CounsellorDashboard/Schedulings";
+import Transfers from "./pages/CounsellorDashboard/Transfers";
+import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
+import ManageAppointments from "./pages/CounsellorDashboard/ManageAppointments";
 
 
 
@@ -442,13 +442,13 @@ function App() {
         <Route path="/consultant-signup" element={<ConsultantSignup />} />
         <Route path="/client-signup" element={<ClientSignup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
         <Route path="/admin/manage-requests" element={<RequestsManagement />} />
-
-
-
-
-
+        <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
+        <Route path="/counsellor/manage-appointments" element={<ManageAppointments />} />
+        <Route path="/counsellor/pending-requests" element={<PendingRequests />} />
+        <Route path="/counsellor/schedulings" element={<Schedulings />} />
+        <Route path="/counsellor/transfers" element={<Transfers />} />
+        <Route path="/counsellor/feedbacks" element={<Feedbacks />} />
 
 
 

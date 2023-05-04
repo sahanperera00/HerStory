@@ -9,7 +9,7 @@ import { Header, TableHeader, TableData } from "../../components";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function CounsellorDashboard() {
+export default function Transfers() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
@@ -96,45 +96,9 @@ export default function CounsellorDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Transfers" />
 
-                <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg dark:text-white">
-                    <thead>
-                      <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Action" />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className="bg-white  hover:bg-[#fafafa] border-b-2 border-gray-200 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                
               </div>
             </div>
             <Footer />
