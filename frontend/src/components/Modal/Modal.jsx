@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../index.css";
 //import AlertComp from "../Alert";
+import { GrClose } from "react-icons/gr";
 
 function Modal({ setOpenModal, setSuccess }) {
   const [tags, setTags] = useState([]);
@@ -14,9 +15,9 @@ function Modal({ setOpenModal, setSuccess }) {
             onClick={() => {
               setOpenModal(false);
             }}
-            className="text-red-600 text-xl font-semibold -mr-4 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue"
+            className="text-pink-600 text-xl font-semibold -mr-4 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue"
           >
-            X
+            <GrClose />
           </button>
         </div>
 
@@ -64,7 +65,7 @@ function Modal({ setOpenModal, setSuccess }) {
             />
             <button
               type="submit"
-              className="text-white font-bold py-2 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue mt-3 "
+              className="text-white font-bold py-2 px-4 rounded-xl bg-pink-400 hover:bg-pink-500 focus:outline-none focus:shadow-outline-blue mt-3 "
             >
               Add Tag
             </button>
@@ -73,7 +74,7 @@ function Modal({ setOpenModal, setSuccess }) {
                 setOpenModal(false);
                 setSuccess(true);
               }}
-              className="text-white font-bold py-1 mt-3 ml-4 h-10 px-5 w-20 rounded-xl bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue "
+              className="text-white font-bold py-1 mt-3 ml-4 h-10 px-5 w-20 rounded-xl bg-pink-400 hover:bg-pink-500 focus:outline-none focus:shadow-outline-blue "
             >
               Post
             </button>

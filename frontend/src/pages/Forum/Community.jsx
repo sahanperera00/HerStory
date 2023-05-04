@@ -1,4 +1,4 @@
-// import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ForumNavbar";
 import Communities from "../../components/Communities/Communities";
 import { Modal, Input, Button, Upload } from "antd";
 import { useState } from "react";
@@ -42,7 +42,7 @@ function Community() {
   };
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Modal
         destroyOnClose={true}
         title="Create a Community"
@@ -85,12 +85,7 @@ function Community() {
               Follow communities and explore your interests!
             </div>
             <div className=" flex flex-1 items-end justify-between">
-              <button
-                onClick={showModal}
-                className="inline-block bg-[#f07ef0] h-[45px] w-[150px] rounded-[5px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[10px] ml-[22px] "
-              >
-                Create
-              </button>
+              
             </div>
           </div>
         </div>

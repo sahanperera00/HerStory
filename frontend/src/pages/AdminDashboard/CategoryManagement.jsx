@@ -6,12 +6,10 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-
-/* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
+import {GrAdd} from "react-icons/gr";
+import {RiDeleteBin6Line} from "react-icons/ri";
 
 export default function CategoryManagement() {
-  // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
-
   const {
     setCurrentColor,
     setCurrentMode,
@@ -114,26 +112,29 @@ export default function CategoryManagement() {
               <Navbar />
             </div>
 
-            <div>
+            <div className="">
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
                 <Header title="Category Management" />
 
-                <div className="block w-full overflow-x-auto rounded-lg">
+                <div className="block w-full overflow-x-auto rounded-lg grid grid-cols-3 gap-4 p-5">
                   {/* category cards */}
-                  <div className="flex flex-wrap flex-row w-[100%] p-3">
+                  {/* <div className="flex flex-wrap flex-row w-[100%] p-3 bg-[blue]"> */}
                       {/* card */}
+                      <div className="w-full border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
+                        <GrAdd className="text-6xl text-gray-100 mx-auto mt-10" />
+                      </div>
                       {categories.map((category) => (
                         <div
                           key={category.id}
-                          className="w-[400px] m-3 bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                          className="w-full bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
                         >
-                          <div className="px-3 py-2">
+                          <div className="px-3 py-10">
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-light text-gray-600 dark:text-gray-400">
                                 {category.name}
                               </span>
-                              <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                              <span className="text-sm font-bold text-[lightgreen] dark:text-gray-400">
                                 {category.status}
                               </span>
                             </div>
@@ -145,10 +146,17 @@ export default function CategoryManagement() {
                                 Edit
                               </span>
                             </div>
+                            <div className="flex justify-between items-center mt-2">
+                              <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                              </span>
+                              <span className="text-xl font-bold text-[red] dark:text-gray-400 cursor-pointer">
+                                <RiDeleteBin6Line />
+                              </span>
+                              </div>
                           </div>
                         </div>
                       ))}
-                  </div>
+                  {/* </div> */}
                 </div>
               </div>
             </div>

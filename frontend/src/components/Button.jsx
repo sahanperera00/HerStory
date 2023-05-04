@@ -16,8 +16,8 @@ export default function Button({
     <button
       type="button"
       onClick={() => setIsClicked(initialState)}
-      style={{ backgroundColor: bgColor, color, borderRadius }}
-      className={` text-${size} p-3 w-${width} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
+      style={{ backgroundColor: bgColor, color, borderRadius, width: width }}
+      className={` text-${size} p-3 hover:drop-shadow-lg hover:bg-${bgHoverColor}`}
     >
       {icon} {text}
     </button>
