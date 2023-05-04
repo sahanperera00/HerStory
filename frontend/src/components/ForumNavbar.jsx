@@ -35,16 +35,18 @@ export default function Navbar() {
         /> */}
       </nav>
       <nav className="max-md:hidden flex w-1/1 items-center justify-around flex-wrap p-3 navbar">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/herstory-6a3c0.appspot.com/o/logo-no-background.png?alt=media&token=08cba1bc-5127-4a4a-8ea6-75cf010b01b1"
-          alt="herstory logo"
-          className="w-[180px]"
-        />
+        <Link to="/">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/herstory-6a3c0.appspot.com/o/logo-no-background.png?alt=media&token=08cba1bc-5127-4a4a-8ea6-75cf010b01b1"
+            alt="herstory logo"
+            className="w-[180px]"
+          />
+        </Link>
         <div className="search flex w-1/2 justify-evenly">
           <Link
-            to="/home"
+            to="/forum"
             className={`${
-              location.pathname === "/home" ? "bg-pink-300" : ""
+              location.pathname === "/forum" ? "bg-pink-300" : ""
             } px-3 py-2 rounded-sm  mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
