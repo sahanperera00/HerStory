@@ -21,6 +21,7 @@ const Post = () => {
       title: "Violence against women isn't cultural, it's criminal.",
       desc: "Equality cannot come eventually, it's something we must fight for now. Violence against women can end only when the culprits get punished.",
       username: "Chanukya Serasinghe",
+      days: "2 days ago",
     },
     {
       id: 2,
@@ -28,12 +29,14 @@ const Post = () => {
         "Women's mental health is an important element in one's overall well-being and contentedness",
       desc: " it maintains cognitive alternates, emotional sanity, and balance of ourselves, lives, and relationships. When one is mentally balanced and at peace with themselves internally, they are practicing good mental health.",
       username: "Nashali Perera",
+      days: "8 days ago",
     },
     {
       id: 3,
       title: "Why We Need To Pay Attention to Women's Mental Health",
       desc: " Newer research suggests women are more prone to psychological problems, such as depression, largely due in part to differences in the brains of ...",
       username: "Ximena Botfago",
+      days: "10 days ago",
     },
   ];
 
@@ -112,13 +115,13 @@ const Post = () => {
                     {data.username}
                   </div>
                   <div className="h-[50%] text-xs p-2 pt-0 text-[#777777]">
-                    2 days ago
+                    {data.days}
                   </div>
                 </div>
                 {like ? (
                   <>
                     <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
-                      {likeCount}
+                      {10}
                     </span>
                     <GoArrowUp
                       fill="#ea76b8"
@@ -137,7 +140,7 @@ const Post = () => {
                 ) : (
                   <>
                     <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
-                      {likeCount}
+                      {10}
                     </span>
                     <BiUpvote
                       fill="#ea76b8"
