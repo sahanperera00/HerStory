@@ -127,7 +127,7 @@ export default function ForumManagement() {
                   <div className="ml-5">
                     <button
                       type="button"
-                      className="py-2 px-4 rounded-lg text-white hover:bg-slate-700 bg-slate-500"
+                      className="py-2 px-4 rounded-lg text-white bg-pink-400"
                       onClick={() => filterDate()}
                     >
                       Filter

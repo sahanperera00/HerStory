@@ -56,7 +56,7 @@ export default function AdminSidebar() {
             </p>
 
             <NavLink
-              to="/coming-soon"
+              to="/admin/complaint-management"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",

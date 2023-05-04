@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { Modal, Input, Button, Upload } from "antd";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, ThemeSettings } from "../../components";
+import {
+  DashTopButton,
+  DashTopBox,
+  Navbar,
+  Footer,
+  ThemeSettings,
+} from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 import { AiOutlineEdit } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
+import { MdPostAdd } from "react-icons/md";
+import { UploadOutlined } from "@ant-design/icons";
 
 export default function CommunityManagement() {
   const {
@@ -20,6 +29,41 @@ export default function CommunityManagement() {
     setThemeSettings,
   } = useStateContext();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [communityName, setCommunityName] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setCommunityName("");
+    setDescription("");
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setCommunityName("");
+    setDescription("");
+    setIsModalOpen(false);
+  };
+
+  const props = {
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    headers: {
+      authorization: "authorization-text",
+    },
+    // onChange(info) {
+    //   // if (info.file.status !== 'uploading') {
+    //   //   console.log(info.file, info.fileList);
+    //   // }
+    //   // if (info.file.status === 'done') {
+    //   //   message.success(`${info.file.name} file uploaded successfully`);
+    //   // } else if (info.file.status === 'error') {
+    //   //   message.error(`${info.file.name} file upload failed.`);
+    //   // }
+    // },
+  };
   const community = [
     {
       id: "Community 1",
@@ -103,6 +147,66 @@ export default function CommunityManagement() {
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
                 <Header title="Forum Communities Management" />
+
+                <Modal
+                  destroyOnClose={true}
+                  title="Create a Community"
+                  className="font-semibold"
+                  open={isModalOpen}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <h5 className="mt-8 font-medium font-['Poppins']">
+                    Community Name:
+                  </h5>
+                  <Input
+                    onChange={(e) => setCommunityName(e.target.value)}
+                    value={communityName}
+                    placeholder="Enter Name"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <h5 className="mt-2 font-normal font-['Poppins']">
+                    Description:
+                  </h5>
+                  <Input
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    placeholder="Enter Description"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <Upload {...props}>
+                    <h5 className="mt-2 font-medium font-['Poppins']">
+                      Community Logo:
+                    </h5>
+                    <Button
+                      className="my-2 font-normal font-['Poppins']"
+                      icon={<UploadOutlined />}
+                    >
+                      Click to Upload
+                    </Button>
+                  </Upload>
+                </Modal>
+
+                <div className=" flex flex-1 items-end justify-between">
+                  <div className="flex m-3 flex-wrap justify-center gap-9 items-center">
+                    <button
+                      onClick={showModal}
+                      className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[5px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
+                    >
+                      Add New
+                    </button>
+                  </div>
+                </div>
+
+                {/* <div className="flex flex-wrap lg:flex-nowrap justify-left ml-5 mt-5">
+                  <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+                    <DashTopButton
+                      value="Add new"
+                      icon={<MdPostAdd />}
+                      onClick={showModal}
+                    />
+                  </div>
+                </div> */}
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
