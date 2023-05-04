@@ -29,27 +29,25 @@ export default function ForumManagement() {
   ------------------------------------------------
   */
 
-  const orders = [
+  const posts = [
     {
       id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      title: "Violence against women isn't cultural, it's criminal.",
+      email: "Chanukya@gmail.com",
+      date: "2023-04-05",
     },
     {
       id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      title:
+        "Women's mental health is an important element in one's overall well-being and contentedness",
+      email: "Nashali@gmail.com",
+      date: "2023-05-05",
     },
     {
       id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      title: "Why We Need To Pay Attention to Women's Mental Health",
+      email: "XimBot@123gmail.com",
+      date: "2023-05-08",
     },
   ];
 
@@ -111,17 +109,17 @@ export default function ForumManagement() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders &&
-                        orders.map((data) => {
+                      {posts &&
+                        posts.map((data) => {
                           return (
                             <tr
                               key={data.id}
                               className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
                               <TableData value={data.id} />
-                              <TableData value={data.client} />
-                              <TableData value={data.grossPrice} />
-                              <TableData value={data.commission} />
+                              <TableData value={data.title} />
+                              <TableData value={data.email} />
+                              <TableData value={data.date} />
                               <TableData>
                                 <Link to="/admin/order-details">
                                   <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">

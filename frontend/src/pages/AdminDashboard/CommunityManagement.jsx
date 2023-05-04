@@ -29,27 +29,36 @@ export default function CommunityManagement() {
   ------------------------------------------------
   */
 
-  const orders = [
+  const community = [
     {
-      id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      id: "Com1",
+      title: "Survivor Support Community",
+      desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
+      members: "8 members",
     },
     {
-      id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      id: "Com3",
+      title: "Legal Advice and Resources Community",
+      desc: "Providing legal resources and advice",
+      members: "10 members",
     },
     {
-      id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      id: "Com3",
+      title: "Mental Health and Wellness Community",
+      desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
+      members: "50 members",
+    },
+    {
+      id: "Com4",
+      title: "Workplace Harassment Community",
+      desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
+      members: "20 members",
+    },
+    {
+      id: "Com5",
+      title: "Education and Prevention Community",
+      desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
+      members: "30 members",
     },
   ];
 
@@ -103,25 +112,26 @@ export default function CommunityManagement() {
                   <table className="w-full rounded-lg">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
+                        <TableHeader value="Community ID" />
                         <TableHeader value="Community title" />
-                        <TableHeader value="Description" />
+
                         <TableHeader value="Number of members" />
                         <TableHeader value="Action" />
                       </tr>
                     </thead>
                     <tbody>
-                      {orders &&
-                        orders.map((data) => {
+                      {community &&
+                        community.map((data) => {
                           return (
                             <tr
                               key={data.id}
                               className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
                               <TableData value={data.id} />
-                              <TableData value={data.client} />
-                              <TableData value={data.grossPrice} />
-                              {/* <TableData value={data.commission} />
-                              <TableData value={data.status} /> */}
+                              <TableData value={data.title} />
+                              {/* <TableData value={data.desc} /> */}
+                              <TableData value={data.members} />
+
                               <TableData>
                                 <Link to="/admin/order-details">
                                   <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
