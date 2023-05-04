@@ -6,7 +6,7 @@ import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
 import Community from "./pages/Forum/Community";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import ManageConsultants from "./pages/AdminDashboard/ManageConsultants";
+import ConsultantManagement from "./pages/AdminDashboard/ConsultantManagement";
 import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
 import ForumPost from "./pages/Forum/ForumPost";
 import ClientDashboard from "./pages/ClientDashboard/ClientDashboard";
@@ -201,7 +201,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route
           path="/admin/manage-consultants"
-          element={<ManageConsultants />}
+          element={<ConsultantManagement />}
         />
         <Route
           path="/admin/category-management"

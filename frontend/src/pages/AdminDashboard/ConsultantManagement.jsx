@@ -7,7 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
-export default function ManageConsultants() {
+export default function ConsultantManagement() {
   const {
     setCurrentColor,
     setCurrentMode,
