@@ -7,13 +7,13 @@ const community = [
   {
     id: 1,
     title: "Survivor Support Community",
-    desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
+    desc: " A space for survivors of harassment or assault to share their stories, and offer support to each other",
     members: "8 members",
   },
   {
     id: 2,
     title: "Legal Advice and Resources Community",
-    desc: "Providing legal resources and advice",
+    desc: "Providing legal resources and advice and distributing information on the legal processes",
     members: "10 members",
   },
   {
@@ -31,7 +31,7 @@ const community = [
   {
     id: 5,
     title: "Education and Prevention Community",
-    desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
+    desc: "Educating and raising awareness about harassment and assault and providing resources and strategies for prevention",
     members: "30 members",
   },
 ];
@@ -45,8 +45,9 @@ const Communities = () => {
             Suggested for You
           </h1>
         </div>
-        {community.map((data) => (
-          <div className="grid xl:grid-cols-3 sm:grids-cols-1 md:grid-cols-2 min-[2000px]:grid-cols-4 place-items-center">
+
+        <div className="grid xl:grid-cols-3 sm:grids-cols-1 md:grid-cols-2 min-[2000px]:grid-cols-4 place-items-center">
+          {community.map((data) => (
             <div className="w-[75%]  h-fit rounded-[15px] font-['Poppins'] overflow-hidden shadow-[0px_7px_5px_rgba(0,0,0,0.25)] my-[35px]">
               <div className="px-[15px] mx-[15px] pt-[5px] pb-[35px] flex flex-col items-center">
                 <div className=" w-fit h-fit ">
@@ -58,7 +59,7 @@ const Communities = () => {
                 </div>
 
                 <div className="flex flex-col justify-center">
-                  <div className=" mx-[22px] mt-[5px] flex flex-row justify-center mt-[10px]">
+                  <div className=" mx-[22px] mt-[5px] flex flex-row justify-center">
                     <text className="font-[600] text-[20px]">{data.title}</text>
                   </div>
 
@@ -76,8 +77,9 @@ const Communities = () => {
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
         <div className="flex flex-row justify-center mt-[-20px] mb-[25px] min-[400px]:ml-[12%] md:ml-[5%] h-fit items-center">
           <h1 className="font-[500] text-[20px] text-[#777777] font-['poppins']">
             View More
