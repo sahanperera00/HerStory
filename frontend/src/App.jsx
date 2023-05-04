@@ -146,7 +146,7 @@ import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
-
+import PendingRequests from "./pages/CounsellorDashboard/PendingRequests";
 
 
 
@@ -442,9 +442,9 @@ function App() {
         <Route path="/consultant-signup" element={<ConsultantSignup />} />
         <Route path="/client-signup" element={<ClientSignup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
         <Route path="/admin/manage-requests" element={<RequestsManagement />} />
-
+        <Route path="/counsellor-dashboard" element={<CounsellorDashboard />} />
+        <Route path="/counsellor/pending-requests" element={<PendingRequests />} />
 
 
 
