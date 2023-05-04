@@ -6,6 +6,9 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import { AiOutlineEdit } from "react-icons/ai";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { MdPreview } from "react-icons/md";
 
 export default function ForumManagement() {
   const {
@@ -108,13 +111,30 @@ export default function ForumManagement() {
                               <TableData value={data.title} />
                               <TableData value={data.email} />
                               <TableData value={data.date} />
-                              <TableData>
-                                <Link to="/admin/order-details">
-                                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                    View
-                                  </button>
-                                </Link>
-                              </TableData>
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                    <button
+                                      className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
+                                      title="View"
+                                    >
+                                      <MdPreview />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
+                                      title="Edit"
+                                    >
+                                      <AiOutlineEdit />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Remove"
+                                    >
+                                      <RiDeleteBin2Line />
+                                    </button>
+                                  </div>
+                                }
+                              />
                             </tr>
                           );
                         })}
