@@ -5,6 +5,7 @@ import { BsPeople } from "react-icons/bs";
 import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { BiGitPullRequest } from "react-icons/bi";
 
 export default function AdminSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
@@ -52,6 +53,65 @@ export default function AdminSidebar() {
               Counseling Service
             </p>
 
+            <NavLink
+              to=""
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest />
+              <span className="capitalize ">Manage Appointments</span>
+            </NavLink>
+            
+            <NavLink
+              to=""
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest />
+              <span className="capitalize ">Pending Requests</span>
+            </NavLink>
+
+            <NavLink
+              to=""
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest />
+              <span className="capitalize ">Schedulings</span>
+            </NavLink>
+
+            <NavLink
+              to=""
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest />
+              <span className="capitalize ">Transfers</span>
+            </NavLink>
+
+            <NavLink
+              to=""
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest />
+              <span className="capitalize ">Feedbacks</span>
+            </NavLink>
 
             <p className="text-[12px] text-gray-400 dark:text-gray-400 mt-4 uppercase">
               Forum Management
