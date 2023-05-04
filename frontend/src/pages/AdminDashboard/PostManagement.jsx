@@ -9,6 +9,7 @@ import { Header, TableHeader, TableData } from "../../components";
 import { AiOutlineEdit } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdPreview } from "react-icons/md";
+import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 
 export default function ForumManagement() {
   const {
@@ -87,6 +88,25 @@ export default function ForumManagement() {
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
                 <Header title="Forum Posts Management" />
+
+                <div className=" flex items-center mb-5 ">
+                  {" "}
+                  <div className=" bg-slate-100 pt-1 rounded-lg px-5 w-56">
+                    <DateRangePickerComponent
+                      //ref={dateRangeRef}
+                      placeholder="Select a date range"
+                    />
+                  </div>
+                  <div className="ml-5">
+                    <button
+                      type="button"
+                      className="py-2 px-4 rounded-lg text-white hover:bg-slate-700 bg-slate-500"
+                      onClick={() => filterDate()}
+                    >
+                      Filter
+                    </button>
+                  </div>
+                </div>
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
