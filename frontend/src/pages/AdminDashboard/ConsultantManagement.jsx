@@ -6,6 +6,8 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import StarRatings from "react-star-ratings";
+import {RxEnvelopeClosed, RxEyeOpen, RxEyeNone} from "react-icons/rx";
 
 export default function ConsultantManagement() {
   const {
@@ -18,28 +20,22 @@ export default function ConsultantManagement() {
     setThemeSettings,
   } = useStateContext();
 
-
   const orders = [
     {
       id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Sahan Perera",
+      email: "sahan@gmail.com",
+      category: "Safty planing and support",
+      rate: 4.5,
+      status: "Active",
     },
     {
       id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
-    },
-    {
-      id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Devindu Samarasinghe",
+      email: "devindu@gmail.com",
+      category: "Workplace harassment consultation",
+      rate: 2,
+      status: "Deactive",
     },
   ];
 
@@ -62,7 +58,7 @@ export default function ConsultantManagement() {
           </div>
 
           {/* SIDEBAR IMPLEMENTATION */}
-          {activeMenu ? ( 
+          {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
@@ -93,36 +89,75 @@ export default function ConsultantManagement() {
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
+                        <TableHeader value="Name" />
+                        <TableHeader value="Email" />
+                        <TableHeader value="Category" />
+                        <TableHeader value="Ratings" />
                         <TableHeader value="Status" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Actions" />
                       </tr>
                     </thead>
                     <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
+                      {orders &&
+                        orders.map((data) => {
+                          return (
+                            <tr
+                              key={data.id}
+                              className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                            >
+                              <TableData value={data.name} />
+                              <TableData value={data.email} />
+                              <TableData value={data.category} />
+                              <TableData
+                                value={
+                                  <StarRatings
+                                    starDimension="24px"
+                                    starSpacing="0px"
+                                    rating={data.rate}
+                                    starRatedColor="#feb400"
+                                    numberOfStars={5}
+                                    name="rating"
+                                  />
+                                }
+                              />
+                              {data.status === "Active" ? (
+                                <TableData
+                                  color={"#79de79"}
+                                  value={data.status}
+                                />
+                              ) : (
+                                <TableData
+                                  color={"#fb6962"}
+                                  value={data.status}
+                                />
+                              )}
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                    <button
+                                      className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]"
+                                      title="Action"
+                                    >
+                                      <RxEnvelopeClosed />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]"
+                                      title="Activate"
+                                    >
+                                      <RxEyeOpen />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Deactivate"
+                                    >
+                                      <RxEyeNone />
+                                    </button>
+                                  </div>
+                                }
+                              />
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
