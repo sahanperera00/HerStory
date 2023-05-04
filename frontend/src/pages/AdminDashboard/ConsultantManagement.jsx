@@ -7,7 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
-export default function ManageConsultants() {
+export default function ConsultantManagement() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -46,7 +46,7 @@ export default function ManageConsultants() {
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
-        <div className="flex relative dark:bg-main-dark-bg">
+        <div className="flex relative dark:bg-main-dark-bg bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
             {/* THEME SETTINGS BUTTON */}
             <TooltipComponent content="Settings" position="Top">
@@ -63,7 +63,7 @@ export default function ManageConsultants() {
 
           {/* SIDEBAR IMPLEMENTATION */}
           {activeMenu ? ( 
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
           ) : (
@@ -75,22 +75,22 @@ export default function ManageConsultants() {
           <div
             className={
               activeMenu
-                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                ? "dark:bg-main-dark-bg min-h-screen md:ml-72 w-full  "
+                : " dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
             {/* NAVBAR IMPLEMENTATION */}
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full ">
+            <div className="fixed md:static dark:bg-main-dark-bg w-full ">
               <Navbar />
             </div>
 
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Manage Consultants" />
+                <Header title="Consultant Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg">
+                  <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Order ID" />

@@ -7,11 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
-/* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
-
-export default function AdminDashboard() {
-  // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
-
+export default function RequestsManagement() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -22,11 +18,6 @@ export default function AdminDashboard() {
     setThemeSettings,
   } = useStateContext();
 
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
 
   const orders = [
     {
@@ -57,7 +48,6 @@ export default function AdminDashboard() {
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="flex relative dark:bg-main-dark-bg bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            {" "}
             {/* THEME SETTINGS BUTTON */}
             <TooltipComponent content="Settings" position="Top">
               <button
@@ -71,8 +61,9 @@ export default function AdminDashboard() {
             </TooltipComponent>
           </div>
 
-          {activeMenu ? ( // SIDEBAR IMPLEMENTATION
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg  bg-[#f9e9e9]">
+          {/* SIDEBAR IMPLEMENTATION */}
+          {activeMenu ? ( 
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
           ) : (
@@ -85,7 +76,7 @@ export default function AdminDashboard() {
             className={
               activeMenu
                 ? "dark:bg-main-dark-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                : " dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
             {/* NAVBAR IMPLEMENTATION */}
@@ -96,12 +87,12 @@ export default function AdminDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Requests Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
-                      <tr className="bg-slate-300 text-md h-12 dark:bg-slate-800">
+                      <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Order ID" />
                         <TableHeader value="Client" />
                         <TableHeader value="Gross Price" />
@@ -115,7 +106,7 @@ export default function AdminDashboard() {
                         return (
                           <tr
                             key={data.id}
-                            className=" bg-[#f9e9e9] hover:bg-[#fafafa] border-b-2 border-gray-300 dark:bg-slate-800"
+                            className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                           >
                             <TableData value={data.id} />
                             <TableData value={data.client} />

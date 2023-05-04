@@ -1,10 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
-import { MdOutlineCancel } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { BsPeople } from "react-icons/bs";
-import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { BiCategory, BiGitPullRequest } from "react-icons/bi";
+import {
+  MdOutlineManageAccounts,
+  MdOutlineForum,
+  MdOutlineCancel,
+} from "react-icons/md";
 
 export default function AdminSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
@@ -76,8 +80,21 @@ export default function AdminSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <FiUser /> {/*  icon  */}
+              <BiCategory /> {/*  icon  */}
               <span className="capitalize ">Category Management</span>{" "}
+              {/*  link name  */}
+            </NavLink>
+
+            <NavLink
+              to="/admin/manage-requests"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest /> {/*  icon  */}
+              <span className="capitalize ">Requests Management</span>{" "}
               {/*  link name  */}
             </NavLink>
 
@@ -89,8 +106,8 @@ export default function AdminSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <FiUser /> {/*  icon  */}
-              <span className="capitalize ">Manage Consultants</span>{" "}
+              <MdOutlineManageAccounts /> {/*  icon  */}
+              <span className="capitalize ">Consultant Management</span>{" "}
               {/*  link name  */}
             </NavLink>
 
