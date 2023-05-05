@@ -82,7 +82,7 @@ export default function ClientSidebar() {
               <span className="capitalize ">Her-Story Community</span>{" "}
               {/*  link name  */}
             </NavLink>
-
+            
             <NavLink
               to="/counsel"
               onClick={handleCloseSideBar}

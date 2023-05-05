@@ -11,6 +11,14 @@ import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
 import ForumPost from "./pages/Forum/ForumPost";
 import ClientDashboard from "./pages/ClientDashboard/ClientDashboard";
 import ComplaintManagement from "./pages/AdminDashboard/ComplaintManagement";
+import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
+import ManageAppointments from "./pages/CounsellorDashboard/ManageAppointments";
+import PendingRequests  from "./pages/CounsellorDashboard/PendingRequests";
+import Chats from "./pages/CounsellorDashboard/Chats";
+import Transfers from "./pages/CounsellorDashboard/Transfers";
+import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
+
+
 // chanu add here
 
 // Devs add here
@@ -22,12 +30,51 @@ import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
-import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
-import PendingRequests from "./pages/CounsellorDashboard/PendingRequests";
-import Chats from "./pages/CounsellorDashboard/Chats";
-import Transfers from "./pages/CounsellorDashboard/Transfers";
-import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
-import ManageAppointments from "./pages/CounsellorDashboard/ManageAppointments";
+import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
+import ContactSupport from "./pages/ClientDashboard/ContactSupport";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function App() {
   return (
@@ -61,6 +108,100 @@ function App() {
 
         {/* Devs add here */}
         <Route path="/client" element={<ClientDashboard />} />
+        <Route path="/updateClient" element={<ClientUpdatePage/>}/>
+        <Route path="/client/support" element={<ContactSupport/>}/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* Nash add here */}
 
