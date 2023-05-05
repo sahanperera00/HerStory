@@ -10,6 +10,14 @@ import ConsultantManagement from "./pages/AdminDashboard/ConsultantManagement";
 import CategoryManagement from "./pages/AdminDashboard/CategoryManagement";
 import ForumPost from "./pages/Forum/ForumPost";
 import ClientDashboard from "./pages/ClientDashboard/ClientDashboard";
+import ComplaintManagement from "./pages/AdminDashboard/ComplaintManagement";
+import RequestsManagement from "./pages/AdminDashboard/RequestsManagement";
+import ManageAppointments from "./pages/CounsellorDashboard/ManageAppointments";
+import PendingRequests  from "./pages/CounsellorDashboard/PendingRequests";
+import Chats from "./pages/CounsellorDashboard/Chats";
+import Transfers from "./pages/CounsellorDashboard/Transfers";
+import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
+
 
 // chanu add here
 
