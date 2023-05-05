@@ -20,3 +20,6 @@ const userInfoSchema = mongoose.Schema({
     },
     
 })
+
+const UserInfo = mongoose.model('UserInfo',userInfoSchema);
+export default UserInfo;

@@ -5,11 +5,12 @@ import { generateToken } from "../../config/generateToken.js";
 
 
 //Register and Login will create relevant json tokens that will help authenticating the remainder of info 
-export const registerUser = async(req,res)=>{
-    
+export const registerUser = async(req,res)=>{    
+
     try{
+
         const {name, email, password, role} = req.body;
-    
+
         if(!name || !email || !password){
             return res.status(400).json({message: "Please enter all the required fields"});
         }
@@ -26,9 +27,9 @@ export const registerUser = async(req,res)=>{
             role,
             email,
             password
-        })
+        });
     
-        const salt = await bcrypt.getSalt(10);
+        const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password,salt);
         await user.save();
     
@@ -47,7 +48,7 @@ export const registerUser = async(req,res)=>{
             res.status(400).json({message: "Failed to create the token"});
         }
     }catch(error){
-        res.status(500).json({message: "Internal Server Error - Reached the catch statement"});
+        res.status(500).json({message: error.message});
     }
 };
 
