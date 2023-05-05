@@ -43,7 +43,7 @@ const Post = () => {
         //deleteMachinery(id);
         Swal.fire({
           icon: "success",
-          title: "Data Successfully Deleted",
+          title: "Post Successfully Deleted",
           color: "#f8f9fa",
           background: "#6c757d",
           showConfirmButton: false,
