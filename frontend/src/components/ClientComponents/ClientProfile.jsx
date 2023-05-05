@@ -58,7 +58,7 @@ const ClientProfile = () => {
               </button>{" "}
               </Link>
 
-              <Link to="/client">
+              <Link to="/client/support">
               <button class="text-white py-2 px-4 uppercase rounded text-sm bg-green-400 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                 {" "}
                 Contact Support
