@@ -31,6 +31,7 @@ import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
+import ContactSupport from "./pages/ClientDashboard/ContactSupport";
 
 
 
@@ -108,6 +109,7 @@ function App() {
         {/* Devs add here */}
         <Route path="/client" element={<ClientDashboard />} />
         <Route path="/updateClient" element={<ClientUpdatePage/>}/>
+        <Route path="/client/support" element={<ContactSupport/>}/>
 
 
 
