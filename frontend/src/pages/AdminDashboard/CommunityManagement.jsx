@@ -53,16 +53,32 @@ export default function CommunityManagement() {
     headers: {
       authorization: "authorization-text",
     },
-    // onChange(info) {
-    //   // if (info.file.status !== 'uploading') {
-    //   //   console.log(info.file, info.fileList);
-    //   // }
-    //   // if (info.file.status === 'done') {
-    //   //   message.success(`${info.file.name} file uploaded successfully`);
-    //   // } else if (info.file.status === 'error') {
-    //   //   message.error(`${info.file.name} file upload failed.`);
-    //   // }
-    // },
+  };
+
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const [communityName1, setCommunityName1] = useState("");
+  const [description1, setDescription1] = useState("");
+  const [file1, setFile1] = useState(null);
+  const showModal1 = () => {
+    setIsModalOpen1(true);
+  };
+  const handleOk1 = () => {
+    setCommunityName1("");
+    setDescription1("");
+    setIsModalOpen1(false);
+  };
+  const handleCancel1 = () => {
+    setCommunityName1("");
+    setDescription1("");
+    setIsModalOpen1(false);
+  };
+
+  const props1 = {
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    headers: {
+      authorization: "authorization-text",
+    },
   };
   const community = [
     {
@@ -147,7 +163,7 @@ export default function CommunityManagement() {
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
                 <Header title="Forum Communities Management" />
-
+                {/* create modal */}
                 <Modal
                   destroyOnClose={true}
                   title="Create a Community"
@@ -171,6 +187,47 @@ export default function CommunityManagement() {
                   <Input
                     onChange={(e) => setDescription(e.target.value)}
                     value={description}
+                    placeholder="Enter Description"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <Upload {...props}>
+                    <h5 className="mt-2 font-medium font-['Poppins']">
+                      Community Logo:
+                    </h5>
+                    <Button
+                      className="my-2 font-normal font-['Poppins']"
+                      icon={<UploadOutlined />}
+                    >
+                      Click to Upload
+                    </Button>
+                  </Upload>
+                </Modal>
+                {/* edit modal */}
+                <Modal
+                  destroyOnClose={true}
+                  title="Edit Community"
+                  className="font-semibold"
+                  open={isModalOpen1}
+                  onOk={handleOk1}
+                  onCancel={handleCancel1}
+                >
+                  <h5 className="mt-8 font-medium font-['Poppins']">
+                    Community Name:
+                  </h5>
+                  <Input
+                    onChange={(e) => setCommunityName1(e.target.value)}
+                    value={"Survivor support group"}
+                    placeholder="Enter Name"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <h5 className="mt-2 font-normal font-['Poppins']">
+                    Description:
+                  </h5>
+                  <Input
+                    onChange={(e) => setDescription1(e.target.value)}
+                    value={
+                      "A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other"
+                    }
                     placeholder="Enter Description"
                     className="font-['Poppins'] mb-2 font-normal"
                   />
@@ -235,6 +292,7 @@ export default function CommunityManagement() {
                                     <button
                                       className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
                                       title="Edit"
+                                      onClick={showModal1}
                                     >
                                       <AiOutlineEdit />
                                     </button>
