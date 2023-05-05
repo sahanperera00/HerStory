@@ -187,15 +187,13 @@ export default function CommunityManagement() {
                   </Upload>
                 </Modal>
 
-                <div className=" flex flex-1 items-end justify-between">
-                  <div className="flex m-3 flex-wrap justify-center gap-9 items-center">
-                    <button
-                      onClick={showModal}
-                      className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[5px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
-                    >
-                      Add New
-                    </button>
-                  </div>
+                <div className=" flex m-3  flex-1 items-end justify-left">
+                  <button
+                    onClick={showModal}
+                    className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[8px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
+                  >
+                    +Community
+                  </button>
                 </div>
 
                 {/* <div className="flex flex-wrap lg:flex-nowrap justify-left ml-5 mt-5">
