@@ -7,6 +7,7 @@ import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
+import ClientProfile from "../../components/ClientComponents/ClientProfile";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
@@ -78,6 +79,10 @@ export default function ClientDashboard() {
               {themeSettings && <ThemeSettings />}
               <div>
                 {/* Paste your content Here */}
+
+                <div className="">
+                  <ClientProfile/>
+                </div>
 
                 <h1 className="ml-5"></h1>
               </div>
