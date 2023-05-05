@@ -1,5 +1,6 @@
 import React from "react";
 import { ContextProvider, useStateContext } from "../../contexts/ContextProvider";
+import {Link} from "react-router-dom"
 
 const ClientProfile = () => {
 
@@ -21,12 +22,12 @@ const ClientProfile = () => {
               <div>
                 {" "}
                 <p class="font-bold text-gray-700 text-xl dark:text-gray-400">10</p>{" "}
-                <p class="text-gray-400 dark:text-gray-200 ">Photos</p>{" "}
+                <p class="text-gray-400 dark:text-gray-200 ">Forum Threads</p>{" "}
               </div>{" "}
               <div>
                 {" "}
-                <p class="font-bold text-gray-700 text-xl dark:text-gray-400">89</p>{" "}
-                <p class="text-gray-400 dark:text-gray-200">Comments</p>{" "}
+                <p class="font-bold text-gray-700 text-xl dark:text-gray-400">0</p>{" "}
+                <p class="text-gray-400 dark:text-gray-200">Filed Complaints</p>{" "}
               </div>{" "}
             </div>{" "}
             <div class="relative">
@@ -48,15 +49,22 @@ const ClientProfile = () => {
               </div>{" "}
             </div>{" "}
             <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+            <Link to="/updateClient">
+            
               <button className="text-white py-2 px-4 uppercase rounded text-sm hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
               style={{background: currentColor}}>
                 {" "}
                 Update your profile
               </button>{" "}
+              </Link>
+
+              <Link to="/client">
               <button class="text-white py-2 px-4 uppercase rounded text-sm bg-green-400 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
                 {" "}
                 Contact Support
               </button>{" "}
+
+              </Link>
             </div>{" "}
           </div>{" "}
           <div class="mt-20 text-center border-b pb-12">
