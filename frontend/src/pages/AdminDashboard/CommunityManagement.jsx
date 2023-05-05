@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { Modal, Input, Button, Upload } from "antd";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, ThemeSettings } from "../../components";
+import {
+  DashTopButton,
+  DashTopBox,
+  Navbar,
+  Footer,
+  ThemeSettings,
+} from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-import Forum from "../Forum/Forum";
-
-/* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
+import { AiOutlineEdit } from "react-icons/ai";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { MdPostAdd } from "react-icons/md";
+import { UploadOutlined } from "@ant-design/icons";
 
 export default function CommunityManagement() {
-  // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
-
   const {
     setCurrentColor,
     setCurrentMode,
@@ -23,41 +29,75 @@ export default function CommunityManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [communityName, setCommunityName] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setCommunityName("");
+    setDescription("");
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setCommunityName("");
+    setDescription("");
+    setIsModalOpen(false);
+  };
 
+  const props = {
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    headers: {
+      authorization: "authorization-text",
+    },
+    // onChange(info) {
+    //   // if (info.file.status !== 'uploading') {
+    //   //   console.log(info.file, info.fileList);
+    //   // }
+    //   // if (info.file.status === 'done') {
+    //   //   message.success(`${info.file.name} file uploaded successfully`);
+    //   // } else if (info.file.status === 'error') {
+    //   //   message.error(`${info.file.name} file upload failed.`);
+    //   // }
+    // },
+  };
   const community = [
     {
-      id: "Com1",
+      id: "Community 1",
       title: "Survivor Support Community",
       desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
+      date: "2023-04-04",
       members: "8 members",
     },
     {
-      id: "Com3",
+      id: "Community 2",
       title: "Legal Advice and Resources Community",
       desc: "Providing legal resources and advice",
+      date: "2023-05-02",
       members: "10 members",
     },
     {
-      id: "Com3",
+      id: "Community 3",
       title: "Mental Health and Wellness Community",
       desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
+      date: "2023-05-04",
       members: "50 members",
     },
     {
-      id: "Com4",
+      id: "Community 4",
       title: "Workplace Harassment Community",
       desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
+      date: "2023-05-06",
       members: "20 members",
     },
     {
-      id: "Com5",
+      id: "Community 5",
       title: "Education and Prevention Community",
       desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
+      date: "2023-05-09",
       members: "30 members",
     },
   ];
@@ -65,9 +105,8 @@ export default function CommunityManagement() {
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
-        <div className="flex relative dark:bg-main-dark-bg">
+        <div className="flex relative dark:bg-main-dark-bg bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            {" "}
             {/* THEME SETTINGS BUTTON */}
             <TooltipComponent content="Settings" position="Top">
               <button
@@ -81,8 +120,9 @@ export default function CommunityManagement() {
             </TooltipComponent>
           </div>
 
-          {activeMenu ? ( // SIDEBAR IMPLEMENTATION
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+          {/* SIDEBAR IMPLEMENTATION */}
+          {activeMenu ? (
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
               <AdminSidebar />
             </div>
           ) : (
@@ -94,29 +134,89 @@ export default function CommunityManagement() {
           <div
             className={
               activeMenu
-                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                ? "dark:bg-main-dark-bg min-h-screen md:ml-72 w-full  "
+                : " dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
             {/* NAVBAR IMPLEMENTATION */}
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full ">
+            <div className="fixed md:static dark:bg-main-dark-bg w-full ">
               <Navbar />
             </div>
 
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Manage Communities" />
+                <Header title="Forum Communities Management" />
+
+                <Modal
+                  destroyOnClose={true}
+                  title="Create a Community"
+                  className="font-semibold"
+                  open={isModalOpen}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <h5 className="mt-8 font-medium font-['Poppins']">
+                    Community Name:
+                  </h5>
+                  <Input
+                    onChange={(e) => setCommunityName(e.target.value)}
+                    value={communityName}
+                    placeholder="Enter Name"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <h5 className="mt-2 font-normal font-['Poppins']">
+                    Description:
+                  </h5>
+                  <Input
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    placeholder="Enter Description"
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <Upload {...props}>
+                    <h5 className="mt-2 font-medium font-['Poppins']">
+                      Community Logo:
+                    </h5>
+                    <Button
+                      className="my-2 font-normal font-['Poppins']"
+                      icon={<UploadOutlined />}
+                    >
+                      Click to Upload
+                    </Button>
+                  </Upload>
+                </Modal>
+
+                <div className=" flex flex-1 items-end justify-between">
+                  <div className="flex m-3 flex-wrap justify-center gap-9 items-center">
+                    <button
+                      onClick={showModal}
+                      className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[5px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
+                    >
+                      Add New
+                    </button>
+                  </div>
+                </div>
+
+                {/* <div className="flex flex-wrap lg:flex-nowrap justify-left ml-5 mt-5">
+                  <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+                    <DashTopButton
+                      value="Add new"
+                      icon={<MdPostAdd />}
+                      onClick={showModal}
+                    />
+                  </div>
+                </div> */}
 
                 <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg">
+                  <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
                         <TableHeader value="Community ID" />
-                        <TableHeader value="Community title" />
-
-                        <TableHeader value="Number of members" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Community Title" />
+                        <TableHeader value="Date Created" />
+                        <TableHeader value="Number of Members" />
+                        <TableHeader value="Actions" />
                       </tr>
                     </thead>
                     <tbody>
@@ -129,16 +229,26 @@ export default function CommunityManagement() {
                             >
                               <TableData value={data.id} />
                               <TableData value={data.title} />
-                              {/* <TableData value={data.desc} /> */}
+                              <TableData value={data.date} />
                               <TableData value={data.members} />
-
-                              <TableData>
-                                <Link to="/admin/order-details">
-                                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                    View
-                                  </button>
-                                </Link>
-                              </TableData>
+                              <TableData
+                                value={
+                                  <div className="flex gap-4">
+                                    <button
+                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
+                                      title="Edit"
+                                    >
+                                      <AiOutlineEdit />
+                                    </button>
+                                    <button
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Remove"
+                                    >
+                                      <RiDeleteBin2Line />
+                                    </button>
+                                  </div>
+                                }
+                              />
                             </tr>
                           );
                         })}

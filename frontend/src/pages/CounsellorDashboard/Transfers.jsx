@@ -4,12 +4,12 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import AdminSidebar from "./AdminSidebar";
+import CounsellorSidebar from "./CounsellorSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function AdminDashboard() {
+export default function Transfers() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
@@ -72,12 +72,12 @@ export default function AdminDashboard() {
           </div>
 
           {activeMenu ? ( // SIDEBAR IMPLEMENTATION
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg  bg-[#f9e9e9]">
-              <AdminSidebar />
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#f9e9e9]">
+              <CounsellorSidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
-              <AdminSidebar />
+              <CounsellorSidebar />
             </div>
           )}
 
@@ -85,7 +85,7 @@ export default function AdminDashboard() {
             className={
               activeMenu
                 ? "dark:bg-main-dark-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                : "dark:bg-main-dark-bg w-full min-h-screen flex-2 "
             }
           >
             {/* NAVBAR IMPLEMENTATION */}
@@ -96,45 +96,9 @@ export default function AdminDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Transfers" />
 
-                <div className="block w-full overflow-x-auto rounded-lg">
-                  <table className="w-full rounded-lg dark:text-white">
-                    <thead>
-                      <tr className="bg-slate-300 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Action" />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className=" bg-[#f9e9e9] hover:bg-[#fafafa] border-b-2 border-gray-300 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                
               </div>
             </div>
             <Footer />

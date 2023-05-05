@@ -6,12 +6,10 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-import { AiOutlineEdit } from "react-icons/ai";
-import { RiDeleteBin2Line } from "react-icons/ri";
-import { MdPreview } from "react-icons/md";
-import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
+import StarRatings from "react-star-ratings";
+import {RxEnvelopeClosed, RxEyeOpen, RxEyeNone} from "react-icons/rx";
 
-export default function ForumManagement() {
+export default function ConsultantManagement() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -22,54 +20,25 @@ export default function ForumManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const posts = [
+  const orders = [
     {
       id: 1,
-      title: "Violence against women isn't cultural, it's criminal.",
-      email: "Chanukya@gmail.com",
-      date: "2023-02-05",
+      name: "Sahan Perera",
+      email: "sahan@gmail.com",
+      category: "Safty planing and support",
+      rate: 4.5,
+      status: "Active",
     },
     {
       id: 2,
-      title:
-        "Women's mental health is an important element in one's overall well-being",
-      email: "Nashali@gmail.com",
-      date: "2023-02-12",
-    },
-    {
-      id: 3,
-      title: "Why We Need To Pay Attention to Women's Mental Health",
-      email: "XimBot@123gmail.com",
-      date: "2023-03-08",
-    },
-
-    {
-      id: 4,
-      title: "Women's Health Matters: Prioritizing Self-Care and Wellness",
-      email: "kylie@ymail.com",
-      date: "2023-03-29",
-    },
-    {
-      id: 5,
-      title:
-        "Building Strong Relationships: Communication and Connection for Women",
-      email: "unknown89@gmail.com",
-      date: "2023-04-05",
-    },
-    {
-      id: 6,
-      title: "Balancing Work and Life: Strategies for Busy Women",
-      email: "Shfa@gmail.com",
-      date: "2023-04-08",
-    },
-
-    {
-      id: 7,
-      title: "Breaking Down Barriers: Women in Male-Dominated Industries",
-      email: "Anne@gmail.com",
-      date: "2023-05-05",
+      name: "Devindu Samarasinghe",
+      email: "devindu@gmail.com",
+      category: "Workplace harassment consultation",
+      rate: 2,
+      status: "Deactive",
     },
   ];
+
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -114,70 +83,74 @@ export default function ForumManagement() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Forum Posts Management" />
-
-                <div className=" flex items-center mb-5 ">
-                  {" "}
-                  <div className=" bg-slate-100 pt-1 rounded-lg px-5 w-56">
-                    <DateRangePickerComponent
-                      //ref={dateRangeRef}
-                      placeholder="Select a date range"
-                    />
-                  </div>
-                  <div className="ml-5">
-                    <button
-                      type="button"
-                      className="py-2 px-4 rounded-lg text-white bg-pink-400"
-                      onClick={() => filterDate()}
-                    >
-                      Filter
-                    </button>
-                  </div>
-                </div>
+                <Header title="Consultant Management" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Post ID" />
-                        <TableHeader value="Title" />
-                        <TableHeader value="User Email" />
-                        <TableHeader value="Date" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Name" />
+                        <TableHeader value="Email" />
+                        <TableHeader value="Category" />
+                        <TableHeader value="Ratings" />
+                        <TableHeader value="Status" />
+                        <TableHeader value="Actions" />
                       </tr>
                     </thead>
                     <tbody>
-                      {posts &&
-                        posts.map((data) => {
+                      {orders &&
+                        orders.map((data) => {
                           return (
                             <tr
                               key={data.id}
-                              className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                              className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
-                              <TableData value={data.id} />
-                              <TableData value={data.title} />
+                              <TableData value={data.name} />
                               <TableData value={data.email} />
-                              <TableData value={data.date} />
+                              <TableData value={data.category} />
+                              <TableData
+                                value={
+                                  <StarRatings
+                                    starDimension="24px"
+                                    starSpacing="0px"
+                                    rating={data.rate}
+                                    starRatedColor="#feb400"
+                                    numberOfStars={5}
+                                    name="rating"
+                                  />
+                                }
+                              />
+                              {data.status === "Active" ? (
+                                <TableData
+                                  color={"#79de79"}
+                                  value={data.status}
+                                />
+                              ) : (
+                                <TableData
+                                  color={"#fb6962"}
+                                  value={data.status}
+                                />
+                              )}
                               <TableData
                                 value={
                                   <div className="flex gap-4">
                                     <button
-                                      className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
-                                      title="View"
+                                      className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]"
+                                      title="Action"
                                     >
-                                      <MdPreview />
+                                      <RxEnvelopeClosed />
                                     </button>
                                     <button
-                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
-                                      title="Edit"
+                                      className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]"
+                                      title="Activate"
                                     >
-                                      <AiOutlineEdit />
+                                      <RxEyeOpen />
                                     </button>
                                     <button
                                       className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
-                                      title="Remove"
+                                      title="Deactivate"
                                     >
-                                      <RiDeleteBin2Line />
+                                      <RxEyeNone />
                                     </button>
                                   </div>
                                 }

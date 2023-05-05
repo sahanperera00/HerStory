@@ -1,12 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
-import { FiUser } from "react-icons/fi";
-import { BsPeople } from "react-icons/bs";
-import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
+import {RxClipboard} from 'react-icons/rx';
+import {RxLapTimer} from 'react-icons/rx';
+import {AiOutlineSchedule} from 'react-icons/ai';
+import {BsChatSquareText} from 'react-icons/bs';
+import {RiFeedbackLine} from 'react-icons/ri';
 
-export default function AdminSidebar() {
+export default function CounsellorSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
     useStateContext();
 
@@ -52,6 +54,65 @@ export default function AdminSidebar() {
               Counseling Service
             </p>
 
+            {/* <NavLink
+              to="/counsellor/manage-appointments"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <RxClipboard />
+              <span className="capitalize ">Manage Appointments</span>
+            </NavLink> */}
+
+            <NavLink
+              to="/counsellor/pending-requests"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <RxLapTimer />
+              <span className="capitalize ">Pending Requests</span>
+            </NavLink>
+
+            <NavLink
+              to="/counsellor/chats"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BsChatSquareText />
+              <span className="capitalize ">Chats</span>
+            </NavLink>
+
+            {/* <NavLink
+              to="/counsellor/transfers"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiTransfer />
+              <span className="capitalize ">Transfers</span>
+            </NavLink> */}
+
+            <NavLink
+              to="/counsellor/feedbacks"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <RiFeedbackLine />
+              <span className="capitalize ">Feedbacks</span>
+            </NavLink>
 
             <p className="text-[12px] text-gray-400 dark:text-gray-400 mt-4 uppercase">
               Forum Management

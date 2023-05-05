@@ -6,10 +6,12 @@ import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import CounsellorSidebar from "./CounsellorSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import StarRatings from "react-star-ratings";
+import { RxEnvelopeClosed, RxEyeOpen, RxEyeNone } from "react-icons/rx";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function CounsellorDashboard() {
+export default function Feedbacks() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
@@ -31,26 +33,54 @@ export default function CounsellorDashboard() {
   const orders = [
     {
       id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Sahan Perera",
+      email: "sahan@gmail.com",
+      review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      rate: 4.5,
+      date: "2022-11-14",
     },
     {
-      id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+        id: 2,
+        name: "Devindu Samarasinghe",
+        email: "devindu@gmail.com",
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        rate: 5,
+        date: "2022-09-20",
     },
     {
       id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
+      name: "Chanukya Serasinghe",
+      email: "chanukya@gmail.com",
+      review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      rate: 3.5,
+      date: "2022-07-14",
     },
-  ];
+    {
+        id: 4,
+        name: "Nashali Perera",
+        email: "nashali@gmail.com",
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        rate: 5,
+        date: "2021-06-24",
+    },
+    {
+      id: 5,
+      name: "Chamodh Perera",
+      email: "chamodh@gmail.com",
+      review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      rate: 4,
+      date: "2021-03-14",
+    },
+    {
+        id: 6,
+        name: "Pasan Induwara",
+        email: "pasan@gmail.com",
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        rate: 4,
+        date: "2021-01-21",
+    },
+    
+];
 
   return (
     <div>
@@ -96,42 +126,46 @@ export default function CounsellorDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
-                <Header title="Topic" />
+                <Header title="Feedbacks" />
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
                     <thead>
                       <tr className="bg-slate-200 text-md h-12 dark:bg-slate-800">
-                        <TableHeader value="Order ID" />
-                        <TableHeader value="Client" />
-                        <TableHeader value="Gross Price" />
-                        <TableHeader value="Commission" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Action" />
+                        <TableHeader value="Name" />
+                        <TableHeader value="Email" />
+                        <TableHeader value="Review" />
+                        <TableHeader value="Ratings" />
+                        <TableHeader value="Date" />
                       </tr>
                     </thead>
                     <tbody>
-                      {orders && orders.map((data) => {
-                        return (
-                          <tr
-                            key={data.id}
-                            className="bg-white  hover:bg-[#fafafa] border-b-2 border-gray-200 dark:bg-slate-800"
-                          >
-                            <TableData value={data.id} />
-                            <TableData value={data.client} />
-                            <TableData value={data.grossPrice} />
-                            <TableData value={data.commission} />
-                            <TableData value={data.status} />
-                            <TableData>
-                              <Link to="/admin/order-details">
-                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                  View
-                                </button>
-                              </Link>
-                            </TableData>
-                          </tr>
-                        );
-                      })}
+                      {orders &&
+                        orders.map((data) => {
+                          return (
+                            <tr
+                              key={data.id}
+                              className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                            >
+                              <TableData value={data.name} />
+                              <TableData value={data.email} />
+                              <TableData value={data.review} />
+                              <TableData
+                                value={
+                                    <StarRatings
+                                    starDimension="24px"
+                                    starSpacing="0px"
+                                    rating={data.rate}
+                                    starRatedColor="#feb400"
+                                    numberOfStars={5}
+                                    name="rating"
+                                    />
+                                }
+                              />
+                                <TableData value={data.date} />
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
