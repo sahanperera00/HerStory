@@ -3,15 +3,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { useStateContext } from "../../contexts/ContextProvider";
+import { FiUser } from "react-icons/fi";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, Sidebar, ThemeSettings } from "../../components";
+import {
+  Navbar,
+  Footer,
+  Sidebar,
+  ThemeSettings,
+} from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
-import ClientProfile from "../../components/ClientComponents/ClientProfile";
+import ClientSidebar from "../../components/ClientComponents/ClientSidebar.jsx";
+import ClientUpdate from "../../components/ClientComponents/ClientUpdate.jsx";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
-export default function ClientDashboard() {
+export default function ClientUpdatePage() {
   // <== THIS IS THE COMPONENT NAME, CHANGE IT TO YOUR COMPONENT NAME
 
   const {
@@ -29,7 +35,6 @@ export default function ClientDashboard() {
   YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
   ------------------------------------------------
   */
-
 
   return (
     <div>
@@ -79,12 +84,8 @@ export default function ClientDashboard() {
               {themeSettings && <ThemeSettings />}
               <div>
                 {/* Paste your content Here */}
-
-                <div className="">
-                  <ClientProfile/>
-                </div>
-
-                <h1 className="ml-5"></h1>
+                
+                <ClientUpdate/>
               </div>
               <Footer />
             </div>
