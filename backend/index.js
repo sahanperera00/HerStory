@@ -14,7 +14,7 @@ import userRoutes from "./routers/users/user.routes.js"
 
 
 //Chanukya
-
+import PostRoutes from "./routers/Forum/post.routes.js"
 
 
 
@@ -46,7 +46,7 @@ app.use('/user',userRoutes);
 
 
 //Chanukya
-
+app.use('/posts',PostRoutes);
 
 
 
