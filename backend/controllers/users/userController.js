@@ -56,27 +56,28 @@ export const loginUser = async(req,res)=>{
     try{
         const {email,password} = req.body;
 
+        //retrieving the user via mail
+        let user = await User.findOne({"email" :email});
+
         if(!email || !password){
-            return res.status(400).json({message: "Please enter all the required fields"});
+            return res.sendStatus(400).json({message: "Please enter all the required fields"});
         }
 
         //Backend validation to see if this is a valid email
         if(!email.includes("@")){
-            return res.status(400).json({message: "Please enter a valid email"})
+            return res.sendStatus(400).json({message: "Please enter a valid email"})
         }
 
-        //retrieving the user via mail
-        let user = User.find({email});
 
         //if no email corresponds returns a message asking for valid email
         if(!user){
-            return res.status(400).json({message: "Invalid email. Please try again"});
+            return res.sendStatus(400).json({message: "Invalid email. Please try again"});
         }
 
         //if password doesnt match returns a message asking for valid password
         const isMatch = await bcrypt.compare(password,user.password);
         if(!isMatch){
-            return res.status(400).json({message: "Invalid password. Please try again!. Cause: " + error.message});
+            return res.sendStatus(400).json({message: "Invalid password. Please try again!. Cause: " + error.message});
         }
 
         //creating a payload for the token
@@ -86,7 +87,6 @@ export const loginUser = async(req,res)=>{
             email: user.email,
             role: user.role
         }
-
         //Checks if the user is created and returns the user and the token
         if(user){
             return res.status(200).json({user: user, token: generateToken(payload)});
