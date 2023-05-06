@@ -15,7 +15,7 @@ import chatRoutes from "./routers/counselling/chat.routes.js"
 
 
 //Chanukya
-
+import PostRoutes from "./routers/Forum/post.routes.js"
 
 
 
@@ -48,7 +48,7 @@ app.use('/chat',chatRoutes);
 
 
 //Chanukya
-
+app.use('/posts',PostRoutes);
 
 
 
