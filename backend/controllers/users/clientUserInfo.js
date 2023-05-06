@@ -4,32 +4,35 @@ import bcrypt from "bcryptjs";
 
 export const getUserBiobyEmail = async(req,res)=>{
 
+        //authenticate req.user is passed.
 
-        const {dob,designation,country, email} = req.body;
-
+        const {dob,designation,country} = req.body;
+        
         try{
 
-            //first we get the USER from the email
-            const user = await User.findOne({"email": email});
-            console.log(user._id.toString());
-            
-            //then we pass the userId to the userInfo referene attribute since thats what we have defined in the model
-            const final = await UserInfo.create({
-                user: user._id,
-                dob: dob,
-                designation: designation,
-                country: country,
-            });
+            //validating if a userInfo has already been created by this version before
+            const isUserInfo = await UserInfo.findOne({"user": req.user._id});
 
-            //We save the model
-            final.save();
+            if(isUserInfo){
+                res.status(400).json("User Info already created");
+            }else{
+                const userInfo = await UserInfo.create({
+                    user: req.user._id,
+                    dob: dob,
+                    designation: designation,
+                    country: country,
+                });
+                userInfo.save();
+    
+                //Now when we call populate, instead of just showing the UserId inside the User attribute of UserModel,
+                //It will show all the information relevant to the UserId that's passed inside the User attribute of UserModel
+    
+                const completeUser = await UserInfo.findOne({"_id": final._id}).populate({path:"user",select:"name email role"});
+                res.send({full:completeUser, usual: userInfo});
+                //For postman comparison, Both populated and normal method has been returned. Check the difference for yourself.
+            }
 
-            //Now when we call populate, instead of just showing the UserId inside the User attribute of UserModel,
-            //It will show all the information relevant to the UserId that's passed inside the User attribute of UserModel
-
-            const fullUser = await UserInfo.findOne({"_id": final._id}).populate({path:"user",select:"name email role password"});
-            res.send({full:fullUser, usual: final});
-            //For postman comparison, Both populated and normal method has been returned. Check the difference for yourself.
+           
 
         }catch(error){
             res.status(500).json({message: error.message});
