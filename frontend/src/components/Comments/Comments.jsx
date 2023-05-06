@@ -1,4 +1,3 @@
-
 export default function ForumPost() {
   return (
     <>
@@ -7,7 +6,7 @@ export default function ForumPost() {
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
           <br />
-          Discussion (20)
+          Discussion (05)
         </h2>
       </div>
       <form class="mb-6">
