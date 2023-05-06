@@ -24,6 +24,10 @@ function Modal({ setOpenModal, setSuccess }) {
         <label className="block text-black text-sm font-bold mb-2">Title</label>
         <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
         <label className="block text-black text-sm font-bold mt-4 mb-2">
+          Description
+        </label>
+        <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
+        <label className="block text-black text-sm font-bold mt-4 mb-2">
           Content
         </label>
         <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
