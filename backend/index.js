@@ -9,7 +9,7 @@ import { connectDB } from "./config/db.js"
 //Route import
 
 //Devindu
-
+import userRoutes from "./routers/users/user.routes.js"
 
 
 
@@ -40,6 +40,7 @@ const PORT = process.env.PORT || 8070;
 
 //Route Implementaion
 //Devindu
+app.use('/user',userRoutes);
 
 
 
