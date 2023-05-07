@@ -20,8 +20,8 @@ import PostRoutes from "./routers/Forum/post.routes.js"
 
 
 //Sahan
-
-
+import FeedbackRoutes from "./routers/counselling/feedback.routes.js"
+import CategoryRoutes from "./routers/counselling/category.routes.js"
 
 
 
@@ -53,8 +53,8 @@ app.use('/posts',PostRoutes);
 
 
 //Sahan
-
-
+app.use('/feedback',FeedbackRoutes);
+app.use('/category',CategoryRoutes);
 
 
 //Nashali
