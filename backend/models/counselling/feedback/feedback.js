@@ -2,13 +2,15 @@ import mongoose from "mongoose";
 
 const feedbackSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
+    client: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "User",
     },
-    email: {
-      type: String,
+    counsellor: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "User",
     },
     review: {
       type: String,
