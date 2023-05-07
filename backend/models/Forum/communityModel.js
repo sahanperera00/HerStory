@@ -13,7 +13,6 @@ const communitiesSchema = mongoose.Schema({
 
   picture: {
     type: String,
-    required: true,
   },
 });
 

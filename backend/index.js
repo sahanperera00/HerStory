@@ -1,74 +1,49 @@
-import express from "express"
+import express from "express";
 
-import dotenv from "dotenv/config"
-import cors from "cors"
-import bodyParser from "body-parser"
+import dotenv from "dotenv/config";
+import cors from "cors";
+import bodyParser from "body-parser";
 
-import { connectDB } from "./config/db.js"
+import { connectDB } from "./config/db.js";
 
 //Route import
 
 //Devindu
-import userRoutes from "./routers/users/user.routes.js"
-import chatRoutes from "./routers/counselling/chat.routes.js"
-
-
+import userRoutes from "./routers/users/user.routes.js";
+import chatRoutes from "./routers/counselling/chat.routes.js";
 
 //Chanukya
-import PostRoutes from "./routers/Forum/post.routes.js"
-
-
+import PostRoutes from "./routers/Forum/post.routes.js";
 
 //Sahan
 
-
-
-
-
 //Nashali
+import communityRoutes from "./routers/Forum/community.routes.js";
 
-
-
-
-//bodyParser and CORS configuration - express 
+//bodyParser and CORS configuration - express
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-//PORT Configurations 
+//PORT Configurations
 const PORT = process.env.PORT || 8070;
 
 //Route Implementaion
 //Devindu
-app.use('/user',userRoutes);
-app.use('/chat',chatRoutes);
-
-
-
+app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
 
 //Chanukya
-app.use('/posts',PostRoutes);
-
-
+app.use("/posts", PostRoutes);
 
 //Sahan
 
-
-
-
 //Nashali
-
-
-
-
+app.use("/community", communityRoutes);
 
 //Setting up mongoDB
 connectDB();
 
 //Starting the server
-app.listen(PORT,console.log(`Server is running on port: ${PORT}`));
-
-
-
-
+app.listen(PORT, console.log(`Server is running on port: ${PORT}`));
