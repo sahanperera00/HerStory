@@ -20,7 +20,7 @@ const Post = () => {
       id: 1,
       title: "Violence against women isn't cultural, it's criminal.",
       desc: "Equality cannot come eventually, it's something we must fight for now. Violence against women can end only when the culprits get punished.",
-      username: "Chanukya Serasinghe",
+      username: "Chanukya@gmail.com",
       days: "2 days ago",
     },
     {
@@ -28,7 +28,7 @@ const Post = () => {
       title:
         "Women's mental health is an important element in one's overall well-being and contentedness",
       desc: " it maintains cognitive alternates, emotional sanity, and balance of ourselves, lives, and relationships. When one is mentally balanced and at peace with themselves internally, they are practicing good mental health.",
-      username: "Nashali Perera",
+      username: "Nashali.P@gmail.com",
       days: "8 days ago",
     },
     {
@@ -75,7 +75,7 @@ const Post = () => {
     }
   };
   return (
-    <div className=" h-[80vh] overflow-y-scroll overflow-x-hidden no-scrollbar ">
+    <div className=" h-[100vh] overflow-y-scroll overflow-x-hidden ">
       {posts.map((data) => (
         <div
           key={2}

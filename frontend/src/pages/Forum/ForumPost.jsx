@@ -95,7 +95,7 @@ const Post = () => {
         key={2}
         onClick={() => handlePostClick(2)}
         className={` 
-           ml-[19px] mt-[20px] h-fit w-[97%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-8`}
+           ml-[200px] mt-[30px] h-fit w-[79%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-8`}
       >
         <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-[#f2b8c6]"></div>
         {posts.map((data) => (
@@ -126,7 +126,7 @@ const Post = () => {
                   </button>
                 </div>
               </div>
-              <div className="h-fit w-[70%] text-base text-[#777777] p-2">
+              <div className="h-fit w-[90%] text-base text-[#777777] p-2">
                 Equality cannot come eventually, it's something we must fight
                 for now. Violence against women can end only when the culprits
                 get punished.Over a quarter of women aged15-49 years who have
@@ -164,7 +164,7 @@ const Post = () => {
                 {like ? (
                   <>
                     <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
-                      {likeCount}
+                      {10}
                     </span>
                     <GoArrowUp
                       fill="#02C8AC"
@@ -183,7 +183,7 @@ const Post = () => {
                 ) : (
                   <>
                     <span className="font-bold text-xl  text-[#ea76b8] top-5 right-[158px] absolute">
-                      {likeCount}
+                      {10}
                     </span>
                     <BiUpvote
                       fill="#ea76b8"
