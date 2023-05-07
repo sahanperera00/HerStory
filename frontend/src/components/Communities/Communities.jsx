@@ -39,16 +39,16 @@ const community = [
 const Communities = () => {
   return (
     <>
-      <div className="flex flex-col w-[87%]  ">
+      <div className="flex flex-col w-[87%]">
         <div className="flex flex-row justify-start my-[20px] min-[400px]:ml-[12%] md:ml-[5%] lg:ml-[6%] xl:ml-[4%]  h-fit items-center">
-          <h1 className="font-[600] text-[24px] font-['poppins']">
+          <h1 className="font-[600] text-[24px]">
             Suggested for You
           </h1>
         </div>
 
         <div className="grid xl:grid-cols-3 sm:grids-cols-1 md:grid-cols-2 min-[2000px]:grid-cols-4 place-items-center">
           {community.map((data) => (
-            <div className="w-[75%]  h-fit rounded-[15px] font-['Poppins'] overflow-hidden shadow-[0px_7px_5px_rgba(0,0,0,0.25)] my-[35px]">
+            <div className="w-[75%] pt-5 h-fit rounded-[15px] overflow-hidden shadow-[0px_7px_5px_rgba(0,0,0,0.25)] my-[35px] bg-[#f9e9e9]">
               <div className="px-[15px] mx-[15px] pt-[5px] pb-[35px] flex flex-col items-center">
                 <div className=" w-fit h-fit ">
                   <img
@@ -81,7 +81,7 @@ const Communities = () => {
         </div>
 
         <div className="flex flex-row justify-center mt-[-20px] mb-[25px] min-[400px]:ml-[12%] md:ml-[5%] h-fit items-center">
-          <h1 className="font-[500] text-[20px] text-[#777777] font-['poppins']">
+          <h1 className="font-[500] text-[20px] text-[#777777]">
             View More
           </h1>
           <BsChevronDown className="text-[28px] text-[#777777] font-[600] mx-[10px] " />

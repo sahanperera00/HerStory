@@ -51,32 +51,32 @@ function Community() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <h5 className="mt-8 font-medium font-['Poppins']">Community Name:</h5>
+        <h5 className="mt-8 font-medium">Community Name:</h5>
         <Input
           onChange={(e) => setCommunityName(e.target.value)}
           value={communityName}
           placeholder="Enter Name"
-          className="font-['Poppins'] mb-2 font-normal"
+          className=" mb-2 font-normal"
         />
-        <h5 className="mt-2 font-normal font-['Poppins']">Description:</h5>
+        <h5 className="mt-2 font-normal">Description:</h5>
         <Input
           onChange={(e) => setDescription(e.target.value)}
           value={description}
           placeholder="Enter Description"
-          className="font-['Poppins'] mb-2 font-normal"
+          className=" mb-2 font-normal"
         />
         <Upload {...props}>
-          <h5 className="mt-2 font-medium font-['Poppins']">Community Logo:</h5>
+          <h5 className="mt-2 font-medium ">Community Logo:</h5>
           <Button
-            className="my-2 font-normal font-['Poppins']"
+            className="my-2 font-normal "
             icon={<UploadOutlined />}
           >
             Click to Upload
           </Button>
         </Upload>
       </Modal>
-      <div className="flex flex-col justify-center items-center">
-        <div className="min-[400px]:w-[65%] md:w-[75%] lg:w-[80%] h-fit rounded-[15px] font-['Poppins'] overflow-hidden shadow-[0px_4px_5px_rgba(0,0,0,0.25)] mx-[36px] my-[16px]">
+      <div className="flex flex-col justify-center items-center bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
+        <div className="min-[400px]:w-[65%] md:w-[75%] lg:w-[80%] h-fit rounded-[15px]  overflow-hidden shadow-[0px_4px_5px_rgba(0,0,0,0.25)] mx-[36px] my-[16px] bg-[#f9e9e9]">
           <div className="px-5 py-4 my-[10px] ">
             <div className="font-[700] text-[32px] mx-[22px] mt-[5px] ">
               Welcome to Communities
