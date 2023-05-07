@@ -58,7 +58,7 @@ export default function ClientSidebar() {
 
 
             <NavLink
-              to="/coming-soon"
+              to="/client/complaint"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
