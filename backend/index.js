@@ -16,6 +16,9 @@ import chatRoutes from "./routers/counselling/chat.routes.js";
 import PostRoutes from "./routers/Forum/post.routes.js";
 
 //Sahan
+import FeedbackRoutes from "./routers/counselling/feedback.routes.js"
+import CategoryRoutes from "./routers/counselling/category.routes.js"
+
 
 //Nashali
 import communityRoutes from "./routers/Forum/community.routes.js";
@@ -38,6 +41,9 @@ app.use("/chat", chatRoutes);
 app.use("/posts", PostRoutes);
 
 //Sahan
+app.use('/feedback',FeedbackRoutes);
+app.use('/category',CategoryRoutes);
+
 
 //Nashali
 app.use("/community", communityRoutes);

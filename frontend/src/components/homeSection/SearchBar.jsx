@@ -25,7 +25,7 @@ export default function SearchBar() {
 
   return (
     <div className="w-full">
-      <div className="searchBar">
+      <div className="searchBar bg-white">
         <input
           type="text"
           className="focus:outline-none focus:ring-0"
