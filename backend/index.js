@@ -26,7 +26,8 @@ import CategoryRoutes from "./routers/counselling/category.routes.js"
 
 
 //Nashali
-
+import CommunityRoutes from "./routers/Forum/community.routes.js";
+import CommentRoutes from "./routers/Forum/comments.routes.js";
 
 
 
@@ -57,9 +58,9 @@ app.use('/feedback',FeedbackRoutes);
 app.use('/category',CategoryRoutes);
 
 
-//Nashali
-
-
+//Nashali'
+app.use("/community", CommunityRoutes);
+app.use('/comment',CommentRoutes);
 
 
 
