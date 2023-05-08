@@ -89,13 +89,13 @@ const Post = () => {
     }
   };
   return (
-    <>
+    <div className="bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
       <Navbar />
       <div
         key={2}
         onClick={() => handlePostClick(2)}
         className={` 
-           ml-[200px] mt-[30px] h-fit w-[79%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-8`}
+           ml-[200px] mt-[30px] h-fit w-[79%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-8 bg-[#f9e9e9]`}
       >
         <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-[#f2b8c6]"></div>
         {posts.map((data) => (
@@ -245,7 +245,7 @@ const Post = () => {
         ))}
         <Comments />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import { connectDB } from "./config/db.js"
 
 //Devindu
 import userRoutes from "./routers/users/user.routes.js"
+import chatRoutes from "./routers/counselling/chat.routes.js"
 
 
 
@@ -19,13 +20,14 @@ import PostRoutes from "./routers/Forum/post.routes.js"
 
 
 //Sahan
-
-
+import FeedbackRoutes from "./routers/counselling/feedback.routes.js"
+import CategoryRoutes from "./routers/counselling/category.routes.js"
 
 
 
 //Nashali
-
+import CommunityRoutes from "./routers/Forum/community.routes.js";
+import CommentRoutes from "./routers/Forum/comments.routes.js";
 
 
 
@@ -41,6 +43,7 @@ const PORT = process.env.PORT || 8070;
 //Route Implementaion
 //Devindu
 app.use('/user',userRoutes);
+app.use('/chat',chatRoutes);
 
 
 
@@ -51,13 +54,13 @@ app.use('/posts',PostRoutes);
 
 
 //Sahan
+app.use('/feedback',FeedbackRoutes);
+app.use('/category',CategoryRoutes);
 
 
-
-
-//Nashali
-
-
+//Nashali'
+app.use("/community", CommunityRoutes);
+app.use('/comment',CommentRoutes);
 
 
 

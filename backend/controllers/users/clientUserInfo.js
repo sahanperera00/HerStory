@@ -32,8 +32,6 @@ export const getUserBiobyEmail = async(req,res)=>{
                 //For postman comparison, Both populated and normal method has been returned. Check the difference for yourself.
             }
 
-           
-
         }catch(error){
             res.status(500).json({message: error.message});
         }
