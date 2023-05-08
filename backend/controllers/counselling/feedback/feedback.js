@@ -18,8 +18,18 @@ export const createFeedback = async (req, res) => {
 
 export const getFeedback = async (req, res) => {
   try {
-    const feedback = await Feedback.find();
+    const feedback = await Feedback.find().populate("client counsellor");
     res.status(200).json(feedback);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deleteFeedback = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Feedback.findByIdAndRemove(id);
+    res.status(200).json({ message: "Feedback deleted successfully." });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
