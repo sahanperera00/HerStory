@@ -11,7 +11,7 @@ export default function ForumPost() {
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
           <br />
-          Discussion (05)
+          Discussion (02)
         </h2>
       </div>
       <form class="mb-6">
@@ -111,10 +111,9 @@ export default function ForumPost() {
         </footer>
 
         <p class="text-gray-500 dark:text-gray-400">
-          Very straight-to-point article. Really worth time reading. Thank you!
-          But tools are just the instruments for the UX designers. The knowledge
-          of the design tools are as important as the creation of the design
-          strategy.
+          It's a human issue. We all have a responsibility to speak out against
+          violence and to work together to create a safer, more equitable
+          society.
         </p>
         <div class="flex items-center mt-4 space-x-4">
           <button
@@ -211,7 +210,9 @@ export default function ForumPost() {
           </div>
         </footer>
         <p class="text-gray-500 dark:text-gray-400">
-          Much appreciated! Glad you liked it ☺️
+          We need to take concrete steps to
+          prevent it from happening in the first place, such as investing in
+          education, training
         </p>
         <div class="flex items-center mt-4 space-x-4">
           <button
