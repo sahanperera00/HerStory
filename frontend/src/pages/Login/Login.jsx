@@ -1,17 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button } from "../../components";
+import validator from "validator";
+import axios from "axios";
+import jwtdecode from "jwt-decode";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // handle submit
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    await axios
+      .post("http://localhost:8070/user/login", { email, password })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        if (res.data.user.role === "client") {
+          navigate("/client");
+        } else if (res.data.user.role === "admin") {
+          navigate("/admin");
+        } else if (res.data.user.role === "counsellor") {
+          navigate("/counsellor-dashboard");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const decodedToken = jwtdecode(localStorage.getItem("token"));
+
+      if (decodedToken.object.role == "client") {
+        navigate("/client");
+      } else if (decodedToken.object.role == "admin") {
+        navigate("/admin");
+      } else if (decodedToken.object.role == "counsellor") {
+        navigate("/counsellor-dashboard");
+      }
+    }
+  }, []);
 
   return (
     <div className="signin">
@@ -37,7 +68,7 @@ export default function Login() {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your Email
+                  Email
                 </label>
                 <input
                   type="email"
@@ -46,7 +77,13 @@ export default function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Eg:- sample@mail.com"
                   required="required"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    if (validator.isEmail(e.target.value)) {
+                      setEmail(e.target.value);
+                    } else {
+                      setEmail("");
+                    }
+                  }}
                 />
               </div>
               <div>
@@ -68,58 +105,30 @@ export default function Login() {
               </div>
               <br />
 
-              <button className="w-full text-white bg-[#ef86c1] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              <button
+                onSubmit={submitHandler}
+                className="w-full text-white bg-[#ef86c1] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
                 Log in
               </button>
 
-              <div className="grid grid-cols-3 gap-5">
-                <Link to={"/consultant-signup"}>
-                  <Button
-                    text={"Register as a Consultant"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
+              <div className="flex items-center justify-center mt-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Don't have an account?{" "}
+                </span>
+              </div>
+              <div className="flex items-center justify-center mt-4 gap-5 text-gray-500 dark:text-gray-400 ">
+                <Link to="/client-signup" className="text-sm hover:underline">
+                  Sign up as a Client
                 </Link>
-
-                <Link to={"/client-signup"}>
-                  <Button
-                    text={"Register as a Client"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-
-                <Button
-                  text={"Client Dashboard"}
-                  bgColor={"#ef86c1"}
-                  borderRadius={"10px"}
-                  color={"white"}
-                />
-                <Link to={"/counsellor-dashboard"}>
-                  <Button
-                    text={"Counsellor Dashboard"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-                <Link to={"/admin"}>
-                  <Button
-                    text={"Admin Dashboard"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-                <Link to={"/forum"}>
-                  <Button
-                    text={"Forum"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  or
+                </span>
+                <Link
+                  to="/consultant-signup"
+                  className="text-sm hover:underline"
+                >
+                  Sign up as a Consultant
                 </Link>
               </div>
             </form>

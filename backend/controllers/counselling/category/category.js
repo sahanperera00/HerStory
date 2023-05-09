@@ -22,3 +22,13 @@ export const getCategory = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const deleteCategory = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Category.findByIdAndRemove(id);
+    res.status(200).json({ message: "Category deleted successfully." });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
