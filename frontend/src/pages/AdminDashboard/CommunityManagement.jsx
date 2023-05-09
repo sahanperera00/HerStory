@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { Modal, Input, Button, Upload } from "antd";
 import { FiSettings } from "react-icons/fi";
@@ -17,8 +19,18 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdPostAdd } from "react-icons/md";
 import { UploadOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
 
 export default function CommunityManagement() {
+  const navigate = useNavigate(); //useNavigate hook to redirect to another page after form submission is successful
+  const [community, setcommunity] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comID, setComID] = useState("");
+  const [name, setname] = useState("");
+  const [description, setdescription] = useState("");
+  const [picture, setpicture] = useState("");
+  const [Members, setMembers] = useState("");
+
   const {
     setCurrentColor,
     setCurrentMode,
@@ -29,21 +41,48 @@ export default function CommunityManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [communityName, setCommunityName] = useState("");
-  const [description, setDescription] = useState("");
-  const [file, setFile] = useState(null);
+  var date = new Date().toISOString().split("T")[0];
+
+  const getcommunity = async () => {
+    //getcommunity is the function to get the data from the backend
+    axios
+      .get("http://localhost:8070/community/")
+      .then((res) => {
+        setcommunity(res.data); //setcommunity is used to update the state variable
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
+  useEffect(() => {
+    getcommunity(); // <== CHANGE ACCORDING TO YOUR OWN FUNCTIONS, YOU CAN REMOVE THIS LINE IF YOU DON'T NEED IT
+    const currentThemeColor = localStorage.getItem("colorMode"); // KEEP THESE LINES
+    const currentThemeMode = localStorage.getItem("themeMode");
+    if (currentThemeColor && currentThemeMode) {
+      setCurrentColor(currentThemeColor);
+      setCurrentMode(currentThemeMode);
+    }
+  }, []);
+
+  const deleteCommunity = async (id) => {
+    await axios
+      .delete(`http://localhost:8070/community/${id}`)
+      .then((res) => {
+        getcommunity();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleOk = () => {
-    setCommunityName("");
-    setDescription("");
     setIsModalOpen(false);
   };
   const handleCancel = () => {
-    setCommunityName("");
-    setDescription("");
     setIsModalOpen(false);
   };
 
@@ -80,44 +119,70 @@ export default function CommunityManagement() {
       authorization: "authorization-text",
     },
   };
-  const community = [
-    {
-      id: "Community 1",
-      title: "Survivor Support Community",
-      desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
-      date: "2023-04-04",
-      members: "8 members",
-    },
-    {
-      id: "Community 2",
-      title: "Legal Advice and Resources Community",
-      desc: "Providing legal resources and advice",
-      date: "2023-05-02",
-      members: "10 members",
-    },
-    {
-      id: "Community 3",
-      title: "Mental Health and Wellness Community",
-      desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
-      date: "2023-05-04",
-      members: "50 members",
-    },
-    {
-      id: "Community 4",
-      title: "Workplace Harassment Community",
-      desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
-      date: "2023-05-06",
-      members: "20 members",
-    },
-    {
-      id: "Community 5",
-      title: "Education and Prevention Community",
-      desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
-      date: "2023-05-09",
-      members: "30 members",
-    },
-  ];
-
+  // const community = [
+  //   {
+  //     id: "Community 1",
+  //     title: "Survivor Support Community",
+  //     desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
+  //     date: "2023-04-04",
+  //     members: "8 members",
+  //   },
+  //   {
+  //     id: "Community 2",
+  //     title: "Legal Advice and Resources Community",
+  //     desc: "Providing legal resources and advice",
+  //     date: "2023-05-02",
+  //     members: "10 members",
+  //   },
+  //   {
+  //     id: "Community 3",
+  //     title: "Mental Health and Wellness Community",
+  //     desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
+  //     date: "2023-05-04",
+  //     members: "50 members",
+  //   },
+  //   {
+  //     id: "Community 4",
+  //     title: "Workplace Harassment Community",
+  //     desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
+  //     date: "2023-05-06",
+  //     members: "20 members",
+  //   },
+  //   {
+  //     id: "Community 5",
+  //     title: "Education and Prevention Community",
+  //     desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
+  //     date: "2023-05-09",
+  //     members: "30 members",
+  //   },
+  // ];
+  const confirmFunc = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      color: "#f8f9fa",
+      background: "#6c757d",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCommunity(id);
+        Swal.fire({
+          icon: "success",
+          title: "Data Successfully Deleted",
+          color: "#f8f9fa",
+          background: "#6c757d",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      } else {
+        Link("/admin/community-management");
+      }
+    });
+  };
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -173,21 +238,42 @@ export default function CommunityManagement() {
                   onCancel={handleCancel}
                 >
                   <h5 className="mt-8 font-medium font-['Poppins']">
+                    Community ID:
+                  </h5>
+                  <Input
+                    onChange={(e) => setComID(e.target.value)}
+                    placeholder="Enter ID"
+                    required
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <h5 className="mt-8 font-medium font-['Poppins']">
                     Community Name:
                   </h5>
                   <Input
-                    onChange={(e) => setCommunityName(e.target.value)}
-                    value={communityName}
+                    onChange={(e) => setname(e.target.value)}
                     placeholder="Enter Name"
+                    required
                     className="font-['Poppins'] mb-2 font-normal"
                   />
                   <h5 className="mt-2 font-normal font-['Poppins']">
                     Description:
                   </h5>
                   <Input
-                    onChange={(e) => setDescription(e.target.value)}
-                    value={description}
+                    onChange={(e) => setdescription(e.target.value)}
                     placeholder="Enter Description"
+                    required
+                    className="font-['Poppins'] mb-2 font-normal"
+                  />
+                  <h5 className="mt-2 font-normal font-['Poppins']">
+                    Created date:
+                  </h5>
+                  <Input
+                    onChange={(e) => setDate(e.target.value)}
+                    type="date"
+                    min="2010-01-01"
+                    //max={date}
+                    required
+                    placeholder="Enter Date"
                     className="font-['Poppins'] mb-2 font-normal"
                   />
                   <Upload {...props}>
@@ -245,12 +331,14 @@ export default function CommunityManagement() {
                 </Modal>
 
                 <div className=" flex m-3  flex-1 items-end justify-left">
-                  <button
-                    onClick={showModal}
-                    className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[8px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
-                  >
-                    +Community
-                  </button>
+                  <Link to="/admin/new-community">
+                    <button
+                      ///onClick={showModal}
+                      className="inline-block bg-pink-400 h-[40px] w-[150px] rounded-[8px] px-3 py-1 text-[15px] font-medium bottom-[80px] text-[#FFFFFF] mt-[20px] ml-[0px] "
+                    >
+                      +Community
+                    </button>
+                  </Link>
                 </div>
 
                 {/* <div className="flex flex-wrap lg:flex-nowrap justify-left ml-5 mt-5">
@@ -282,10 +370,12 @@ export default function CommunityManagement() {
                               key={data.id}
                               className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
-                              <TableData value={data.id} />
-                              <TableData value={data.title} />
-                              <TableData value={data.date} />
-                              <TableData value={data.members} />
+                              <TableData value={data.comID} />
+                              <TableData value={data.name} />
+                              <TableData value={date} />
+                              <TableData
+                                value={data.Members + "   " + " " + "members"}
+                              />
                               <TableData
                                 value={
                                   <div className="flex gap-4">
@@ -297,6 +387,9 @@ export default function CommunityManagement() {
                                       <AiOutlineEdit />
                                     </button>
                                     <button
+                                      onClick={() => {
+                                        confirmFunc(data._id);
+                                      }}
                                       className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
                                       title="Remove"
                                     >

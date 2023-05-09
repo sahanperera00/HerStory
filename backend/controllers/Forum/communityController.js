@@ -1,6 +1,5 @@
 import Communities from "../../models/Forum/communityModel.js";
 
-
 //create community
 export const createCommunity = async (req, res) => {
   const communities = req.body;
@@ -30,7 +29,7 @@ export const updateCommunity = async (req, res) => {
 //view all communities
 export const getCommunities = async (req, res) => {
   try {
-    const communities = await Item.find();
+    const communities = await Communities.find();
     res.status(200).json(communities);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -41,7 +40,7 @@ export const getCommunities = async (req, res) => {
 export const deleteCommunity = async (req, res) => {
   const { id } = req.params;
   try {
-    await Community.findByIdAndRemove(id);
+    await Communities.findByIdAndRemove(id);
     res.status(200).json({ message: "Community deleted successfully" });
   } catch (error) {
     res.status(404).json({ message: error.message });
