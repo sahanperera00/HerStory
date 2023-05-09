@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Forum from "./pages/Forum/Forum";
 import PostManagement from "./pages/AdminDashboard/PostManagement";
 import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
+import CommunityNew from "./pages/AdminDashboard/CommunityNew";
 import Community from "./pages/Forum/Community";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -104,6 +105,10 @@ function App() {
         <Route
           path="/admin/complaint-management"
           element={<ComplaintManagement />}
+        />
+        <Route
+          path="/admin/new-community"
+          element={<CommunityNew />}
         />
 
         {/* Devs add here */}
