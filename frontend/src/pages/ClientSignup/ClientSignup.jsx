@@ -1,18 +1,48 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import validator from "validator";
+import jwtdecode from "jwt-decode";
 
 export default function ClientSignup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
-  // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    await axios
+      .post("http://localhost:8070/user/register", {
+        firstName,
+        lastName,
+        role: "client",
+        email,
+        password,
+      })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const decodedToken = jwtdecode(localStorage.getItem("token"));
+
+      if (decodedToken.object.role == "client") {
+        navigate("/client");
+      } else if (decodedToken.object.role == "admin") {
+        navigate("/admin");
+      } else if (decodedToken.object.role == "counsellor") {
+        navigate("/counsellor-dashboard");
+      }
+    }
+  }, []);
 
   return (
     <div className="signup">
@@ -44,7 +74,7 @@ export default function ClientSignup() {
                         First Name
                       </label>
                       <input
-                        type="firstName"
+                        type="text"
                         name="firstName"
                         id="firstName"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -65,7 +95,7 @@ export default function ClientSignup() {
                         Last Name
                       </label>
                       <input
-                        type="lastName"
+                        type="text"
                         name="lastName"
                         id="lastName"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -95,9 +125,12 @@ export default function ClientSignup() {
                       placeholder="Eg:- samaple@mail.com"
                       required="required"
                       onChange={(e) => {
-                        setEmail(e.target.value);
+                        if (validator.isEmail(e.target.value)) {
+                          setEmail(e.target.value);
+                        } else {
+                          setEmail("");
+                        }
                       }}
-                      pattern="[._a-z0-9]+@+[a-z]+.com"
                     />
                   </div>
                   <div className="col-span-2">
@@ -117,29 +150,8 @@ export default function ClientSignup() {
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
-                      minLength="6"
-                      title="Password must be minimum of 6 characters"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <label
-                      htmlFor="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required="required"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      minLength="6"
-                      title="Password must be minimum of 6 characters"
+                      minLength="8"
+                      title="Password must be minimum of 8 characters"
                     />
                   </div>
                   <button
