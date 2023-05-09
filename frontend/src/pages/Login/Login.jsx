@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from "../../components";
+import validator from "validator";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // handle submit
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    await axios
+      .post("http://localhost:8070/user/login", { email, password })
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        navigate("/client");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/client");
+    }
+  }, []);
 
   return (
     <div className="signin">
@@ -37,7 +54,7 @@ export default function Login() {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your Email
+                  Email
                 </label>
                 <input
                   type="email"
@@ -46,7 +63,13 @@ export default function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Eg:- sample@mail.com"
                   required="required"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    if (validator.isEmail(e.target.value)) {
+                      setEmail(e.target.value);
+                    } else {
+                      setEmail("");
+                    }
+                  }}
                 />
               </div>
               <div>
@@ -68,7 +91,10 @@ export default function Login() {
               </div>
               <br />
 
-              <button className="w-full text-white bg-[#ef86c1] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              <button
+                onSubmit={submitHandler}
+                className="w-full text-white bg-[#ef86c1] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
                 Log in
               </button>
 
