@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button } from "../../components";
 import validator from "validator";
 import axios from "axios";
+import jwtdecode from "jwt-decode";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,13 @@ export default function Login() {
       .post("http://localhost:8070/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        navigate("/client");
+        if (res.data.user.role === "client") {
+          navigate("/client");
+        } else if (res.data.user.role === "admin") {
+          navigate("/admin");
+        } else if (res.data.user.role === "counsellor") {
+          navigate("/counsellor-dashboard");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -26,7 +32,15 @@ export default function Login() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/client");
+      const decodedToken = jwtdecode(localStorage.getItem("token"));
+
+      if (decodedToken.object.role == "client") {
+        navigate("/client");
+      } else if (decodedToken.object.role == "admin") {
+        navigate("/admin");
+      } else if (decodedToken.object.role == "counsellor") {
+        navigate("/counsellor-dashboard");
+      }
     }
   }, []);
 
@@ -98,54 +112,23 @@ export default function Login() {
                 Log in
               </button>
 
-              <div className="grid grid-cols-3 gap-5">
-                <Link to={"/consultant-signup"}>
-                  <Button
-                    text={"Register as a Consultant"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
+              <div className="flex items-center justify-center mt-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Don't have an account?{" "}
+                </span>
+              </div>
+              <div className="flex items-center justify-center mt-4 gap-5 text-gray-500 dark:text-gray-400 ">
+                <Link to="/client-signup" className="text-sm hover:underline">
+                  Sign up as a Client
                 </Link>
-
-                <Link to={"/client-signup"}>
-                  <Button
-                    text={"Register as a Client"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-
-                <Button
-                  text={"Client Dashboard"}
-                  bgColor={"#ef86c1"}
-                  borderRadius={"10px"}
-                  color={"white"}
-                />
-                <Link to={"/counsellor-dashboard"}>
-                  <Button
-                    text={"Counsellor Dashboard"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-                <Link to={"/admin"}>
-                  <Button
-                    text={"Admin Dashboard"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
-                </Link>
-                <Link to={"/forum"}>
-                  <Button
-                    text={"Forum"}
-                    bgColor={"#ef86c1"}
-                    borderRadius={"10px"}
-                    color={"white"}
-                  />
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  or
+                </span>
+                <Link
+                  to="/consultant-signup"
+                  className="text-sm hover:underline"
+                >
+                  Sign up as a Consultant
                 </Link>
               </div>
             </form>
