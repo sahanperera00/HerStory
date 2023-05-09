@@ -5,6 +5,7 @@ import PostManagement from "./pages/AdminDashboard/PostManagement";
 import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
 import CommunityNew from "./pages/AdminDashboard/CommunityNew";
 import Community from "./pages/Forum/Community";
+import CommunityEdit from "./pages/AdminDashboard/CommunityEdit";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ConsultantManagement from "./pages/AdminDashboard/ConsultantManagement";
@@ -109,6 +110,10 @@ function App() {
         <Route
           path="/admin/new-community"
           element={<CommunityNew />}
+        />
+        <Route
+          path="/admin/CommunityEdit/:id"
+          element={<CommunityEdit />}
         />
 
         {/* Devs add here */}
