@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 
 const communitiesSchema = mongoose.Schema({
+  comID: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
   },
 
   description: {
+    type: String,
+    required: true,
+  },
+  Members: {
     type: String,
     required: true,
   },
