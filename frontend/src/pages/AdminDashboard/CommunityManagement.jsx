@@ -76,86 +76,6 @@ export default function CommunityManagement() {
       });
   };
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-  };
-
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [communityName1, setCommunityName1] = useState("");
-  const [description1, setDescription1] = useState("");
-  const [file1, setFile1] = useState(null);
-  const showModal1 = () => {
-    setIsModalOpen1(true);
-  };
-  const handleOk1 = () => {
-    setCommunityName1("");
-    setDescription1("");
-    setIsModalOpen1(false);
-  };
-  const handleCancel1 = () => {
-    setCommunityName1("");
-    setDescription1("");
-    setIsModalOpen1(false);
-  };
-
-  const props1 = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-  };
-  // const community = [
-  //   {
-  //     id: "Community 1",
-  //     title: "Survivor Support Community",
-  //     desc: " A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other",
-  //     date: "2023-04-04",
-  //     members: "8 members",
-  //   },
-  //   {
-  //     id: "Community 2",
-  //     title: "Legal Advice and Resources Community",
-  //     desc: "Providing legal resources and advice",
-  //     date: "2023-05-02",
-  //     members: "10 members",
-  //   },
-  //   {
-  //     id: "Community 3",
-  //     title: "Mental Health and Wellness Community",
-  //     desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
-  //     date: "2023-05-04",
-  //     members: "50 members",
-  //   },
-  //   {
-  //     id: "Community 4",
-  //     title: "Workplace Harassment Community",
-  //     desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
-  //     date: "2023-05-06",
-  //     members: "20 members",
-  //   },
-  //   {
-  //     id: "Community 5",
-  //     title: "Education and Prevention Community",
-  //     desc: "Educating and raising awareness about harassment and assault, as well as providing resources and strategies for preventing it",
-  //     date: "2023-05-09",
-  //     members: "30 members",
-  //   },
-  // ];
   const confirmFunc = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -228,107 +148,6 @@ export default function CommunityManagement() {
               {themeSettings && <ThemeSettings />}
               <div className="md:m-6 p-5">
                 <Header title="Forum Communities Management" />
-                {/* create modal */}
-                <Modal
-                  destroyOnClose={true}
-                  title="Create a Community"
-                  className="font-semibold"
-                  open={isModalOpen}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <h5 className="mt-8 font-medium font-['Poppins']">
-                    Community ID:
-                  </h5>
-                  <Input
-                    onChange={(e) => setComID(e.target.value)}
-                    placeholder="Enter ID"
-                    required
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <h5 className="mt-8 font-medium font-['Poppins']">
-                    Community Name:
-                  </h5>
-                  <Input
-                    onChange={(e) => setname(e.target.value)}
-                    placeholder="Enter Name"
-                    required
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <h5 className="mt-2 font-normal font-['Poppins']">
-                    Description:
-                  </h5>
-                  <Input
-                    onChange={(e) => setdescription(e.target.value)}
-                    placeholder="Enter Description"
-                    required
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <h5 className="mt-2 font-normal font-['Poppins']">
-                    Created date:
-                  </h5>
-                  <Input
-                    onChange={(e) => setDate(e.target.value)}
-                    type="date"
-                    min="2010-01-01"
-                    //max={date}
-                    required
-                    placeholder="Enter Date"
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <Upload {...props}>
-                    <h5 className="mt-2 font-medium font-['Poppins']">
-                      Community Logo:
-                    </h5>
-                    <Button
-                      className="my-2 font-normal font-['Poppins']"
-                      icon={<UploadOutlined />}
-                    >
-                      Click to Upload
-                    </Button>
-                  </Upload>
-                </Modal>
-                {/* edit modal */}
-                <Modal
-                  destroyOnClose={true}
-                  title="Edit Community"
-                  className="font-semibold"
-                  open={isModalOpen1}
-                  onOk={handleOk1}
-                  onCancel={handleCancel1}
-                >
-                  <h5 className="mt-8 font-medium font-['Poppins']">
-                    Community Name:
-                  </h5>
-                  <Input
-                    onChange={(e) => setCommunityName1(e.target.value)}
-                    value={"Survivor support group"}
-                    placeholder="Enter Name"
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <h5 className="mt-2 font-normal font-['Poppins']">
-                    Description:
-                  </h5>
-                  <Input
-                    onChange={(e) => setDescription1(e.target.value)}
-                    value={
-                      "A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other"
-                    }
-                    placeholder="Enter Description"
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <Upload {...props}>
-                    <h5 className="mt-2 font-medium font-['Poppins']">
-                      Community Logo:
-                    </h5>
-                    <Button
-                      className="my-2 font-normal font-['Poppins']"
-                      icon={<UploadOutlined />}
-                    >
-                      Click to Upload
-                    </Button>
-                  </Upload>
-                </Modal>
 
                 <div className=" flex m-3  flex-1 items-end justify-left">
                   <Link to="/admin/new-community">
@@ -340,16 +159,6 @@ export default function CommunityManagement() {
                     </button>
                   </Link>
                 </div>
-
-                {/* <div className="flex flex-wrap lg:flex-nowrap justify-left ml-5 mt-5">
-                  <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
-                    <DashTopButton
-                      value="Add new"
-                      icon={<MdPostAdd />}
-                      onClick={showModal}
-                    />
-                  </div>
-                </div> */}
 
                 <div className="block w-full overflow-x-auto rounded-lg">
                   <table className="w-full rounded-lg dark:text-white">
@@ -379,13 +188,16 @@ export default function CommunityManagement() {
                               <TableData
                                 value={
                                   <div className="flex gap-4">
-                                    <button
-                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
-                                      title="Edit"
-                                      onClick={showModal1}
+                                    <Link
+                                      to={`/admin/CommunityEdit/${data._id}`}
                                     >
-                                      <AiOutlineEdit />
-                                    </button>
+                                      <button
+                                        className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
+                                        title="Edit"
+                                      >
+                                        <AiOutlineEdit />
+                                      </button>
+                                    </Link>
                                     <button
                                       onClick={() => {
                                         confirmFunc(data._id);
