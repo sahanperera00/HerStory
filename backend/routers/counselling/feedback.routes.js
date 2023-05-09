@@ -1,10 +1,11 @@
 import express from 'express';
 import { authenticate } from '../../middleware/authentication.js';
-import { createFeedback, getFeedback } from '../../controllers/counselling/feedback/feedback.js';
+import { createFeedback, getFeedback, deleteFeedback } from '../../controllers/counselling/feedback/feedback.js';
 
 const router = express.Router();
 
-router.post('/',createFeedback);
-router.get('/',getFeedback);
+router.post('/', authenticate, createFeedback);
+router.get('/', authenticate, getFeedback);
+router.delete('/:id', authenticate, deleteFeedback);
 
 export default router;
