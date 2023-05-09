@@ -14,15 +14,15 @@ export const createCommunity = async (req, res) => {
 
 //update community
 export const updateCommunity = async (req, res) => {
-  const { id } = req.params;
-  const community = req.body;
   try {
-    const updatedCommunity = await community.findByIdAndUpdate(id, community, {
-      new: true,
+    const id = req.params.id;
+    const community = req.body;
+    await Communities.findByIdAndUpdate(id, community);
+    res.status(200).json({
+      status: "community details updated",
     });
-    res.status(200).json(updatedCommunity);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error });
   }
 };
 
@@ -31,6 +31,16 @@ export const getCommunities = async (req, res) => {
   try {
     const communities = await Communities.find();
     res.status(200).json(communities);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+//view community by id
+export const getCommunity = async (req, res) => {
+  try {
+    const community = await Communities.findById(req.params.id);
+    res.status(200).json(community);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
