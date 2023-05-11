@@ -109,3 +109,13 @@ export const getAllUsers = async(req,res)=>{
         res.status(500).json({message: "Error Caught: " + error.message});
     }
 }
+
+export const deleteUser = async(req,res)=>{
+    const {id} = req.params;
+    try {
+        await User.findByIdAndRemove(id);
+        res.status(200).json({message: "User deleted successfully."})
+    } catch(error) {
+        res.status(404).json({message: error.message})
+    }
+}
