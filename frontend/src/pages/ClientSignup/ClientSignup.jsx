@@ -65,6 +65,7 @@ export default function ClientSignup() {
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                  
                   <div className="sm:col-span-2 flex flex-row gap-4">
                     <div className="w-1/2">
                       <label
