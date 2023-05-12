@@ -34,6 +34,7 @@ import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
 import ContactSupport from "./pages/ClientDashboard/ContactSupport";
+import ClientComplaint from "./pages/ClientDashboard/ClientComplaint";
 
 
 
@@ -120,6 +121,7 @@ function App() {
         <Route path="/client" element={<ClientDashboard />} />
         <Route path="/updateClient" element={<ClientUpdatePage/>}/>
         <Route path="/client/support" element={<ContactSupport/>}/>
+        <Route path="/client/complaint" element={<ClientComplaint/>}/>
 
 
 
