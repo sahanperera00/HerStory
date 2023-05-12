@@ -20,13 +20,14 @@ import PostRoutes from "./routers/Forum/post.routes.js"
 
 
 //Sahan
-
-
-
-
+import FeedbackRoutes from "./routers/counselling/feedback.routes.js"
+import CategoryRoutes from "./routers/counselling/category.routes.js"
+import ComplaintRoutes from "./routers/complaint/complaint.routes.js"
+import CounsellorRoutes from "./routers/users/counseller.routes.js"
 
 //Nashali
-
+import CommunityRoutes from "./routers/Forum/community.routes.js";
+import CommentRoutes from "./routers/Forum/comments.routes.js";
 
 
 
@@ -53,13 +54,13 @@ app.use('/posts',PostRoutes);
 
 
 //Sahan
-
-
-
-
-//Nashali
-
-
+app.use('/feedback',FeedbackRoutes);
+app.use('/category',CategoryRoutes);
+app.use('/complaint',ComplaintRoutes);
+app.use('/counsellor',CounsellorRoutes);
+//Nashali'
+app.use("/community", CommunityRoutes);
+app.use('/comment',CommentRoutes);
 
 
 

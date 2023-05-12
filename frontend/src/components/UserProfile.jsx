@@ -11,7 +11,7 @@ export default function UserProfile() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("token");
     navigate("/");
   };
 

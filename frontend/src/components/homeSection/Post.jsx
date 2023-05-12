@@ -83,7 +83,7 @@ const Post = () => {
           className={` 
           ${
             activePostId === 2 ? "border-2 border-pink-300" : ""
-          } ml-[19px] mt-[20px] h-fit w-[93%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-2`}
+          } ml-[19px] mt-[20px] h-fit w-[93%] relative shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-xl p-2 bg-[#f9e9e9]`}
         >
           <div className="mt-4 inline-block align-top rounded-2xl h-[calc(17vw-32px)]  w-[calc(17vw-32px)] bg-[#f2b8c6]"></div>
 

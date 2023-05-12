@@ -26,7 +26,7 @@ export default function Navbar() {
   //   setOpen(false);
   // };
   return (
-    <>
+    <div className=" bg-[#f9e9e9]">
       <nav className=" md:hidden flex w-1/1 items-center justify-start flex-wrap py-3 navbar">
         {/* <Input.Search
           placeholder="Type here to search ..."
@@ -46,7 +46,7 @@ export default function Navbar() {
           <Link
             to="/forum"
             className={`${
-              location.pathname === "/forum" ? "bg-pink-300" : ""
+              location.pathname === "/forum" ? "bg-pink-300" : "bg-white"
             } px-3 py-2 rounded-sm  mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
@@ -55,7 +55,7 @@ export default function Navbar() {
           <Link
             to="/Community"
             className={`${
-              location.pathname === "/Community" ? "bg-pink-300" : ""
+              location.pathname === "/Community" ? "bg-pink-300" : "bg-white"
             } px-3 py-2 rounded-sm mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
@@ -93,6 +93,6 @@ export default function Navbar() {
           {isClicked.userProfile && <UserProfile />}
         </div>
       </nav>
-    </>
+    </div>
   );
 }

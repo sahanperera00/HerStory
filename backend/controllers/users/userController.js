@@ -9,9 +9,9 @@ export const registerUser = async(req,res)=>{
 
     try{
 
-        const {name, email, password, role} = req.body;
+        const {firstName, lastName, email, password, role} = req.body;
 
-        if(!name || !email || !password){
+        if(!firstName || !lastName || !email || !password){
             return res.status(400).json({message: "Please enter all the required fields"});
         }
     
@@ -23,7 +23,8 @@ export const registerUser = async(req,res)=>{
     
         //Creates new User
         user = new User({
-            name,
+            firstName,
+            lastName,
             role,
             email,
             password
@@ -36,7 +37,8 @@ export const registerUser = async(req,res)=>{
         //creating a payload for the token
         const payload = {
             _id: user._id,
-            name: user.name,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             role: user.role
         }
@@ -105,5 +107,15 @@ export const getAllUsers = async(req,res)=>{
 
     }catch(error){
         res.status(500).json({message: "Error Caught: " + error.message});
+    }
+}
+
+export const deleteUser = async(req,res)=>{
+    const {id} = req.params;
+    try {
+        await User.findByIdAndRemove(id);
+        res.status(200).json({message: "User deleted successfully."})
+    } catch(error) {
+        res.status(404).json({message: error.message})
     }
 }
