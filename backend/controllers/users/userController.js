@@ -91,6 +91,7 @@ export const loginUser = async(req,res)=>{
         }
         //Checks if the user is created and returns the user and the token
         if(user){
+            user = await User.findOne({"email" :email}).select("-password");
             return res.status(200).json({user: user, token: generateToken(payload)});
         }else{
             return res.status(400).json({message: "Failed to create the token please try again"});
