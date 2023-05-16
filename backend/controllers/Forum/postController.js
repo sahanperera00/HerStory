@@ -3,8 +3,14 @@ import User from "../../models/users/userInfoModel.js";
 //import Comment from "../../models/Forum/commentModel.js";
 
 export const createPost = async (req, res) => {
-  const post = req.body;
-  const newPost = new Post(post);
+  const { postedBy,title,description,tags} = req.body;
+  const newPost = new Post({
+    postedBy,
+    title,
+    description,
+    // image,
+    tags,
+  });
   try {
     await newPost.save();
     res.status(201).json(newPost);
@@ -12,66 +18,112 @@ export const createPost = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
-//Create a post
-// export const createPost = async (req, res) => {
-//   try {
-//     const { title, description, content, tags } = req.body;
 
-//     if (!title || !description || !content || !tags) {
-//       return res
-//         .status(400)
-//         .json({ message: "Please enter all the required fields" });
+export const getPosts = async (req, res) => {
+  try {
+    const posts = await Post.find().populate("postedBy","_id email ");
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id).populate(
+      "postedBy",
+      "_id email"
+    );
+    res.send(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+ export const likePost = async (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $push: { likes: req.user._id },
+    },
+    {
+      new: true,
+    }
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(422).json({ error: err });
+    } else {
+      res.json(result);
+    }
+  });
+};
+
+
+ export const UnlikePost = async (req, res) => {
+   Post.findByIdAndUpdate(
+     req.body.postId,
+     {
+       $pull: { likes: req.user._id },
+     },
+     {
+       new: true,
+     }
+   ).exec((err, result) => {
+     if (err) {
+       return res.status(422).json({ error: err });
+     } else {
+       res.json(result);
+     }
+   });
+ };
+
+// router.put("/comment", requireLogin, (req, res) => {
+//   const comment = {
+//     text: req.body.text,
+//     postedBy: req.user._id,
+//   };
+//   Post.findByIdAndUpdate(
+//     req.body.postId,
+//     {
+//       $push: { comments: comment },
+//     },
+//     {
+//       new: true,
 //     }
-
-//     //checks if the user already exists
-//     let user = await User.findOne({ _id: req.user._id });
-//     if (!user) {
-//       return res.status(400).json({ message: "User not found" });
-//     }
-
-//     //Creates new User
-//     const post = new Post({
-//       title,
-//       description,
-//       content,
-//       tags,
-//       postedBy: req.user._id,
+//   )
+//     .populate("comments.postedBy", "_id name")
+//     .populate("postedBy", "_id name")
+//     .exec((err, result) => {
+//       if (err) {
+//         return res.status(422).json({ error: err });
+//       } else {
+//         res.json(result);
+//       }
 //     });
+// });
 
-//     await post.save();
 
-//     //Checks if the user is created
-//     if (post) {
-//       res.status(201).json({ post: post });
-//     } else {
-//       res.status(400).json({ message: "Failed to create the post" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
-// //Get all posts
-// export const getPosts = async (req, res) => {
-//   try {
-//     const posts = await Post.find({}).populate("postedBy", "name email");
-//     res.send(posts);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
-// export const getPost = async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id).populate(
-//       "postedBy",
-//       "name email"
-//     );
-//     res.send(post);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export const updatePost = async (req, res) => {
 //   try {
@@ -199,107 +251,3 @@ export const createPost = async (req, res) => {
 // //     res.status(500).json({ message: error.message });
 // //   }
 // // };
-
-// export const likePost = async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-
-//     if (post) {
-//       if (
-//         post.likes.find(
-//           (like) => like.user.toString() === req.user._id.toString()
-//         )
-//       ) {
-//         return res.status(400).json({ message: "Post already liked" });
-//       }
-
-//       post.likes.unshift({ user: req.user._id });
-
-//       await post.save();
-//       res.json({ message: "Post liked" });
-//     } else {
-//       res.status(404).json({ message: "Post not found" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// export const unlikePost = async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-
-//     if (post) {
-//       if (
-//         !post.likes.find(
-//           (like) => like.user.toString() === req.user._id.toString()
-//         )
-//       ) {
-//         return res.status(400).json({ message: "Post not liked" });
-//       }
-
-//       post.likes = post.likes.filter(
-//         ({ user }) => user.toString() !== req.user._id.toString()
-//       );
-
-//       await post.save();
-//       res.json({ message: "Post unliked" });
-//     } else {
-//       res.status(404).json({ message: "Post not found" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// export const likeComment = async (req, res) => {
-//   try {
-//     const comment = await Comment.findById(req.params.id);
-
-//     if (comment) {
-//       if (
-//         comment.likes.find(
-//           (like) => like.user.toString() === req.user._id.toString()
-//         )
-//       ) {
-//         return res.status(400).json({ message: "Comment already liked" });
-//       }
-
-//       comment.likes.unshift({ user: req.user._id });
-
-//       await comment.save();
-//       res.json({ message: "Comment liked" });
-//     } else {
-//       res.status(404).json({ message: "Comment not found" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// export const unlikeComment = async (req, res) => {
-//   try {
-//     const comment = await Comment.findById(req.params.id);
-
-//     if (comment) {
-//       if (
-//         !comment.likes.find(
-//           (like) => like.user.toString() === req.user._id.toString()
-//         )
-//       ) {
-//         return res.status(400).json({ message: "Comment not liked" });
-//       }
-
-//       comment.likes = comment.likes.filter(
-//         ({ user }) => user.toString() !== req.user._id.toString()
-//       );
-
-//       await comment.save();
-//       res.json({ message: "Comment unliked" });
-//     } else {
-//       res.status(404).json({ message: "Comment not found" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
