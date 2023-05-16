@@ -17,7 +17,7 @@ export default function Login() {
       .post("http://localhost:8070/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userInfo", JSON.stringify(res.data.user));
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
         if (res.data.user.role === "client") {
           navigate("/client");
         } else if (res.data.user.role === "admin") {
