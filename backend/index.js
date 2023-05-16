@@ -48,8 +48,10 @@ app.use('/chat',chatRoutes);
 
 
 
-//Chanukya
-app.use('/posts',PostRoutes);
+//Chanukya and Nashali
+app.use("/community", CommunityRoutes);
+app.use("/posts", PostRoutes);
+app.use("/comment", CommentRoutes);
 
 
 
@@ -58,9 +60,8 @@ app.use('/feedback',FeedbackRoutes);
 app.use('/category',CategoryRoutes);
 app.use('/complaint',ComplaintRoutes);
 app.use('/counsellor',CounsellorRoutes);
-//Nashali'
-app.use("/community", CommunityRoutes);
-app.use('/comment',CommentRoutes);
+
+
 
 
 
