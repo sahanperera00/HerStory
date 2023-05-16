@@ -41,3 +41,18 @@ export const accessChat = async(req,res)=>{
     }
 }
 
+export const fetchChats = async(req,res)=>{
+    try{
+        await Chat.find({
+            users: {$elemMatch: {$eq: req.user._id}}
+        }).populate("users","-password").populate("latestMessage").sort({updatedAt: -1}).then(async(results)=>{
+            results = await User.populate(results, {path: "latestMessage.sender", select: "-password"});
+            res.status(200).send(results);  
+        })
+        
+    }catch(error){
+        res.sendStatus(500);
+        throw new Error("Error caught: " + error.message);
+    }
+}
+
