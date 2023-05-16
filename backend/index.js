@@ -11,6 +11,7 @@ import { connectDB } from "./config/db.js"
 //Devindu
 import userRoutes from "./routers/users/user.routes.js"
 import chatRoutes from "./routers/counselling/chat.routes.js"
+import messageRoutes from "./routers/counselling/messages.routes.js"
 
 
 
@@ -44,6 +45,7 @@ const PORT = process.env.PORT || 8070;
 //Devindu
 app.use('/user',userRoutes);
 app.use('/chat',chatRoutes);
+app.use('/message',messageRoutes);
 
 
 
