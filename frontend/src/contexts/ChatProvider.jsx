@@ -10,17 +10,18 @@ const ChatProvider = ({children}) => {
   const [user, setUser] = useState();
   const [notification,setNotification] = useState(false);
   const [chats, setChats] = useState([]);
+  const [token, setToken] = useState(null); 
+  const [loggedUser, setLoggedUser] = useState();
 
   const navigate = useNavigate();
 
   useEffect(()=>{
 
+    const userToken = localStorage.getItem("token");
+    setToken(userToken);
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     setUser(userInfo);
 
-    if(!userInfo){
-      navigate("/login");
-    }
   },[navigate]);
 
   return (
@@ -32,7 +33,11 @@ const ChatProvider = ({children}) => {
       notification,
       setNotification,
       chats,
-      setChats
+      setChats,
+      token,
+      setToken,
+      loggedUser,
+      setLoggedUser
     }} >
         {children}
     </ChatContext.Provider>
