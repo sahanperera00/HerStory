@@ -19,10 +19,10 @@ import { useToast } from "@chakra-ui/react";
 // import "./styles.css";
 
 //config imports
-import { getSender, getSenderFull } from "../config/ChatLogics";
+import { getSender, getSenderFull } from "../../config/ChatLogic";
 
 //component imports
-// import ScrollableChat from "./ScrollableChat";
+import ScrollableChat from "./ScrollableChat";
 import ProfileModal from "./ProfileModal";
 
 //socket client import
@@ -88,7 +88,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 }
             }
             setNewMessage("");
-            const {data} = await axios.post(`http://localhost:8070/api/message`,{content: newMessage, chatId: selectedChat._id},config);
+            const {data} = await axios.post(`http://localhost:8070/message`,{content: newMessage, chatId: selectedChat},config);
             console.log(data);
 
             socket.emit("new message",data);
@@ -108,7 +108,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   //UseEffect to initiate the connection to the socket
   useEffect(()=>{
-    socket = io(ENDPOINT);  //establishes the connection
+    socket = io();  //establishes the connection
     socket.emit("setup",user.user); //Setting up the socket by passing the user
     socket.on('connected', ()=> setSocketConnected(true));
   },[])
@@ -120,7 +120,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   },[selectedChat])
 
   useEffect(()=>{
-    socket.on("Message received", (newMessageReceived)=>{
+    socket.on("message received", (newMessageReceived)=>{
       if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id){
         //give notification
         console.log("Hello")
@@ -154,11 +154,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               onClick={() => setSelectedChat("")}
             />
             {messages &&
-              (!selectedChat.isGroupChat && (
+              (selectedChat&& (
                 <>
                   {getSender(user.user, selectedChat.users)}
                   <ProfileModal
-                    user={getSenderFull(user.user, selectedChat.users)}
+                    user={getSenderFull(user, selectedChat.users)}
                   />
                 </>
               ))}
@@ -184,7 +184,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               />
             ) : (
               <div className="messages">
-                {/* <ScrollableChat messages={messages} /> */}
+                <ScrollableChat messages={messages} />
               </div>
             )}
 
@@ -202,7 +202,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       ) : (
         // to get socket.io on same page
         <Box display="flex" alignItems="center" justifyContent="center" h="100%">
-          <Text fontSize="3xl" pb={3} fontFamily="Work sans">
+          <Text fontSize="3xl" fontFamily='revert-layer' pb={3} >
             Click on a user to start chatting
           </Text>
         </Box>
