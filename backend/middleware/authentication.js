@@ -9,7 +9,6 @@ export const authenticate = async (req, res, next) => {
         let token;
 
         if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
-            console.log("Authorization header: ", req.headers.authorization);
     
             try{
                 token = req.headers.authorization.split(' ')[1];    //We take whats after Bearer once the space is removed.
