@@ -1,5 +1,4 @@
 export const getSender = (loggedUser, users) => {
-    console.log(users[0]._id, loggedUser._id, users[1]._id);
     return users[0]._id === loggedUser._id ? users[1].firstName.concat(" " ,users[1].lastName) : users[0].firstName.concat(" ",users[0].lastName );
 
   };
@@ -31,7 +30,7 @@ export const isLastMessage = (messages, i, userId) => {
   };
   
   export const isSameSenderMargin = (messages, m, i, userId) => {
-    // console.log(i === messages.length - 1);
+
   
     if (
       i < messages.length - 1 &&

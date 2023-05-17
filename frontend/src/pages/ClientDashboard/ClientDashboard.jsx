@@ -9,6 +9,8 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
 import ClientProfile from "../../components/ClientComponents/ClientProfile";
 
+import { useChatState } from "../../contexts/ChatProvider";
+
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
 export default function ClientDashboard() {
@@ -24,12 +26,16 @@ export default function ClientDashboard() {
     setThemeSettings,
   } = useStateContext();
 
+ const {loggedUser, setLoggedUser} = useChatState();
   /* 
   ------------------------------------------------
   YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
   ------------------------------------------------
   */
-
+  useEffect(()=>{
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    console.log(loggedUser);
+  },[])
 
   return (
     <div>

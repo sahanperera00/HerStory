@@ -10,11 +10,11 @@ import { getSender } from '../../config/ChatLogic';
 
 
 const MyChats = ({fetchAgain}) => {
-  const { selectedChat, setSelectedChat, user, chats, setChats } = useChatState();
-  const [loggedUser, setLoggedUser] = useState();
+  const { selectedChat, setSelectedChat, user, chats, setChats, loggedUser,setLoggedUser } = useChatState();
+  // const [loggedUser, setLoggedUser] = useState();
 
   const Toast = useToast();
-  console.log("Logged User: ", loggedUser);
+
 
   const fetchChats = async () => {
     try {
@@ -41,7 +41,7 @@ const MyChats = ({fetchAgain}) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+
     fetchChats();
   }, [fetchAgain])
 
@@ -80,9 +80,7 @@ const MyChats = ({fetchAgain}) => {
       >
         {chats ? (
           <Stack overflowY="scroll">
-            {chats.map((chat) => { console.log("Solo Chat: ", chat); 
-              console.log("Logged User: ", loggedUser.user);
-              console.log("THis Chat Users: ", chat.users);
+            {chats.map((chat) => { 
             return(
               <Box
                 onClick={() => setSelectedChat(chat)}
@@ -99,7 +97,7 @@ const MyChats = ({fetchAgain}) => {
               </Text>
                 {chat.latestMessage && (
                   <Text fontSize="xs">
-                    <b>{chat.latestMessage.sender.name} : </b>
+                    <b>{chat.latestMessage.sender.firstName} : </b>
                     {chat.latestMessage.content.length > 50
                       ? chat.latestMessage.content.substring(0, 51) + "..."
                       : chat.latestMessage.content}
