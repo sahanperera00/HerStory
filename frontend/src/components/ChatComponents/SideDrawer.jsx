@@ -49,6 +49,7 @@ const SideDrawer = () => {
 
     //Logout Handler
     const logOutHandler = ()=>{
+        localStorage.removeItem("token");
         localStorage.removeItem("userInfo");
         navigate('/');
         alert("You have been logged out");

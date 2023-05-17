@@ -10,8 +10,8 @@ import { getSender } from '../../config/ChatLogic';
 
 
 const MyChats = ({fetchAgain}) => {
-  const { selectedChat, setSelectedChat, user, chats, setChats } = useChatState();
-  const [loggedUser, setLoggedUser] = useState();
+  const { selectedChat, setSelectedChat, user, chats, setChats, loggedUser,setLoggedUser } = useChatState();
+  // const [loggedUser, setLoggedUser] = useState();
 
   const Toast = useToast();
 
@@ -41,9 +41,9 @@ const MyChats = ({fetchAgain}) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+
     fetchChats();
-  }, [])
+  }, [fetchAgain])
 
   return (
     <Box
