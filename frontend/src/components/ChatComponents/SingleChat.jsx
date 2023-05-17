@@ -144,7 +144,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             pb={3}
             px={2}
             w="100%"
-            fontFamily="Work sans"
             display="flex"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
