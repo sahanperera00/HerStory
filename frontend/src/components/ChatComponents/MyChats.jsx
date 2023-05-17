@@ -14,7 +14,7 @@ const MyChats = ({fetchAgain}) => {
   const [loggedUser, setLoggedUser] = useState();
 
   const Toast = useToast();
-  console.log(loggedUser);
+  console.log("Logged User: ", loggedUser);
 
   const fetchChats = async () => {
     try {
@@ -24,7 +24,7 @@ const MyChats = ({fetchAgain}) => {
         },
       };
       const { data } = await axios.get(`http://localhost:8070/chat/`, config);
-      console.log(data);
+      console.log("Chat:", data);
       setChats(data);
 
     } catch (error) {
@@ -80,7 +80,10 @@ const MyChats = ({fetchAgain}) => {
       >
         {chats ? (
           <Stack overflowY="scroll">
-            {chats.map((chat) => (
+            {chats.map((chat) => { console.log("Solo Chat: ", chat); 
+              console.log("Logged User: ", loggedUser.user);
+              console.log("THis Chat Users: ", chat.users);
+            return(
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
@@ -91,12 +94,6 @@ const MyChats = ({fetchAgain}) => {
                 borderRadius="lg"
                 key={chat._id}
               >
-                {/* <Text>
-                {!chat.isGroupChat
-                  ? getSender(loggedUser, chat.users)
-                  : chat.chatName}
-              </Text> */}
-
               <Text>
                 {getSender(loggedUser.user, chat.users)}
               </Text>
@@ -109,7 +106,7 @@ const MyChats = ({fetchAgain}) => {
                   </Text>
                 )}
               </Box>
-            ))}
+            )})}
           </Stack>
         ) : (
           <ChatLoading />
