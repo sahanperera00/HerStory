@@ -16,7 +16,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
-// import "./styles.css";
+import './styles.css';
 
 //config imports
 import { getSender, getSenderFull } from "../../config/ChatLogic";
@@ -29,7 +29,7 @@ import ProfileModal from "./ProfileModal";
 import io from "socket.io-client";
 
 //socket configuration 
-const ENDPOINT = 'http://localhost:8070'; //For now the local variable will be 8070
+const ENDPOINT = 'http://127.0.0.1:8070'; //For now the local variable will be 8070
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -57,9 +57,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
 
         setLoading(true);
-
+        console.log("SelectedChat:",selectedChat)
         const {data} = await axios.get(`http://localhost:8070/message/${selectedChat._id}`,config);
-        console.log("Messages of this chat: ", messages);
+        console.log("Messages of this chat: ", data);
         setMessages(data);
         setLoading(false);
 
@@ -88,8 +88,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 }
             }
             setNewMessage("");
-            const {data} = await axios.post(`http://localhost:8070/message`,{content: newMessage, chatId: selectedChat},config);
-            console.log(data);
+            const {data} = await axios.post(`http://localhost:8070/message`,{content: newMessage, chatId: selectedChat._id},config);
+            console.log("new Message:" ,data);
 
             socket.emit("new message",data);
             setMessages([...messages,data]);
@@ -108,9 +108,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   //UseEffect to initiate the connection to the socket
   useEffect(()=>{
-    socket = io();  //establishes the connection
+    socket = io(ENDPOINT);  //establishes the connection
     socket.emit("setup",user.user); //Setting up the socket by passing the user
     socket.on('connected', ()=> setSocketConnected(true));
+    console.log("Messages in UseEffect: ", messages);
   },[])
 
   useEffect(()=>{
@@ -121,16 +122,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(()=>{
     socket.on("message received", (newMessageReceived)=>{
-      if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id){
-        //give notification
-        console.log("Hello")
-      }else{
         setMessages([...messages,newMessageReceived]);
-      }
+
     })
   })
 
-  const typingHandler = (e) => {setNewMessage(e.target.value);};
+  const typingHandler = (e) => {setNewMessage(e.target.value);
+    if(!socketConnected){
+      return;
+    }
+  };
 
 
     

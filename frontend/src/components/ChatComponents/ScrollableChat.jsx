@@ -10,7 +10,8 @@ const ScrollableChat = ({messages}) => {
     
         //Retrieving all the messages relevant to the chat ID
     const {user} = useChatState();
-    console.log("Messages are: ",messages);
+    console.log("Messages:" ,messages);
+    console.log("User: ", user.user);
   return (
 
     //The pattern is that opposite user's profile only shows with the last message and not for every message sent

@@ -77,7 +77,7 @@ const server = app.listen(PORT,console.log(`Server is running on port: ${PORT}`)
 const io = new Server(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "*",
+        origin: 'http://127.0.0.1:3000',
     }
 });
 
@@ -108,7 +108,7 @@ io.on("connection", (socket)=>{
                 return;
             }
             socket.in(user._id).emit('message received',newMessagereceived);
-            console.log("Message sent to: ",user._id);
+            console.log("Message sent to: ",user.firstName);
         });
     })
 })

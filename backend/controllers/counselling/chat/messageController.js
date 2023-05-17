@@ -5,21 +5,24 @@ import Message from "../../../models/counselling/chat/messageModel.js";
 export const sendMessage = async(req,res)=>{
     const {content, chatId} = req.body;
 
-    if(!content || !chatId){
-        return res.status(400).send("Invalid data passed into request");
+    if(!content && !chatId){
+        console.log("Invalid data passed into request");
+        return res.sendStatus(400);
     }
+
+    console.log("ChatID passed down: " , chatId)
 
     var newMessage = {
         sender: req.user._id,
         content: content,
-        chatId: chatId
+        chat: chatId
     };
 
     try{
         var message = await Message.create(newMessage);
-        message = await message.populate("sender","name pic");
+        message = await message.populate("sender","-password");
         message = await message.populate("chat");
-        message = await User.populate(message, {path: "chat.users", select: "name pic email"});
+        message = await User.populate(message, {path: "chat.users", select: "-password"});
         message = await Message.populate(message,{path: "chat.latestMessage", select: "content"});
 
         await Chat.findByIdAndUpdate(req.body.chatId, {latestMessage: message});
@@ -32,7 +35,7 @@ export const sendMessage = async(req,res)=>{
 
 export const allMessages = async(req,res)=>{
     try{
-        const messages = await Message.find({chat: req.params.chatId}).populate('sender','name pic email');
+        const messages = await Message.find({chat: req.params.chatId}).populate('sender','firstName lastName pic email');
         res.json(messages);
     }catch(err){
         res.sendStatus(400);
