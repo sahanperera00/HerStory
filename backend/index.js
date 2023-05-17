@@ -3,6 +3,7 @@ import express from "express"
 import dotenv from "dotenv/config"
 import cors from "cors"
 import bodyParser from "body-parser"
+import {Server} from "socket.io"
 
 import { connectDB } from "./config/db.js"
 
@@ -11,6 +12,7 @@ import { connectDB } from "./config/db.js"
 //Devindu
 import userRoutes from "./routers/users/user.routes.js"
 import chatRoutes from "./routers/counselling/chat.routes.js"
+import messageRoutes from "./routers/counselling/messages.routes.js"
 
 
 
@@ -44,12 +46,15 @@ const PORT = process.env.PORT || 8070;
 //Devindu
 app.use('/user',userRoutes);
 app.use('/chat',chatRoutes);
+app.use('/message',messageRoutes);
 
 
 
 
-//Chanukya
-app.use('/posts',PostRoutes);
+//Chanukya and Nashali
+app.use("/community", CommunityRoutes);
+app.use("/posts", PostRoutes);
+app.use("/comment", CommentRoutes);
 
 
 
@@ -58,9 +63,8 @@ app.use('/feedback',FeedbackRoutes);
 app.use('/category',CategoryRoutes);
 app.use('/complaint',ComplaintRoutes);
 app.use('/counsellor',CounsellorRoutes);
-//Nashali'
-app.use("/community", CommunityRoutes);
-app.use('/comment',CommentRoutes);
+
+
 
 
 
@@ -68,8 +72,46 @@ app.use('/comment',CommentRoutes);
 connectDB();
 
 //Starting the server
-app.listen(PORT,console.log(`Server is running on port: ${PORT}`));
+const server = app.listen(PORT,console.log(`Server is running on port: ${PORT}`));
 
+const io = new Server(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: 'http://127.0.0.1:3000',
+    }
+});
+
+io.on("connection", (socket)=>{
+    console.log("Connected to Socket.io websocket");
+
+    socket.on('setup',(userData)=>{
+        console.log("User Data:" ,userData);
+        socket.join(userData._id);
+        socket.emit("connected");
+    });
+
+    socket.on('join chat',(room)=>{
+        socket.join(room);
+        console.log("Joined Room: ",room);
+    });
+
+    socket.on('new message', (newMessagereceived)=>{
+        var chat = newMessagereceived.chat;
+        console.log("Chat is :",newMessagereceived.chat);
+
+        if(!chat.users){
+            return console.log("Chat.users not defined");
+        }
+
+        chat.users.forEach((user)=>{
+            if(user._id == newMessagereceived.sender._id){
+                return;
+            }
+            socket.in(user._id).emit('message received',newMessagereceived);
+            console.log("Message sent to: ",user.firstName);
+        });
+    })
+})
 
 
 

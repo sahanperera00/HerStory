@@ -58,7 +58,7 @@ export default function ClientSidebar() {
 
 
             <NavLink
-              to="/coming-soon"
+              to="/client/complaint"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
@@ -114,7 +114,7 @@ export default function ClientSidebar() {
             </NavLink>
 
             <NavLink
-              to="/admin/manage-post"
+              to="/chats"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",

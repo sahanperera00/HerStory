@@ -17,6 +17,7 @@ export default function Login() {
       .post("http://localhost:8070/user/login", { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
         if (res.data.user.role === "client") {
           navigate("/client");
         } else if (res.data.user.role === "admin") {
@@ -33,6 +34,7 @@ export default function Login() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       const decodedToken = jwtdecode(localStorage.getItem("token"));
+      
 
       if (decodedToken.object.role == "client") {
         navigate("/client");

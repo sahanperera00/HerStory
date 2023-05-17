@@ -24,7 +24,10 @@ import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
 // chanu add here
 
 // Devs add here
-
+import ChatPage from "./pages/Chat/ChatPage";
+import ClientComplaint from "./pages/ClientDashboard/ClientComplaint";
+import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
+import ContactSupport from "./pages/ClientDashboard/ContactSupport";
 // Nash add here
 
 // Shagg add here
@@ -32,8 +35,10 @@ import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
-import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
-import ContactSupport from "./pages/ClientDashboard/ContactSupport";
+
+
+
+
 
 
 
@@ -120,6 +125,8 @@ function App() {
         <Route path="/client" element={<ClientDashboard />} />
         <Route path="/updateClient" element={<ClientUpdatePage/>}/>
         <Route path="/client/support" element={<ContactSupport/>}/>
+        <Route path="/client/complaint" element={<ClientComplaint/>}/>
+        <Route path='/chats' element={<ChatPage/>}/>
 
 
 
