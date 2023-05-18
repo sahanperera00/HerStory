@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GrAdd } from "react-icons/gr";
 import { Button } from "../../components";
 import axios from "axios";
 import validator from "validator";
+import AddQualifications from "../../components/Modal/AddQualifications";
+import AddExperience from "../../components/Modal/AddExperience";
+import { MdOutlineCancel } from "react-icons/md";
 
 export default function ConsultantSignup() {
   const [firstName, setFirstName] = useState("");
@@ -19,6 +22,8 @@ export default function ConsultantSignup() {
   const [certifications, setCertifications] = useState([]);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,26 +37,84 @@ export default function ConsultantSignup() {
         password,
       })
       .then((res) => {
-        axios.post("http://localhost:8070/counsellor", {
-          user: { _id: res.data.user._id },
-          dob,
-          phoneNumber: phone,
-          gender,
-          nationality,
-          category,
-          education,
-          experience,
-          certifications,
-        }).then(() => {
-          navigate("/login");
-        }).catch((err) => {
-          console.log(err);
-        })
+        axios
+          .post("http://localhost:8070/counsellor", {
+            user: { _id: res.data.user._id },
+            dob,
+            phoneNumber: phone,
+            gender,
+            nationality,
+            category,
+            education,
+            experience,
+            certifications,
+          })
+          .then(() => {
+            navigate("/login");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const handleAddQualifications = (university, type, field, graduated) => {
+    setEducation([
+      ...education,
+      {
+        university,
+        type,
+        field,
+        graduated,
+      },
+    ]);
+  };
+
+  const handleAddExperience = (employer, title, duration, description) => {
+    setExperience([
+      ...experience,
+      {
+        employer,
+        title,
+        duration,
+        description,
+      },
+    ]);
+  };
+
+  const handleDeleteQualifications = (index) => {
+    const newEducation = [...education];
+    newEducation.splice(index, 1);
+    setEducation(newEducation);
+  };
+
+  const handleDeleteExperience = (index) => {
+    const newExperience = [...experience];
+    newExperience.splice(index, 1);
+    setExperience(newExperience);
+  };
+
+  const showModal1 = () => {
+    setIsModalOpen1(true);
+  };
+
+  const showModal2 = () => {
+    setIsModalOpen2(true);
+  };
+
+  useEffect(() => {
+    if (education.length > 0) {
+      setEducation(education);
+    }
+
+    if (experience.length > 0) {
+      setExperience(experience);
+    }
+  }, [education, experience]);
+
   return (
     <div className="signup py-[50px] bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
@@ -65,12 +128,13 @@ export default function ConsultantSignup() {
             className="w-80 my-5"
           />
         </Link>
-        <div className="container p-10 grid grid-cols-2 bg-[#f9e9e9] flex flex-row rounded-lg shadow-lg dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="w-full space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Create your Account
-            </h1>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <div className="container p-10 grid grid-cols-2 bg-[#f9e9e9] flex rounded-lg shadow-lg dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Create your Account
+              </h1>
+
               <div className="">
                 <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                   <div className="sm:col-span-2 flex flex-row gap-4">
@@ -282,146 +346,157 @@ export default function ConsultantSignup() {
                         }}
                       />
                     </div>
-                    {/* <div className="w-1/2">
-                      <label
-                        htmlFor="phone"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Confirm Password
-                      </label>
-                      <input
-                        type="password"
-                        name="phone"
-                        id="phone"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="........"
-                        required="required"
-                        onChange={(e) => {
-                          setEmail(e.target.value);
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Educational Background
+              </h1>
+
+              <AddQualifications
+                isModalOpen1={isModalOpen1}
+                setIsModalOpen1={setIsModalOpen1}
+                handleAddQualifications={handleAddQualifications}
+              />
+
+              <div className="grid gap-3">
+                {education &&
+                  education.length > 0 &&
+                  education.map((item, index) => (
+                    <div className="relative">
+                      <MdOutlineCancel
+                        className="absolute right-1 top-1 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition duration-200 ease-in-out"
+                        onClick={() => {
+                          handleDeleteQualifications(index);
                         }}
                       />
-                    </div> */}
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Educational Background
-                </h1>
-                <div className="grid gap-3">
-                  <div className="">
-                    <div className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease">
-                      {/* Institution Name
-                    Degree Type
-                    Field of Study
-                    Year Graduated */}
-                      <div className="flex flex-row justify-between items-center w-[90%] h-[80px]">
-                        <div className="flex flex-col justify-center items-start">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">
-                            Sri Lanka Institute of Information Technology
-                          </p>
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Bachelor's
-                          </p>
-                        </div>
-                        <div className="flex flex-col justify-center items-end">
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Software Engineering
-                          </p>
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            April 2025
-                          </p>
+                      <div className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease">
+                        <div className="flex flex-row justify-between items-center w-[90%] h-[80px]">
+                          <div className="flex flex-col justify-center items-start">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">
+                              {item.university}
+                            </p>
+                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                              {item.type}
+                            </p>
+                          </div>
+                          <div className="flex flex-col justify-center items-end">
+                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                              {item.field}
+                            </p>
+                            <p className="text-xsbreak-all font-medium text-gray-500 dark:text-gray-400">
+                              {item.graduated}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="">
-                    <div className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
-                      <GrAdd className="text-3xl font-gray-200 text-gray-100" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  ))}
 
-              <div className="w-full p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Professional Experience
-                </h1>
-                <div className="grid gap-3">
-                  <div className="">
-                    <div className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease">
-                      {/* Current or Previous Employer
-                        Job Title
-                        Years of Experience
-                        Relevant Work Experience
-                        Job Description */}
-                      <div className="flex flex-row justify-between items-center w-[90%] h-[80px]">
-                        <div className="flex flex-col justify-center items-start">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">
-                            Employer
-                          </p>
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Job Title
-                          </p>
-                        </div>
-                        <div className="flex flex-col justify-center items-end">
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Years of Experience
-                          </p>
-                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Job Description
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="">
-                    <div className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
-                      <GrAdd className="text-3xl font-gray-200 text-gray-100" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Certifications
-                </h1>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="">
-                    <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease"></div>
-                  </div>
-                  <div className="">
-                    <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
-                      <GrAdd className="text-3xl font-gray-200 text-gray-100" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-span-2 items-center flex flex-col justify-center py-5 gap-5">
-                <button type="submit">Create Account</button>
-                {/* <Button
-                  text={"Create Account"}
-                  bgColor={"#ef86c1"}
-                  borderRadius={"10px"}
-                  color={"white"}
-                  width={220}
-                /> */}
-                <p className="text-sm col-span-2 text-center font-light text-gray-500 dark:text-gray-400">
-                  Already have an account?{" "}
-                  <a
-                    href="/login"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                <div className="">
+                  <div
+                    onClick={showModal1}
+                    className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer"
                   >
-                    Log in here
-                  </a>
-                </p>
+                    <GrAdd className="text-3xl font-gray-200 text-gray-100" />
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
+
+            <div className="w-full space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Professional Experience
+              </h1>
+
+              <AddExperience
+                isModalOpen2={isModalOpen2}
+                setIsModalOpen2={setIsModalOpen2}
+                handleAddExperience={handleAddExperience}
+              />
+
+              <div className="">
+                <div className="grid gap-3 grid-cols-1">
+                  {experience &&
+                    experience.length > 0 &&
+                    experience.map((item, index) => (
+                      <div className="relative">
+                        <MdOutlineCancel
+                          className="absolute right-1 top-1 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition duration-200 ease-in-out"
+                          onClick={() => {
+                            handleDeleteExperience(index);
+                          }}
+                        />
+                        <div className="w-[100%] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease">
+                          <div className="flex flex-col justify-between items-center w-[90%] py-3">
+                            <div className="flex w-full justify-between">
+                              <div className="flex flex-col justify-center items-start">
+                                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                  {item.employer}
+                                </p>
+                              </div>
+                              <div className="flex flex-col justify-center items-end">
+                                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                  {item.title}
+                                </p>
+                                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                  {item.duration}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-xs py-2 w-full font-medium text-gray-500 dark:text-gray-400">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                  <div className="">
+                    <div
+                      onClick={showModal2}
+                      className="w-[100%] h-[80px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer"
+                    >
+                      <GrAdd className="text-3xl font-gray-200 text-gray-100" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Certifications
+              </h1>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="">
+                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease"></div>
+                </div>
+                <div className="">
+                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
+                    <GrAdd className="text-3xl font-gray-200 text-gray-100" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-2 items-center flex flex-col justify-center py-5 gap-5">
+              <button type="submit">Create Account</button>
+              <p className="text-sm col-span-2 text-center font-light text-gray-500 dark:text-gray-400">
+                Already have an account?{" "}
+                <a
+                  href="/login"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Log in here
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
