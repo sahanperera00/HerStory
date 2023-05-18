@@ -26,11 +26,11 @@ const UserListItem = ({user, handleFunction}) => {
       mr={2}
       size="sm"
       cursor="pointer"
-      name={user.name}
+      name={user.firstName + " " + user.lastName}
       src={user.pic}
     />
     <Box>
-      <Text>{user.name}</Text>
+      <Text>{user.firstName} {user.lastName}</Text>
       <Text fontSize="xs">
         <b>Email : </b>
         {user.email}
