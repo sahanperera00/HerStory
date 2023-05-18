@@ -11,12 +11,9 @@ import { getSender } from '../../config/ChatLogic';
 
 const MyChats = ({fetchAgain}) => {
   const { selectedChat, setSelectedChat, user, chats, setChats, loggedUser,setLoggedUser } = useChatState();
-  // const [loggedUser, setLoggedUser] = useState();
-
+  
   const Toast = useToast();
-
-
-  const fetchChats = async () => {
+  const fetchChats =  async() => {
     try {
       const config = {
         headers: {
@@ -41,9 +38,10 @@ const MyChats = ({fetchAgain}) => {
   };
 
   useEffect(() => {
-
+    console.log(loggedUser);
+   setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, [fetchAgain])
+  }, [])
 
   return (
     <Box
@@ -89,6 +87,7 @@ const MyChats = ({fetchAgain}) => {
                 color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}
+                
                 borderRadius="lg"
                 key={chat._id}
               >

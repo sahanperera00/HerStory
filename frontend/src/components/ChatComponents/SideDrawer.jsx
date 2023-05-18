@@ -45,7 +45,7 @@ const SideDrawer = () => {
     const [loadingChat, setLoadingChat] = useState(false);
 
     //Custom States
-    const {user,setSelectedChat, chats,setChats } = useChatState();
+    const {user,setSelectedChat, chats,setChats, selectedChat } = useChatState();
 
     //Logout Handler
     const logOutHandler = ()=>{
@@ -80,6 +80,7 @@ const SideDrawer = () => {
             const {data} = await axios.get(`http://localhost:8070/user/users?search=${search}`,config);
             setLoading(false);
             setSearchResult(data);
+            console.log("SearchResults",searchResult);
         }catch(error){
             Toast({
                 title: "Error fetching data",
@@ -95,18 +96,20 @@ const SideDrawer = () => {
     const accessChat = async(userId)=>{
         try{
             setLoadingChat(true);
-            
             const config = {
                 headers: {
                     "Content-type": "application/json",
                     Authorization: `Bearer ${user.token}`,
                 },
             };
+
+
             //console.log("UserID: ", userId);
-            const {data} = await axios.post(`http://localhost:8070/chats`,{userId},config);
+            const {data} = await axios.post(`http://localhost:8070/chat`,{receiverId: userId},config);
 
             if(!chats.find((chat)=> chat._id===data._id)) setChats([data,...chats]) //If we already have the chat we are creating, dont duplicate it. Just show the same we have created before.
             setSelectedChat(data);
+            console.log(selectedChat);
             setLoadingChat(false);
             onClose();
         }catch(error){
@@ -204,7 +207,8 @@ const SideDrawer = () => {
               <ChatLoading />
 
             ) : (
-              searchResult?.map((user) => (
+              searchResult?.map((user) => 
+              (
                 <UserListItem
                   key={user._id}
                   user={user}
