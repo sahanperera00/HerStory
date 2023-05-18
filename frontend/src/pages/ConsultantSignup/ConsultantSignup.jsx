@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GrAdd } from "react-icons/gr";
 import { Button } from "../../components";
@@ -24,6 +24,8 @@ export default function ConsultantSignup() {
   const navigate = useNavigate();
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const filepickerRef = useRef(null);
+  const [images, setImages] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,6 +99,16 @@ export default function ConsultantSignup() {
     setExperience(newExperience);
   };
 
+  const handleDeleteCertifications = (index) => {
+    const newCertifications = [...certifications];
+    newCertifications.splice(index, 1);
+    setCertifications(newCertifications);
+
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
   const showModal1 = () => {
     setIsModalOpen1(true);
   };
@@ -105,15 +117,24 @@ export default function ConsultantSignup() {
     setIsModalOpen2(true);
   };
 
-  useEffect(() => {
-    if (education.length > 0) {
-      setEducation(education);
-    }
+  const uploadImages = async (e) => {
+    const fileList = e.target.files;
+    const array = [];
 
-    if (experience.length > 0) {
-      setExperience(experience);
+    for (let i = 0; i < fileList.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileList[i]);
+      reader.onload = () => {
+        array.push(reader.result);
+
+        if (array.length === fileList.length) {
+          setImages([...images, ...array]);
+        }
+      };
     }
-  }, [education, experience]);
+    const imagesArray = Array.from(fileList);
+    setCertifications([...certifications, ...imagesArray]);
+  };
 
   return (
     <div className="signup py-[50px] bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
@@ -472,13 +493,35 @@ export default function ConsultantSignup() {
                 Certifications
               </h1>
               <div className="grid grid-cols-3 gap-3">
+                {images && images.length > 0 ? (
+                  images.map((item, index) => (
+                    <div className="relative">
+                      <MdOutlineCancel
+                        className="absolute right-1 top-1 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition duration-200 ease-in-out"
+                        onClick={() => {
+                          handleDeleteCertifications(index);
+                        }}
+                      />
+                      <img src={item} className="w-[100%] rounded-lg" />
+                    </div>
+                  ))
+                ) : (
+                  <></>
+                )}
                 <div className="">
-                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease"></div>
-                </div>
-                <div className="">
-                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
+                  <div
+                    onClick={() => filepickerRef.current.click()}
+                    className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer"
+                  >
                     <GrAdd className="text-3xl font-gray-200 text-gray-100" />
                   </div>
+                  <input
+                    type="file"
+                    ref={filepickerRef}
+                    onChange={uploadImages}
+                    multiple
+                    hidden
+                  />
                 </div>
               </div>
             </div>
