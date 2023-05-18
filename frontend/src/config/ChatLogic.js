@@ -1,5 +1,14 @@
+
 export const getSender = (loggedUser, users) => {
+
+  console.log("Users in GetSender: ",users);
+  console.log("Logged User in GetSender: ",loggedUser);
+  try{
     return users[0]._id === loggedUser._id ? users[1].firstName.concat(" " ,users[1].lastName) : users[0].firstName.concat(" ",users[0].lastName );
+  }catch(error){
+    return "Deleted Account"
+  } 
+   
 
   };
   
