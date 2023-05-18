@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Input, Button, Upload } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
@@ -12,6 +12,8 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdPreview } from "react-icons/md";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { UploadOutlined } from "@ant-design/icons";
+import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function ForumManagement() {
   const [isModalOpen1, setIsModalOpen1] = useState(false);
@@ -50,54 +52,123 @@ export default function ForumManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const posts = [
-    {
-      id: 1,
-      title: "Violence against women isn't cultural, it's criminal.",
-      email: "Chanukya@gmail.com",
-      date: "2023-02-05",
-    },
-    {
-      id: 2,
-      title:
-        "Women's mental health is an important element in one's overall well-being",
-      email: "Nashali@gmail.com",
-      date: "2023-02-12",
-    },
-    {
-      id: 3,
-      title: "Why We Need To Pay Attention to Women's Mental Health",
-      email: "XimBot@123gmail.com",
-      date: "2023-03-08",
-    },
+  const navigate = useNavigate();
 
-    {
-      id: 4,
-      title: "Women's Health Matters: Prioritizing Self-Care and Wellness",
-      email: "kylie@ymail.com",
-      date: "2023-03-29",
-    },
-    {
-      id: 5,
-      title:
-        "Building Strong Relationships: Communication and Connection for Women",
-      email: "unknown89@gmail.com",
-      date: "2023-04-05",
-    },
-    {
-      id: 6,
-      title: "Balancing Work and Life: Strategies for Busy Women",
-      email: "Shfa@gmail.com",
-      date: "2023-04-08",
-    },
+  const [posts, setPosts] = useState([])
 
-    {
-      id: 7,
-      title: "Breaking Down Barriers: Women in Male-Dominated Industries",
-      email: "Anne@gmail.com",
-      date: "2023-05-05",
-    },
-  ];
+  useEffect(()=>{
+
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+
+    const getPosts = async() =>{
+      await axios
+        .get(
+          'http://localhost:8070/posts',
+          header
+        )
+        .then((res) => {
+          setPosts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    getPosts()
+    
+  },[])
+
+
+  const header = {
+		headers: {
+			'Content-Type': 'application/json',
+			authorization: `Bearer ${localStorage.getItem('token')}`,
+		},
+	};
+
+  const confirmFunc = async (postId) => {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			color: '#f8f9fa',
+			background: '#6c757d',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				const res = await axios.delete(`http://localhost:8070/posts/${postId}`, header);
+				if(res.status===200){
+          setPosts(posts.filter((p)=>p._id !== postId))
+        }
+				Swal.fire({
+					icon: 'success',
+					title: 'Post Successfully Deleted',
+					color: '#f8f9fa',
+					background: '#6c757d',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			} else {
+				//navigate('/MachineryViewAll');
+			}
+		});
+	};
+
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: "Violence against women isn't cultural, it's criminal.",
+  //     email: "Chanukya@gmail.com",
+  //     date: "2023-02-05",
+  //   },
+  //   {
+  //     id: 2,
+  //     title:
+  //       "Women's mental health is an important element in one's overall well-being",
+  //     email: "Nashali@gmail.com",
+  //     date: "2023-02-12",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Why We Need To Pay Attention to Women's Mental Health",
+  //     email: "XimBot@123gmail.com",
+  //     date: "2023-03-08",
+  //   },
+
+  //   {
+  //     id: 4,
+  //     title: "Women's Health Matters: Prioritizing Self-Care and Wellness",
+  //     email: "kylie@ymail.com",
+  //     date: "2023-03-29",
+  //   },
+  //   {
+  //     id: 5,
+  //     title:
+  //       "Building Strong Relationships: Communication and Connection for Women",
+  //     email: "unknown89@gmail.com",
+  //     date: "2023-04-05",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Balancing Work and Life: Strategies for Busy Women",
+  //     email: "Shfa@gmail.com",
+  //     date: "2023-04-08",
+  //   },
+
+  //   {
+  //     id: 7,
+  //     title: "Breaking Down Barriers: Women in Male-Dominated Industries",
+  //     email: "Anne@gmail.com",
+  //     date: "2023-05-05",
+  //   },
+  // ];
 
   return (
     <div>
@@ -264,20 +335,22 @@ export default function ForumManagement() {
                     </thead>
                     <tbody>
                       {posts &&
-                        posts.map((data) => {
+                        posts.map((data, index) => {
                           return (
                             <tr
-                              key={data.id}
+                              key={data._id}
                               className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
-                              <TableData value={data.id} />
+                              <TableData value={index + 1} />
                               <TableData value={data.title} />
-                              <TableData value={data.email} />
+                              <TableData value={data.postedBy.email} />
                               <TableData value={data.date} />
                               <TableData
                                 value={
                                   <div className="flex gap-4">
                                     <button
+                                    onClick={()=>navigate(`/post/${data._id}`)
+                                  }
                                       className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
                                       title="View"
                                     >
@@ -291,6 +364,7 @@ export default function ForumManagement() {
                                       <AiOutlineEdit />
                                     </button> */}
                                     <button
+                                    onClick={()=>confirmFunc(data._id)}
                                       className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
                                       title="Remove"
                                     >

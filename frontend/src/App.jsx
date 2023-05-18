@@ -35,6 +35,8 @@ import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
+import ClientForum from "./pages/Forum/ClientForum";
+
 
 
 
@@ -89,8 +91,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/myforum" element={<ClientForum />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/post" element={<ForumPost />} />
+        <Route path="/post/:postId" element={<ForumPost />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
         <Route
