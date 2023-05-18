@@ -9,7 +9,7 @@ import ChatLoading from './ChatLoading';
 import { getSender } from '../../config/ChatLogic';
 
 
-const MyChats = ({fetchAgain}) => {
+const MyChats = () => {
   const { selectedChat, setSelectedChat, user, chats, setChats, loggedUser,setLoggedUser } = useChatState();
   
   const Toast = useToast();
@@ -21,7 +21,6 @@ const MyChats = ({fetchAgain}) => {
         },
       };
       const { data } = await axios.get(`http://localhost:8070/chat/`, config);
-      console.log("Chat:", data);
       setChats(data);
 
     } catch (error) {
@@ -38,7 +37,6 @@ const MyChats = ({fetchAgain}) => {
   };
 
   useEffect(() => {
-    console.log(loggedUser);
    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
   }, [])
