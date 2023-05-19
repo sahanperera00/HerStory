@@ -77,7 +77,7 @@ export default function ClientSidebar() {
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <CgCommunity /> {/*  icon  */}
+              <MdOutlineForum /> {/*  icon  */}
               <span className="capitalize ">Her-Story Forum</span>{" "}
               {/*  link name  */}
             </NavLink>
