@@ -27,6 +27,8 @@ export default function Login() {
         }
       })
       .catch((err) => {
+        alert(err.response.data.error);
+        navigate("/login");
         console.log(err);
       });
   };
@@ -34,7 +36,6 @@ export default function Login() {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       const decodedToken = jwtdecode(localStorage.getItem("token"));
-      
 
       if (decodedToken.object.role == "client") {
         navigate("/client");
