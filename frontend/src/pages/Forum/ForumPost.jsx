@@ -215,7 +215,14 @@ const Post = () => {
               {post.content}
             </div>
             <div className="mt-4 h-fit   relative">
-              <div className="bg-pink-400 h-12 w-12 rounded-full  mt-1 mx-2 inline-block"></div>
+              <div className=" h-12 w-12 rounded-full  mt-1 mx-2 inline-block">
+                <img
+                  src={user?.pic}
+                  className="h-full w-full object-cover rounded-full"
+                  alt=""
+                />
+              </div>
+
               <div className="inline-block w-[calc(100%-192px)]  h-[100%] absolute">
                 <div className="h-[50%] text-xs p-2 pb-0 text-[#777777]">
                   {post?.postedBy?.email}
