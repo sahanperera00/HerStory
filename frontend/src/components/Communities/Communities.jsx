@@ -1,46 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
-// import Community from "./community";
-import { BsArrowRightShort } from "react-icons/bs";
-import { BsChevronDown } from "react-icons/bs";
-
-// const community = [
-//   {
-//     id: 1,
-//     title: "Survivor Support Community",
-//     desc: " A space for survivors of harassment or assault to share their stories, and offer support to each other",
-//     members: "8 members",
-//   },
-//   {
-//     id: 2,
-//     title: "Legal Advice and Resources Community",
-//     desc: "Providing legal resources and advice and distributing information on the legal processes",
-//     members: "10 members",
-//   },
-//   {
-//     id: 3,
-//     title: "Mental Health and Wellness Community",
-//     desc: "Focus on providing resources and support for women who are struggling with the mental health effects",
-//     members: "50 members",
-//   },
-//   {
-//     id: 4,
-//     title: "Workplace Harassment Community",
-//     desc: "Providing resources and support for women who have experienced harassment or assault in the workplace",
-//     members: "20 members",
-//   },
-//   {
-//     id: 5,
-//     title: "Education and Prevention Community",
-//     desc: "Educating and raising awareness about harassment and assault and providing resources and strategies for prevention",
-//     members: "30 members",
-//   },
-// ];
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Communities = () => {
   const [community, setcommunity] = useState([]);
+  const [joinedCommunities, setJoinedCommunities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -52,6 +19,25 @@ const Communities = () => {
     }
     fetchData();
   }, []);
+
+  const joinCommunity = (communityId) => {
+    setJoinedCommunities((prevJoinedCommunities) => [
+      ...prevJoinedCommunities,
+      communityId,
+    ]);
+
+    Swal.fire({
+      icon: "success",
+      title: "You have Joined Successfully",
+      color: "#f8f9fa",
+      background: "#6c757d",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+
+    navigate(`/forumSurvivor`);
+  };
+
   return (
     <>
       <div className="flex flex-col w-[87%]">
@@ -79,13 +65,22 @@ const Communities = () => {
                   <div className="h-fit font-[500] text-base text-[#777777] text-[14px] text-center my-[5px]">
                     {data.description}
                   </div>
-                  <div className="h-fit font-[500] text-base text-[#fc46aa] text-[16px] text-center ">
+                  {/* <div className="h-fit font-[500] text-base text-[#fc46aa] text-[16px] text-center ">
                     {data.Members} members
-                  </div>
+                  </div> */}
                   <div className=" flex flex-1 items-center justify-center">
-                    <button className="inline-block bg-pink-300  h-[40px] w-[145px] rounded-[7px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[35px] ">
-                      Join
-                    </button>
+                    {joinedCommunities.includes(data._id) ? (
+                      <button className="inline-block bg-gray-400  h-[40px] w-[145px] rounded-[7px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[35px]">
+                        Joined
+                      </button>
+                    ) : (
+                      <button
+                        className="inline-block bg-pink-300  h-[40px] w-[145px] rounded-[7px] px-3 py-1 text-[20px] font-medium bottom-[0px] text-[#FFFFFF] mt-[35px] "
+                        onClick={() => joinCommunity(data._id)}
+                      >
+                        Join
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -93,10 +88,7 @@ const Communities = () => {
           ))}
         </div>
 
-        <div className="flex flex-row justify-center mt-[-20px] mb-[25px] min-[400px]:ml-[12%] md:ml-[5%] h-fit items-center">
-          <h1 className="font-[500] text-[20px] text-[#777777]">View More</h1>
-          <BsChevronDown className="text-[28px] text-[#777777] font-[600] mx-[10px] " />
-        </div>
+        <div className="flex flex-row justify-center mt-[-20px] mb-[25px] min-[400px]:ml-[12%] md:ml-[5%] h-fit items-center"></div>
       </div>
     </>
   );
