@@ -86,19 +86,6 @@ export default function AdminSidebar() {
             </NavLink>
 
             <NavLink
-              to="/admin/manage-requests"
-              onClick={handleCloseSideBar}
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? currentColor : "",
-              })}
-              className={({ isActive }) => (isActive ? activeLink : normalLink)}
-            >
-              <BiGitPullRequest /> {/*  icon  */}
-              <span className="capitalize ">Requests Management</span>{" "}
-              {/*  link name  */}
-            </NavLink>
-
-            <NavLink
               to="/admin/manage-consultants"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({

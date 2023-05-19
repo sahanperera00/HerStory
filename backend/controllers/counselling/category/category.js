@@ -32,3 +32,27 @@ export const deleteCategory = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const updateCategory = async (req, res) => {
+  const { id } = req.params;
+
+  const oldCategory = await Category.findById(id);
+
+  if (req.body.name) {
+    oldCategory.name = req.body.name;
+  }
+  if (req.body.description) {
+    oldCategory.description = req.body.description;
+  }
+  if (req.body.visibility) {
+    oldCategory.visibility = req.body.visibility;
+  }
+
+  try {
+    await oldCategory.save();
+    res.status(200).json(oldCategory);
+  }
+  catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}

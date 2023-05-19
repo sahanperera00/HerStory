@@ -13,6 +13,7 @@ import {
   dislikePost,
   undislikePost,
   makeComment,
+  getPostsbyCategory,
 } from "../../controllers/Forum/postController.js";
 
 const router = express.Router();
@@ -20,6 +21,7 @@ const router = express.Router();
 router.get("/", authenticate, getPosts);
 router.get("/:id", authenticate, getPost);
 router.get("/date/:DS/:DE", authenticate, getDateRangePosts);
+router.get("/category/:category", authenticate, getPostsbyCategory);
 router.post("/", authenticate, createPost);
 router.put("/like/:postId", authenticate, likePost);
 router.put("/unlike/:postId", authenticate, UnlikePost);
