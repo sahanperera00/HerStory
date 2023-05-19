@@ -147,7 +147,7 @@ export default function CommunityNew(
                       }}
                     >
                       <div className="mb-3">
-                        <label htmlFor="employeeNIC" className="form-label">
+                        <label htmlFor="commID" className="form-label">
                           Community ID:{" "}
                         </label>
                         <input
@@ -161,7 +161,7 @@ export default function CommunityNew(
                       </div>
                       <div className="mb-3">
                         <label
-                          htmlFor="employeeFullName"
+                          htmlFor="title"
                           className="form-label"
                         >
                           Title :{" "}
@@ -170,7 +170,7 @@ export default function CommunityNew(
                           type="text"
                           rows={2}
                           className="mt-1 block w-800 rounded-md bg-gray-100 focus:bg-white dark:text-black"
-                          id="employeeFullName"
+                          id="title"
                           required
                           onChange={(e) => {
                             setname(e.target.value);
@@ -179,14 +179,14 @@ export default function CommunityNew(
                       </div>
 
                       <div className="mb-3">
-                        <label htmlFor="employeeDOB" className="form-label">
+                        <label htmlFor="description" className="form-label">
                           Description :{" "}
                         </label>
                         <textarea
                           type="text"
                           rows={3}
                           className="mt-1 block w-800 rounded-md bg-gray-100 focus:bg-white dark:text-black"
-                          id="employeeDOB"
+                          id="description"
                           required
                           onChange={(e) => {
                             setdescription(e.target.value);

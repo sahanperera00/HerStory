@@ -167,7 +167,7 @@ export default function CommunityManagement() {
                         <TableHeader value="Community ID" />
                         <TableHeader value="Community Title" />
                         <TableHeader value="Date Created" />
-                        <TableHeader value="Number of Members" />
+                        {/* <TableHeader value="Number of Members" /> */}
                         <TableHeader value="Actions" />
                       </tr>
                     </thead>
@@ -182,9 +182,9 @@ export default function CommunityManagement() {
                               <TableData value={data.comID} />
                               <TableData value={data.name} />
                               <TableData value={date} />
-                              <TableData
+                              {/* <TableData
                                 value={data.Members + "   " + " " + "members"}
-                              />
+                              /> */}
                               <TableData
                                 value={
                                   <div className="flex gap-4">
