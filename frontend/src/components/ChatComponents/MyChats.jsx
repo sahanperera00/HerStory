@@ -43,6 +43,7 @@ const MyChats = () => {
 
   return (
     <Box
+      data-testid="main-chat"
       display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
@@ -89,7 +90,7 @@ const MyChats = () => {
                 borderRadius="lg"
                 key={chat._id}
               >
-              <Text>
+              <Text data-testid="chat-user">
                 {getSender(loggedUser.user, chat.users)}
               </Text>
                 {chat.latestMessage && (
