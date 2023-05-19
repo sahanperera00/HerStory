@@ -4,6 +4,8 @@ import { Button } from ".";
 // import { userProfileData } from "../../../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import KG from "../data/KG.png";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function UserProfile() {
   const { currentColor } = useStateContext();
@@ -17,6 +19,12 @@ export default function UserProfile() {
   };
 
   const user = JSON.parse(localStorage.getItem("userInfo"));
+
+  const [role,setRole] = useState("");
+  useEffect(()=>{
+    user.user.role === "client" ? setRole("client") : user.user.role === "admin"? setRole("admin") : setRole("counsellor-dashboard"); 
+  },[])
+  
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -33,12 +41,17 @@ export default function UserProfile() {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img className="rounded-full h-24 w-24" src={user.user.pic} alt="user-profile" />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200 text-transform: capitalize">
+        <Link to={`/${role}`}>
+        <p className="font-semibold text-xl text-blue-800 dark:text-gray-200 text-transform: capitalize">
             {user.user.firstName} {user.user.lastName}
-           
           </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">
+          </Link>
+          <p className="text-gray-500 text-sm dark:text-gray-400 capitalize">
             {user.user.role}
+          </p>
+
+          <p className="text-gray-500 text-sm dark:text-gray-400">
+            {user.user.email}
 
           </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
