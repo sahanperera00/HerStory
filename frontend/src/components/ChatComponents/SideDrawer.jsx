@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { useChatState } from "../../contexts/ChatProvider";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 //UI imports
 import {
@@ -40,6 +41,10 @@ import ChatLoading from "./ChatLoading";
 import UserListItem from "./UserListItem";
 import ProfileModal from "./ProfileModal";
 
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import UserProfile from "../UserProfile";
+
 const SideDrawer = () => {
   const Toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure(); //Chakra
@@ -54,6 +59,17 @@ const SideDrawer = () => {
   //Custom States
   const { user, setSelectedChat, chats, setChats, selectedChat } =
     useChatState();
+
+  const {
+    currentColor,
+    activeMenu,
+    setActiveMenu,
+    handleClick,
+    isClicked,
+    setScreenSize,
+    screenSize,
+  } = useStateContext();
+
 
   //Logout Handler
   const logOutHandler = () => {
@@ -159,31 +175,33 @@ const SideDrawer = () => {
             flex: "true",
           }}
         />
-        <div>
-          <Menu>
-            <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1} />
-            </MenuButton>
+        <div >
+          <Menu display = "flex">
           </Menu>
-          <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
-              <Avatar
-                size="sm"
-                cursor="pointer"
-                name={user.name}
-                src={user.pic}
-              />
-            </MenuButton>
-            <MenuList>
-              <ProfileModal user={user.user}>
-                <MenuItem>My Profile</MenuItem>{" "}
-              </ProfileModal>
-              <MenuDivider />
-              <MenuItem onClick={logOutHandler}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+            <div className="flex">
+              <TooltipComponent content="Profile" position="BottomCenter">
+                <div
+                  className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+                  onClick={() => handleClick("userProfile")}
+                >
+                  <img className="rounded-full w-8 h-8" src={user.user.pic} alt="user-profile" />
+                  <p>
+                    <span className="text-gray-400 text-14">Hi, {user.user.firstName}</span>{" "}
+                    <span className="text-gray-400 font-bold ml-1 text-14">
+                      {/* {user.userName} */}
+                      {/* Michael */}
+                    </span>
+                  </p>
+                  <MdKeyboardArrowDown className="text-gray-400 text-14" />
+                </div>
+              </TooltipComponent>
+
+              {isClicked.userProfile && <UserProfile />}
+            </div>
+            
         </div>
-      </Box>
+      
+    </Box >
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
