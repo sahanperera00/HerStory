@@ -2,11 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
-import {RxClipboard} from 'react-icons/rx';
-import {RxLapTimer} from 'react-icons/rx';
-import {AiOutlineSchedule} from 'react-icons/ai';
-import {BsChatSquareText} from 'react-icons/bs';
-import {RiFeedbackLine} from 'react-icons/ri';
+import { RxClipboard } from "react-icons/rx";
+import { RxLapTimer } from "react-icons/rx";
+import { AiOutlineSchedule } from "react-icons/ai";
+import { BsChatSquareText } from "react-icons/bs";
+import { RiFeedbackLine } from "react-icons/ri";
+import { MdOutlineForum } from "react-icons/md";
 
 export default function CounsellorSidebar() {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
@@ -49,7 +50,6 @@ export default function CounsellorSidebar() {
           </div>
 
           <div className="mt-5 mx-5">
-
             <p className="text-[12px] text-gray-400 dark:text-gray-400 mt-4 uppercase">
               Counseling Service
             </p>
@@ -114,9 +114,17 @@ export default function CounsellorSidebar() {
               <span className="capitalize ">Feedbacks</span>
             </NavLink>
 
-            <p className="text-[12px] text-gray-400 dark:text-gray-400 mt-4 uppercase">
-              Forum Management
-            </p>
+            <NavLink
+              to="/forum"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <MdOutlineForum />
+              <span className="capitalize ">Forum</span>
+            </NavLink>
           </div>
         </>
       )}
