@@ -12,17 +12,15 @@ root.render(
   <ChakraProvider>
     
       <ContextProvider>
-      <ChatProvider>
         <BrowserRouter>
-        
+        <ChatProvider>
           <Routes>
           
             <Route path="*" element={<App />} />
             
           </Routes>
-          
+          </ChatProvider>
         </BrowserRouter>
-        </ChatProvider>
       </ContextProvider>
     
   </ChakraProvider>

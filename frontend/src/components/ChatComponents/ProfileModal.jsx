@@ -29,7 +29,7 @@ const ProfileModal = ({user, children}) => {
             display="flex"
             justifyContent="center"
           >
-            <Link to='/client' data-testId="username">
+            <Link to='/client'>
             {user.firstName} {user.lastName}
             </Link>
           </ModalHeader>
@@ -39,7 +39,7 @@ const ProfileModal = ({user, children}) => {
             flexDir="column"
             justifyContent="center"
           >
-            <Image 
+            <Image
               borderRadius="full"
               boxSize="150px"
               src={user.pic}
