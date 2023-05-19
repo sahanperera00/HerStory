@@ -26,7 +26,7 @@ const ProfileModal = ({user, children}) => {
         <ModalContent h="410px">
           <ModalHeader
             fontSize="40px"
-            d="flex"
+            display="flex"
             justifyContent="center"
           >
             <Link to='/client'>
@@ -35,19 +35,21 @@ const ProfileModal = ({user, children}) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
-            d="flex"
+            display="flex"
             flexDir="column"
-            alignItems="center"
-            justifyContent="space-between"
+            justifyContent="center"
           >
             <Image
               borderRadius="full"
               boxSize="150px"
               src={user.pic}
               alt={user.firstName}
+              display="flex"
+              justifyContent={"center"}
             />
             <Text 
             pt={'10px'}
+            display={"flex"} justifyContent={"center"} 
               fontSize={{ base: "28px", md: "30px" }}
             >
               Email: {user.email}

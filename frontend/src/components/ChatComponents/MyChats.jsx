@@ -9,14 +9,11 @@ import ChatLoading from './ChatLoading';
 import { getSender } from '../../config/ChatLogic';
 
 
-const MyChats = ({fetchAgain}) => {
+const MyChats = () => {
   const { selectedChat, setSelectedChat, user, chats, setChats, loggedUser,setLoggedUser } = useChatState();
-  // const [loggedUser, setLoggedUser] = useState();
-
+  
   const Toast = useToast();
-
-
-  const fetchChats = async () => {
+  const fetchChats =  async() => {
     try {
       const config = {
         headers: {
@@ -24,7 +21,6 @@ const MyChats = ({fetchAgain}) => {
         },
       };
       const { data } = await axios.get(`http://localhost:8070/chat/`, config);
-      console.log("Chat:", data);
       setChats(data);
 
     } catch (error) {
@@ -41,9 +37,9 @@ const MyChats = ({fetchAgain}) => {
   };
 
   useEffect(() => {
-
+   setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, [fetchAgain])
+  }, [])
 
   return (
     <Box
@@ -89,6 +85,7 @@ const MyChats = ({fetchAgain}) => {
                 color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}
+                
                 borderRadius="lg"
                 key={chat._id}
               >
