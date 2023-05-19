@@ -3,12 +3,21 @@ import User from "../../models/users/userInfoModel.js";
 //import Comment from "../../models/Forum/commentModel.js";
 
 export const createPost = async (req, res) => {
-  const { postedBy, image, title, description, tags, dateCreated, content } =
-    req.body;
+  const {
+    postedBy,
+    image,
+    title,
+    category,
+    description,
+    tags,
+    dateCreated,
+    content,
+  } = req.body;
   const newPost = new Post({
     postedBy: req.user,
     title,
     description,
+    category,
     image,
     tags,
     dateCreated,
@@ -185,3 +194,14 @@ export const getDateRangePosts = async (req, res) => {
 //       }
 //     });
 // });
+
+//get posts by category
+export const getPostsbyCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const posts = await Post.find({ category: category });
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

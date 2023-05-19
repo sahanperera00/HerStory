@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Communities = () => {
   const [community, setcommunity] = useState([]);
   const [joinedCommunities, setJoinedCommunities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,15 +28,15 @@ const Communities = () => {
 
     Swal.fire({
       icon: "success",
-      title: "Joined Successfully",
+      title: "You have Joined Successfully",
       color: "#f8f9fa",
       background: "#6c757d",
       showConfirmButton: false,
       timer: 2000,
     });
-  };
 
-  const confirmFunc = (id) => {};
+    navigate(`/forumSurvivor`);
+  };
 
   return (
     <>
