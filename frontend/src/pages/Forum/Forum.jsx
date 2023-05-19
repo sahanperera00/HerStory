@@ -106,11 +106,11 @@ function Forum() {
                   <div className="w-[100%]">
                     <div className=" h-[100px] w-[93.35%] mx-4 mt-4 p-4 shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[15px] bg-[#f9e9e9]">
                       <div className="inline-block w-[68px] bg-pink-300 h-[68px] rounded-xl overflow-hidden">
-                        <img
+                        {/* <img
                           src={user?.pic}
                           className="h-full w-full object-cover"
                           alt=""
-                        />
+                        /> */}
                       </div>
                       <div className="inline-block w-[calc(90%-100px)] h-[68px] p-6 relative -top-7">
                         <input
@@ -139,7 +139,6 @@ function Forum() {
               </div>
               <h1 className="ml-5"></h1>
             </div>
-            
           </div>
         </div>
       </div>
