@@ -74,6 +74,7 @@ connectDB();
 //Starting the server
 const server = app.listen(PORT,console.log(`Server is running on port: ${PORT}`));
 
+//instantiating a Socket.io Server
 const io = new Server(server, {
     pingTimeout: 60000,
     cors: {
@@ -81,20 +82,24 @@ const io = new Server(server, {
     }
 });
 
+//Socket.io connection
 io.on("connection", (socket)=>{
     console.log("Connected to Socket.io websocket");
 
+    //creating a setup port for the user
     socket.on('setup',(userData)=>{
         console.log("User Data:" ,userData);
         socket.join(userData._id);
         socket.emit("connected");
     });
 
+    //port for the user to join a chat
     socket.on('join chat',(room)=>{
         socket.join(room);
         console.log("Joined Room: ",room);
     });
 
+    //port for the users to send messages within the ports 
     socket.on('new message', (newMessagereceived)=>{
         var chat = newMessagereceived.chat;
         console.log("Chat is :",newMessagereceived.chat);

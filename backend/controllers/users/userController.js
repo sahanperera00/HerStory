@@ -97,7 +97,7 @@ export const loginUser = async(req,res)=>{
             return res.status(400).json({message: "Failed to create the token please try again"});
         }
     }catch(error){
-        res.status(500).json({message: "Internal Server Error - Reached the catch statement. Cause: " + error.message});
+           res.status(500).json({message: "Internal Server Error - Reached the catch statement. Cause: " + error.message});
     }
 }
 

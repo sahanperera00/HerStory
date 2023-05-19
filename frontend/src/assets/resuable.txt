@@ -1,0 +1,17 @@
+            {/* <Menu>
+            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={user.pic}
+              />
+            </MenuButton>
+            <MenuList>
+              <ProfileModal user={user.user}>
+                <MenuItem>My Profile</MenuItem>{" "}
+              </ProfileModal>
+              <MenuDivider />
+              <MenuItem onClick={logOutHandler}>Logout</MenuItem>
+            </MenuList>
+          </Menu> */}
