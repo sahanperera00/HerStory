@@ -25,8 +25,8 @@ const ClientForum = () => {
 			await axios
 				.get('http://localhost:8070/posts', header)
 				.then((res) => {
-                    const clientPosts = res.data.filter((post)=> post?.postedBy?.email === user.email)
-					setPosts(clientPosts);
+                    const clientPosts = res.data.filter((post)=> post?.postedBy?.email === user.email)//filtering posts of the logged in user
+					setPosts(clientPosts);//setting the posts of the logged in user
 				})
 				.catch((err) => {
 					console.log(err);

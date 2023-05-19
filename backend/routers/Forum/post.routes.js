@@ -19,7 +19,7 @@ const router = express.Router();
 
 router.get("/", authenticate, getPosts);
 router.get("/:id", authenticate, getPost);
-router.get("/date/:DS/:DE", getDateRangePosts);
+router.get("/date/:DS/:DE", authenticate, getDateRangePosts);
 router.post("/", authenticate, createPost);
 router.put("/like/:postId", authenticate, likePost);
 router.put("/unlike/:postId", authenticate, UnlikePost);
