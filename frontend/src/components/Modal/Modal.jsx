@@ -2,9 +2,75 @@ import React, { useState } from "react";
 import "../../index.css";
 //import AlertComp from "../Alert";
 import { GrClose } from "react-icons/gr";
+import axios from "axios";
+import { storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-function Modal({ setOpenModal, setSuccess }) {
-  const [tags, setTags] = useState([]);
+function Modal({ setOpenModal, setSuccess, postId, post }) {
+  const [tags, setTags] = useState(post?.tags || []);
+  const [title, setTitle] = useState(post?.title || "");
+  const [description, setDescription] = useState(post?.description || "");
+  const [content, setContent] = useState(post?.content || "");
+  const [dateCreated, setdateCreated] = useState(post?.dateCreated || "");
+  const [image, setImage] = useState(post?.image || "");
+  const [loading, setLoading] = useState(false);
+
+  const header = {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+
+  const user = JSON.parse(localStorage.getItem("userInfo")).user;
+
+  const handleFileUpload = async (event) => {
+    setLoading(true);
+    const file = event.target.files[0];
+    const path = `/images/${file.name}`;
+    const storageRef = ref(storage, path);
+
+    const uploadResponse = await uploadBytes(storageRef, file);
+
+    if (uploadResponse) {
+      const url = await getDownloadURL(ref(storage, path));
+      setImage(url);
+      setLoading(false);
+    }
+  };
+
+  const postData = {
+    postedBy: user,
+    title,
+    description,
+    image,
+    tags,
+    content,
+  };
+
+  const handlePost = async () => {
+    let res;
+
+    try {
+      if (postId) {
+        res = await axios.put(
+          `http://localhost:8070/posts/${postId}`,
+          postData,
+          header
+        );
+      } else {
+        res = await axios.post("http://localhost:8070/posts", postData, header);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (res.status === 201 || res.status === 200) {
+      setOpenModal(false);
+      setSuccess(true);
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="modal h-screen w-full scale-x-110 fixed top-0  flex justify-center items-center bg-black bg-opacity-50   ">
@@ -22,20 +88,42 @@ function Modal({ setOpenModal, setSuccess }) {
         </div>
 
         <label className="block text-black text-sm font-bold mb-2">Title</label>
-        <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
+        <textarea
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
+        />
         <label className="block text-black text-sm font-bold mt-4 mb-2">
           Description
         </label>
-        <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
+        />
         <label className="block text-black text-sm font-bold mt-4 mb-2">
           Content
         </label>
-        <textarea className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue" />
-
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
+        />
+        <label className="block text-black text-sm font-bold mt-4 mb-2">
+          Date Created
+        </label>
+        <input
+          type="date"
+          onChange={(e) => setdateCreated(e.target.value)}
+          className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
+        />
         <div className="my-4">
           <div className="text-gray-100 text-lg leading-relaxed">
-            {tags.map((tag) => (
-              <button className="inline-block bg-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-100 mr-2">
+            {tags?.map((tag) => (
+              <button
+                key={tag}
+                className="inline-block bg-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-100 mr-2"
+              >
                 {tag}
               </button>
             ))}
@@ -46,6 +134,7 @@ function Modal({ setOpenModal, setSuccess }) {
             Attachments
           </label>
           <input
+            onChange={(event) => handleFileUpload(event)}
             type="file"
             multiple
             className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
@@ -74,13 +163,10 @@ function Modal({ setOpenModal, setSuccess }) {
               Add Tag
             </button>
             <button
-              onClick={() => {
-                setOpenModal(false);
-                setSuccess(true);
-              }}
-              className="text-white font-bold py-1 mt-3 ml-4 h-10 px-5 w-20 rounded-xl bg-pink-400 hover:bg-pink-500 focus:outline-none focus:shadow-outline-blue "
+              onClick={() => handlePost()}
+              className="text-white font-bold py-1 mt-3 ml-4 h-10 px-5  rounded-xl bg-pink-400 hover:bg-pink-500 focus:outline-none focus:shadow-outline-blue "
             >
-              Post
+              {loading ? "Uploading Photo..." : "Post"}
             </button>
           </form>
         </div>

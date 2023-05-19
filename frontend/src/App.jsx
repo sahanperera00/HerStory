@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Forum from "./pages/Forum/Forum";
 import PostManagement from "./pages/AdminDashboard/PostManagement";
+import PostDateRange from "./pages/AdminDashboard/PostDateRange";
 import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
 import CommunityNew from "./pages/AdminDashboard/CommunityNew";
 import Community from "./pages/Forum/Community";
@@ -21,20 +22,18 @@ import Transfers from "./pages/CounsellorDashboard/Transfers";
 import Feedbacks from "./pages/CounsellorDashboard/Feedbacks";
 
 
-// chanu add here
 
-// Devs add here
 import ChatPage from "./pages/Chat/ChatPage";
 import ClientComplaint from "./pages/ClientDashboard/ClientComplaint";
 import ClientUpdatePage from "./pages/ClientDashboard/ClientUpdatePage";
 import ContactSupport from "./pages/ClientDashboard/ContactSupport";
-// Nash add here
 
-// Shagg add here
 import ConsultantSignup from "./pages/ConsultantSignup/ConsultantSignup";
 import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
+import ClientForum from "./pages/Forum/ClientForum";
+
 
 
 
@@ -89,8 +88,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/myforum" element={<ClientForum />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/post" element={<ForumPost />} />
+        <Route path="/post/:postId" element={<ForumPost />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
         <Route
@@ -104,6 +104,8 @@ function App() {
 
         {/* chanu add here */}
         <Route path="/admin/manage-post" element={<PostManagement />} />
+        <Route path ="admin/PostDateRange" element={<PostDateRange/>}/>
+        
         <Route
           path="/admin/manage-community"
           element={<CommunityManagement />}

@@ -5,23 +5,28 @@ import axios from "axios";
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [items, setItems] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  // // Get all items
-  // const getItems = async () => {
-  //   axios
-  //     .get(`http://localhost:8081/items/`)
-  //     .then((res) => {
-  //       setItems(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  useEffect(() => {
+    const header = {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
 
-  // useEffect(() => {
-  //   getItems();
-  // }, []);
+    const getPosts = async () => {
+      await axios
+        .get("http://localhost:8070/posts", header)
+        .then((res) => {
+          setPosts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getPosts();
+  }, []);
 
   return (
     <div className="w-full">
@@ -38,20 +43,19 @@ export default function SearchBar() {
         <div className="s-icon">
           <UilSearch />
         </div>
-      </div>
-
-      {/* <div
+      </div>{" "}
+      <div
         className="h-[700px] overflow-scroll w-[40%] mt-20"
         style={{ position: "absolute", top: 0 }}
         hidden={searchTerm === "" ? true : false}
       >
-        {items
+        {posts
           .filter((val) => {
             //Filtering the items
             if (searchTerm === "") {
               return "";
             } else if (
-              val.name.toLowerCase().includes(searchTerm.toLowerCase())
+              val.title.toLowerCase().includes(searchTerm.toLowerCase())
             ) {
               return val;
             }
@@ -66,17 +70,14 @@ export default function SearchBar() {
                   <img class=" w-[65px]" src={data.image} alt="" />
                   <div class="flex flex-col justify-between p-4 leading-normal">
                     <h5 class="mb-2 text-[15px] font-bold tracking-tight text-gray-900 dark:text-white">
-                      {data.name}
+                      {data.title}
                     </h5>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      ${data.price.$numberDecimal}
-                    </p>
                   </div>
                 </a>
               </div>
             );
           })}
-      </div> */}
+      </div>
     </div>
   );
 }
