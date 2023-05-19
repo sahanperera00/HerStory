@@ -51,7 +51,7 @@ const Communities = () => {
               <div className="px-[15px] mx-[15px] pt-[5px] pb-[35px] flex flex-col items-center">
                 <div className=" w-fit h-fit ">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/512/1160/1160358.png"
+                    src={data.picture}
                     alt="profile"
                     className="rounded-[15px] max-w-[10vw] max-h-[10vw] mb-[20px]"
                   />
