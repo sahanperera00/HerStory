@@ -7,6 +7,8 @@ import validator from "validator";
 import AddQualifications from "../../components/Modal/AddQualifications";
 import AddExperience from "../../components/Modal/AddExperience";
 import { MdOutlineCancel } from "react-icons/md";
+import { storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function ConsultantSignup() {
   const [firstName, setFirstName] = useState("");
@@ -38,8 +40,12 @@ export default function ConsultantSignup() {
         email,
         password,
       })
-      .then((res) => {
-        axios
+      .then(async (res) => {
+        console.log("User registered successfully");
+        const urls = await uploadFiles();
+        console.log("Images uploaded successfully");
+
+        await axios
           .post("http://localhost:8070/counsellor", {
             user: { _id: res.data.user._id },
             dob,
@@ -49,9 +55,10 @@ export default function ConsultantSignup() {
             category,
             education,
             experience,
-            certifications,
+            certifications : urls,
           })
           .then(() => {
+            console.log("Counsellor registered successfully");
             navigate("/login");
           })
           .catch((err) => {
@@ -61,6 +68,42 @@ export default function ConsultantSignup() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const uploadImages = async (e) => {
+    const fileList = e.target.files;
+    const array = [];
+
+    for (let i = 0; i < fileList.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileList[i]);
+      reader.onload = () => {
+        array.push(reader.result);
+
+        if (array.length === fileList.length) {
+          setImages([...images, ...array]);
+        }
+      };
+    }
+    const imagesArray = Array.from(fileList);
+    setCertifications([...certifications, ...imagesArray]);
+  };
+
+  const uploadFiles = async () => {
+    const uploadPromises = certifications.map(async (image) => {
+      const storageRef = ref(storage, `${email}/certificates/${image.name}`);
+      try {
+        await uploadBytes(storageRef, image);
+        const url = await getDownloadURL(ref(storageRef));
+        return url;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    });
+
+    const urls = await Promise.all(uploadPromises);
+    return urls;
   };
 
   const handleAddQualifications = (university, type, field, graduated) => {
@@ -115,25 +158,6 @@ export default function ConsultantSignup() {
 
   const showModal2 = () => {
     setIsModalOpen2(true);
-  };
-
-  const uploadImages = async (e) => {
-    const fileList = e.target.files;
-    const array = [];
-
-    for (let i = 0; i < fileList.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(fileList[i]);
-      reader.onload = () => {
-        array.push(reader.result);
-
-        if (array.length === fileList.length) {
-          setImages([...images, ...array]);
-        }
-      };
-    }
-    const imagesArray = Array.from(fileList);
-    setCertifications([...certifications, ...imagesArray]);
   };
 
   return (
@@ -464,7 +488,7 @@ export default function ConsultantSignup() {
                                   {item.title}
                                 </p>
                                 <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                                  {item.duration}
+                                  {item.duration} Years
                                 </p>
                               </div>
                             </div>
