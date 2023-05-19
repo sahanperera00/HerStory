@@ -112,6 +112,8 @@ export default function ForumManagement() {
       navigate("/admin/PostDateRange", { state: { DS: start, DE: end } });
     } else {
       alert("Please select a date range");
+      console.log(dateRangeRef.value);
+
       setDateStart("");
       setDateEnd("");
     }
@@ -168,7 +170,7 @@ export default function ForumManagement() {
                   {" "}
                   <div className=" bg-slate-100 pt-1 rounded-lg px-5 w-56">
                     <DateRangePickerComponent
-                      //ref={dateRangeRef}
+                      ref={dateRangeRef}
                       placeholder="Select a date range"
                     />
                   </div>
@@ -245,13 +247,26 @@ export default function ForumManagement() {
                             }
                           })
                           .map((data, index) => {
+                            let datacolor = "text-green-500 font-bold";
+                            if (
+                              data.title.toLowerCase().includes("gun") ||
+                              data.title.toLowerCase().includes("knife") ||
+                              data.title.toLowerCase().includes("bomb") ||
+                              data.title.toLowerCase().includes("fight")
+                            ) {
+                              datacolor = "text-red-600 font-bold";
+                            }
                             return (
                               <tr
                                 key={data._id}
                                 className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                               >
                                 <TableData value={index + 1} />
-                                <TableData value={data.title} />
+                                <td
+                                  className={`${datacolor}  px-3  border-l-0 border-r-0 text-m whitespace-nowrap p-3`}
+                                >
+                                  {data.title}{" "}
+                                </td>
                                 <TableData value={data.postedBy.email} />
                                 <TableData
                                   value={
