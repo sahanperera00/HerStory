@@ -15,7 +15,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function ForumManagement() {
+export default function PostDateRange() {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
@@ -24,7 +24,7 @@ export default function ForumManagement() {
   const [posts, setPosts] = useState([]);
 
   const toDateRange = () => {
-    navigate("/admin/PostDateRange", { state: { DS: dateStart, DE: dateEnd } });
+    navigate("/PostDateRange", { state: { DS: dateStart, DE: dateEnd } });
   };
   const {
     setCurrentColor,
@@ -46,7 +46,7 @@ export default function ForumManagement() {
 
     const getPosts = async () => {
       await axios
-        .get("http://localhost:8070/posts", header)
+        .get("http://localhost:8070/posts/date/"+location.state.DS+"/"+location.state.DE, header)
         .then((res) => {
           setPosts(res.data);
         })
@@ -109,7 +109,7 @@ export default function ForumManagement() {
 
       setDateStart(start);
       setDateEnd(end);
-      navigate("/admin/PostDateRange", { state: { DS: start, DE: end } });
+      navigate("/PostDateRange", { state: { DS: start, DE: end } });
     } else {
       alert("Please select a date range");
       setDateStart("");
@@ -253,15 +253,7 @@ export default function ForumManagement() {
                                 <TableData value={index + 1} />
                                 <TableData value={data.title} />
                                 <TableData value={data.postedBy.email} />
-                                <TableData
-                                  value={
-                                    data.dateCreated
-                                      ? data.dateCreated
-                                          .toString()
-                                          .split("T")[0]
-                                      : ""
-                                  }
-                                />
+                                <TableData value={data.dateCreated} />
                                 <TableData
                                   value={
                                     <div className="flex gap-4">

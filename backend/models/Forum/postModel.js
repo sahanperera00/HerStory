@@ -23,10 +23,17 @@ const postSchema = mongoose.Schema({
     // default:
     //   "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
   },
-  tags: [{
-    type: String,
+  tags: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+
+  dateCreated: {
+    type: Date,
     required: true,
-  }],
+  },
 
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 
@@ -38,8 +45,6 @@ const postSchema = mongoose.Schema({
       postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     },
   ],
-
- 
 });
 
 const Post = mongoose.model("Post", postSchema);
