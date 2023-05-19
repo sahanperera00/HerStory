@@ -13,34 +13,13 @@ import { MdPreview } from "react-icons/md";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default function ForumManagement() {
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [communityName1, setCommunityName1] = useState("");
-  const [description1, setDescription1] = useState("");
-  const [file1, setFile1] = useState(null);
-  const showModal1 = () => {
-    setIsModalOpen1(true);
-  };
-  const handleOk1 = () => {
-    setCommunityName1("");
-    setDescription1("");
-    setIsModalOpen1(false);
-  };
-  const handleCancel1 = () => {
-    setCommunityName1("");
-    setDescription1("");
-    setIsModalOpen1(false);
-  };
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-  };
+  const [posts, setPosts] = useState([]);
 
   const {
     setCurrentColor,
@@ -52,123 +31,67 @@ export default function ForumManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const navigate = useNavigate();
-
-  const [posts, setPosts] = useState([])
-
-  useEffect(()=>{
-
+  useEffect(() => {
     const header = {
       headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
 
-    const getPosts = async() =>{
+    const getPosts = async () => {
       await axios
-        .get(
-          'http://localhost:8070/posts',
-          header
-        )
+        .get("http://localhost:8070/posts", header)
         .then((res) => {
           setPosts(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-    }
-    getPosts()
-    
-  },[])
-
+    };
+    getPosts();
+  }, []);
 
   const header = {
-		headers: {
-			'Content-Type': 'application/json',
-			authorization: `Bearer ${localStorage.getItem('token')}`,
-		},
-	};
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
 
   const confirmFunc = async (postId) => {
-		Swal.fire({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
-			color: '#f8f9fa',
-			background: '#6c757d',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, delete it!',
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				const res = await axios.delete(`http://localhost:8070/posts/${postId}`, header);
-				if(res.status===200){
-          setPosts(posts.filter((p)=>p._id !== postId))
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      color: "#f8f9fa",
+      background: "#6c757d",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(
+          `http://localhost:8070/posts/${postId}`,
+          header
+        );
+        if (res.status === 200) {
+          setPosts(posts.filter((p) => p._id !== postId));
         }
-				Swal.fire({
-					icon: 'success',
-					title: 'Post Successfully Deleted',
-					color: '#f8f9fa',
-					background: '#6c757d',
-					showConfirmButton: false,
-					timer: 2000,
-				});
-			} else {
-				//navigate('/MachineryViewAll');
-			}
-		});
-	};
-
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     title: "Violence against women isn't cultural, it's criminal.",
-  //     email: "Chanukya@gmail.com",
-  //     date: "2023-02-05",
-  //   },
-  //   {
-  //     id: 2,
-  //     title:
-  //       "Women's mental health is an important element in one's overall well-being",
-  //     email: "Nashali@gmail.com",
-  //     date: "2023-02-12",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Why We Need To Pay Attention to Women's Mental Health",
-  //     email: "XimBot@123gmail.com",
-  //     date: "2023-03-08",
-  //   },
-
-  //   {
-  //     id: 4,
-  //     title: "Women's Health Matters: Prioritizing Self-Care and Wellness",
-  //     email: "kylie@ymail.com",
-  //     date: "2023-03-29",
-  //   },
-  //   {
-  //     id: 5,
-  //     title:
-  //       "Building Strong Relationships: Communication and Connection for Women",
-  //     email: "unknown89@gmail.com",
-  //     date: "2023-04-05",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Balancing Work and Life: Strategies for Busy Women",
-  //     email: "Shfa@gmail.com",
-  //     date: "2023-04-08",
-  //   },
-
-  //   {
-  //     id: 7,
-  //     title: "Breaking Down Barriers: Women in Male-Dominated Industries",
-  //     email: "Anne@gmail.com",
-  //     date: "2023-05-05",
-  //   },
-  // ];
+        Swal.fire({
+          icon: "success",
+          title: "Post Successfully Deleted",
+          color: "#f8f9fa",
+          background: "#6c757d",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else {
+        //navigate('/MachineryViewAll');
+      }
+    });
+  };
 
   return (
     <div>
@@ -216,62 +139,6 @@ export default function ForumManagement() {
               <div className="md:m-6 p-5">
                 <Header title="Forum Posts Management" />
 
-                {/* edit modal */}
-                <Modal
-                  destroyOnClose={true}
-                  title="Edit Community"
-                  className="font-semibold"
-                  open={isModalOpen1}
-                  onOk={handleOk1}
-                  onCancel={handleCancel1}
-                >
-                  <h5 className="mt-8 font-medium font-['Poppins']">
-                    Community Name:
-                  </h5>
-                  <Input
-                    onChange={(e) => setCommunityName1(e.target.value)}
-                    value={"Survivor support group"}
-                    placeholder="Enter Name"
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <h5 className="mt-2 font-normal font-['Poppins']">
-                    Description:
-                  </h5>
-                  <Input
-                    onChange={(e) => setDescription1(e.target.value)}
-                    value={
-                      "A space for survivors of harassment or assault to connect with one another, share their stories, and offer support to each other"
-                    }
-                    placeholder="Enter Description"
-                    className="font-['Poppins'] mb-2 font-normal"
-                  />
-                  <Upload {...props}>
-                    <h5 className="mt-2 font-medium font-['Poppins']">
-                      Community Logo:
-                    </h5>
-                    <Button
-                      className="my-2 font-normal font-['Poppins']"
-                      icon={<UploadOutlined />}
-                    >
-                      Click to Upload
-                    </Button>
-                  </Upload>
-                </Modal>
-
-                {/* 
-                <div className=" flex items-center mb-5 ">
-                  <div>
-                    <input
-                      type="text"
-                      className=" block w-400 h-100 rounded-md bg-gray-100 focus:bg-white dark:text-black"
-                      placeholder="Search Here"
-                      onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div> */}
-
                 <br></br>
                 <div className=" flex items-center mb-5 ">
                   {" "}
@@ -297,6 +164,9 @@ export default function ForumManagement() {
                         type="search"
                         name="search"
                         placeholder="Search here"
+                        onChange={(e) => {
+                          setSearchTerm(e.target.value);
+                        }}
                       />
                       <button
                         type="submit"
@@ -335,47 +205,63 @@ export default function ForumManagement() {
                     </thead>
                     <tbody>
                       {posts &&
-                        posts.map((data, index) => {
-                          return (
-                            <tr
-                              key={data._id}
-                              className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
-                            >
-                              <TableData value={index + 1} />
-                              <TableData value={data.title} />
-                              <TableData value={data.postedBy.email} />
-                              <TableData value={data.date} />
-                              <TableData
-                                value={
-                                  <div className="flex gap-4">
-                                    <button
-                                    onClick={()=>navigate(`/post/${data._id}`)
-                                  }
-                                      className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
-                                      title="View"
-                                    >
-                                      <MdPreview />
-                                    </button>
-                                    {/* <button
+                        posts
+                          .filter((data) => {
+                            if (searchTerm == "") {
+                              return data;
+                            } else if (
+                              data.title
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()) ||
+                              data.postedBy.email
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase())
+                            ) {
+                              return data;
+                            }
+                          })
+                          .map((data, index) => {
+                            return (
+                              <tr
+                                key={data._id}
+                                className="bg-white  hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
+                              >
+                                <TableData value={index + 1} />
+                                <TableData value={data.title} />
+                                <TableData value={data.postedBy.email} />
+                                <TableData value={data.date} />
+                                <TableData
+                                  value={
+                                    <div className="flex gap-4">
+                                      <button
+                                        onClick={() =>
+                                          navigate(`/post/${data._id}`)
+                                        }
+                                        className="text-white bg-[#f4c723] p-2 rounded-full hover:bg-[#f4c723]"
+                                        title="View"
+                                      >
+                                        <MdPreview />
+                                      </button>
+                                      {/* <button
                                       className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
                                       title="Edit"
                                       onClick={showModal1}
                                     >
                                       <AiOutlineEdit />
                                     </button> */}
-                                    <button
-                                    onClick={()=>confirmFunc(data._id)}
-                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
-                                      title="Remove"
-                                    >
-                                      <RiDeleteBin2Line />
-                                    </button>
-                                  </div>
-                                }
-                              />
-                            </tr>
-                          );
-                        })}
+                                      <button
+                                        onClick={() => confirmFunc(data._id)}
+                                        className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                        title="Remove"
+                                      >
+                                        <RiDeleteBin2Line />
+                                      </button>
+                                    </div>
+                                  }
+                                />
+                              </tr>
+                            );
+                          })}
                     </tbody>
                   </table>
                 </div>
