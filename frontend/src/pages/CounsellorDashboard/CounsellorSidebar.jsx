@@ -123,7 +123,7 @@ export default function CounsellorSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <MdOutlineForum />
-              <span className="capitalize ">Forum</span>
+              <span className="capitalize ">Her-Story Forum</span>
             </NavLink>
           </div>
         </>
