@@ -33,6 +33,7 @@ import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import ClientForum from "./pages/Forum/ClientForum";
+import Premium from "./pages/ClientDashboard/Premium";
 
 
 
@@ -129,6 +130,7 @@ function App() {
         <Route path="/client/support" element={<ContactSupport/>}/>
         <Route path="/client/complaint" element={<ClientComplaint/>}/>
         <Route path='/chats' element={<ChatPage/>}/>
+        <Route path="/client/premium" element={<Premium/>}/>
 
 
 

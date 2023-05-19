@@ -101,7 +101,7 @@ export default function ClientSidebar() {
             </p>
 
             <NavLink
-              to="/admin/updateProfile"
+              to="/client/premium"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
@@ -130,7 +130,7 @@ export default function ClientSidebar() {
               Settings
             </p>
             <NavLink
-              to="/updateProfile"
+              to="/client/premium"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
