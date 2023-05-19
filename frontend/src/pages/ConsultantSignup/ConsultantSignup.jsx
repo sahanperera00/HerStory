@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GrAdd } from "react-icons/gr";
 import { Button } from "../../components";
@@ -7,6 +7,8 @@ import validator from "validator";
 import AddQualifications from "../../components/Modal/AddQualifications";
 import AddExperience from "../../components/Modal/AddExperience";
 import { MdOutlineCancel } from "react-icons/md";
+import { storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function ConsultantSignup() {
   const [firstName, setFirstName] = useState("");
@@ -24,6 +26,8 @@ export default function ConsultantSignup() {
   const navigate = useNavigate();
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const filepickerRef = useRef(null);
+  const [images, setImages] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +40,12 @@ export default function ConsultantSignup() {
         email,
         password,
       })
-      .then((res) => {
-        axios
+      .then(async (res) => {
+        console.log("User registered successfully");
+        const urls = await uploadFiles();
+        console.log("Images uploaded successfully");
+
+        await axios
           .post("http://localhost:8070/counsellor", {
             user: { _id: res.data.user._id },
             dob,
@@ -47,9 +55,10 @@ export default function ConsultantSignup() {
             category,
             education,
             experience,
-            certifications,
+            certifications : urls,
           })
           .then(() => {
+            console.log("Counsellor registered successfully");
             navigate("/login");
           })
           .catch((err) => {
@@ -59,6 +68,42 @@ export default function ConsultantSignup() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const uploadImages = async (e) => {
+    const fileList = e.target.files;
+    const array = [];
+
+    for (let i = 0; i < fileList.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileList[i]);
+      reader.onload = () => {
+        array.push(reader.result);
+
+        if (array.length === fileList.length) {
+          setImages([...images, ...array]);
+        }
+      };
+    }
+    const imagesArray = Array.from(fileList);
+    setCertifications([...certifications, ...imagesArray]);
+  };
+
+  const uploadFiles = async () => {
+    const uploadPromises = certifications.map(async (image) => {
+      const storageRef = ref(storage, `${email}/certificates/${image.name}`);
+      try {
+        await uploadBytes(storageRef, image);
+        const url = await getDownloadURL(ref(storageRef));
+        return url;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    });
+
+    const urls = await Promise.all(uploadPromises);
+    return urls;
   };
 
   const handleAddQualifications = (university, type, field, graduated) => {
@@ -97,6 +142,16 @@ export default function ConsultantSignup() {
     setExperience(newExperience);
   };
 
+  const handleDeleteCertifications = (index) => {
+    const newCertifications = [...certifications];
+    newCertifications.splice(index, 1);
+    setCertifications(newCertifications);
+
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
   const showModal1 = () => {
     setIsModalOpen1(true);
   };
@@ -104,16 +159,6 @@ export default function ConsultantSignup() {
   const showModal2 = () => {
     setIsModalOpen2(true);
   };
-
-  useEffect(() => {
-    if (education.length > 0) {
-      setEducation(education);
-    }
-
-    if (experience.length > 0) {
-      setExperience(experience);
-    }
-  }, [education, experience]);
 
   return (
     <div className="signup py-[50px] bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
@@ -443,7 +488,7 @@ export default function ConsultantSignup() {
                                   {item.title}
                                 </p>
                                 <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                                  {item.duration}
+                                  {item.duration} Years
                                 </p>
                               </div>
                             </div>
@@ -472,13 +517,35 @@ export default function ConsultantSignup() {
                 Certifications
               </h1>
               <div className="grid grid-cols-3 gap-3">
+                {images && images.length > 0 ? (
+                  images.map((item, index) => (
+                    <div className="relative">
+                      <MdOutlineCancel
+                        className="absolute right-1 top-1 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition duration-200 ease-in-out"
+                        onClick={() => {
+                          handleDeleteCertifications(index);
+                        }}
+                      />
+                      <img src={item} className="w-[100%] rounded-lg" />
+                    </div>
+                  ))
+                ) : (
+                  <></>
+                )}
                 <div className="">
-                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-solid bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease"></div>
-                </div>
-                <div className="">
-                  <div className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer">
+                  <div
+                    onClick={() => filepickerRef.current.click()}
+                    className="w-[100%] h-[250px] flex flex-col justify-center items-center border-2 border-dashed bg-white dark:bg-secondary-dark-bg rounded-lg hover:border-gray-500 transition duration-200 ease cursor-pointer"
+                  >
                     <GrAdd className="text-3xl font-gray-200 text-gray-100" />
                   </div>
+                  <input
+                    type="file"
+                    ref={filepickerRef}
+                    onChange={uploadImages}
+                    multiple
+                    hidden
+                  />
                 </div>
               </div>
             </div>

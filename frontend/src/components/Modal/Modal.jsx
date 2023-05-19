@@ -48,6 +48,7 @@ function Modal({ setOpenModal, setSuccess, postId, post }) {
     image,
     tags,
     content,
+    dateCreated
   };
 
   const handlePost = async () => {
