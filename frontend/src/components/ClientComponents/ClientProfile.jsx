@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { ContextProvider, useStateContext } from "../../contexts/ContextProvider";
+import { useChatState } from "../../contexts/ChatProvider";
 import {Link} from "react-router-dom"
 
 const ClientProfile = () => {
 
     const {currentColor} = useStateContext();
+    const {user} = useChatState();
+
+    useEffect(()=>{
+      console.log(user.user._id);
+    },[])
+    
   return (
     <div>
       <div className="pb-16 px-10">
