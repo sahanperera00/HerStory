@@ -181,7 +181,6 @@ export default function CommunityManagement() {
                               <TableData value={data.comID} />
                               <TableData value={data.name} />
                               <TableData value={date} />
-
                               <TableData
                                 value={
                                   <div className="flex gap-4">
