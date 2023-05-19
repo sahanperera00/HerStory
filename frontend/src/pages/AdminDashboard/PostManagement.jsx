@@ -17,10 +17,15 @@ import Swal from "sweetalert2";
 
 export default function ForumManagement() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState([]);
 
+  const toDateRange = () => {
+    navigate("/admin/PostDateRange", { state: { DS: dateStart, DE: dateEnd } });
+  };
   const {
     setCurrentColor,
     setCurrentMode,
@@ -88,9 +93,28 @@ export default function ForumManagement() {
           timer: 2000,
         });
       } else {
-        //navigate('/MachineryViewAll');
+        navigate("/admin/manage-post");
       }
     });
+  };
+
+  let dateRangeRef = (dateRange) => {
+    dateRangeRef = dateRange; // dateRangeRef is a reference to the DateRangePickerComponent
+  };
+
+  const filterDate = () => {
+    if (dateRangeRef.value && dateRangeRef.value.length > 0) {
+      const start = dateRangeRef.value[0];
+      const end = dateRangeRef.value[1];
+
+      setDateStart(start);
+      setDateEnd(end);
+      navigate("/admin/PostDateRange", { state: { DS: start, DE: end } });
+    } else {
+      alert("Please select a date range");
+      setDateStart("");
+      setDateEnd("");
+    }
   };
 
   return (
@@ -229,7 +253,15 @@ export default function ForumManagement() {
                                 <TableData value={index + 1} />
                                 <TableData value={data.title} />
                                 <TableData value={data.postedBy.email} />
-                                <TableData value={data.date} />
+                                <TableData
+                                  value={
+                                    data.dateCreated
+                                      ? data.dateCreated
+                                          .toString()
+                                          .split("T")[0]
+                                      : ""
+                                  }
+                                />
                                 <TableData
                                   value={
                                     <div className="flex gap-4">
@@ -242,13 +274,7 @@ export default function ForumManagement() {
                                       >
                                         <MdPreview />
                                       </button>
-                                      {/* <button
-                                      className="text-white bg-[rgb(121,205,222)] p-2 rounded-full hover:bg-[rgb(121,205,222)]"
-                                      title="Edit"
-                                      onClick={showModal1}
-                                    >
-                                      <AiOutlineEdit />
-                                    </button> */}
+
                                       <button
                                         onClick={() => confirmFunc(data._id)}
                                         className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
