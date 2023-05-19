@@ -2,6 +2,7 @@ import User from "../../../models/users/userModel.js";
 import Chat from "../../../models/counselling/chat/chatModel.js";
 import Message from "../../../models/counselling/chat/messageModel.js";
 
+//Sending a message
 export const sendMessage = async(req,res)=>{
     const {content, chatId} = req.body;
 
@@ -9,8 +10,6 @@ export const sendMessage = async(req,res)=>{
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
     }
-
-    console.log("ChatID passed down: " , chatId)
 
     var newMessage = {
         sender: req.user._id,
@@ -33,6 +32,7 @@ export const sendMessage = async(req,res)=>{
     }
 }
 
+//fetching all the messages according to the chatId
 export const allMessages = async(req,res)=>{
     try{
         const messages = await Message.find({chat: req.params.chatId}).populate('sender','firstName lastName pic email');

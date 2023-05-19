@@ -1,6 +1,7 @@
 import User from "../../../models/users/userModel.js";
 import Chat from "../../../models/counselling/chat/chatModel.js";
 
+//accessing chat acccording to the user clicked 
 export const accessChat = async(req,res)=>{
     try{
         
@@ -15,12 +16,9 @@ export const accessChat = async(req,res)=>{
             ]
         }).populate("users","-password").populate("latestMessage"); //While looking for a chat, we are populating the users and latestMessage fields as well
 
-        console.log("Before Message Populate: ",isChat)
         //Since originally no message has been actually created we forge a late message without having it in the database via populate
         //For that we use the User to be populated in the Message model
         isChat = await User.populate(isChat, {path: "latestMessage.sender",select: "-password"});
-
-        console.log("After Message Populate: ",isChat)
 
         if(isChat.length > 0){
             res.send(isChat[0]);    //If there's a result already, send it else we create the chat
@@ -41,6 +39,7 @@ export const accessChat = async(req,res)=>{
     }
 }
 
+//Controller to fetch Chats according to the user
 export const fetchChats = async(req,res)=>{
     try{
         await Chat.find({
