@@ -4,8 +4,8 @@ import dotenv from "dotenv/config"
 import cors from "cors"
 import bodyParser from "body-parser"
 import {Server} from "socket.io"
-
 import { connectDB } from "./config/db.js"
+import path from "path"
 
 //Route import
 
@@ -66,6 +66,24 @@ app.use('/counsellor',CounsellorRoutes);
 
 
 
+
+//DEPLOYMENT
+
+const __dirname1 = path.resolve();
+if(process.env.NODE_ENV === 'production'){
+
+    app.use(express.static(path.join(__dirname1,'../frontend/dist')));
+
+    app.get('*', (req,res)=>{
+        res.sendFile(path.resolve(__dirname1,'frontend','dist','index.html'))
+    });
+}else{
+    app.get('/',(req,res)=>{
+        res.send('API is running successfully!');
+    })
+}
+
+//DEPLOYMENT
 
 
 //Setting up mongoDB
