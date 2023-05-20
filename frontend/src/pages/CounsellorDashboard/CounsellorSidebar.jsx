@@ -66,7 +66,7 @@ export default function CounsellorSidebar() {
               <span className="capitalize ">Manage Appointments</span>
             </NavLink> */}
 
-            <NavLink
+            {/* <NavLink
               to="/counsellor/pending-requests"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
@@ -76,7 +76,7 @@ export default function CounsellorSidebar() {
             >
               <RxLapTimer />
               <span className="capitalize ">Pending Requests</span>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink
               to="/counsellor/chats"
