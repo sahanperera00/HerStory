@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, ThemeSettings } from "../../components";
+import { Navbar, Footer, ThemeSettings, Button } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useChatState } from "../../contexts/ChatProvider";
+
+import { useToast } from "@chakra-ui/react";
 
 export default function Counsel() {
+
+  const Toast = useToast();
   const {
     setCurrentColor,
     setCurrentMode,
@@ -18,7 +24,39 @@ export default function Counsel() {
     setThemeSettings,
   } = useStateContext();
 
+  const navigate = useNavigate();
+
   const [counsellors, setCounsellors] = useState([]);
+  const {selectedChat, setSelectedChat, user} = useChatState();
+
+  useEffect(()=>{
+    console.log(user);
+  },[])
+
+
+  const handleChat = async(receiverId)=>{
+    try{  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const {data} = await axios.post(`http://localhost:8070/chat`,{receiverId: receiverId},config);
+      setSelectedChat(data);
+      Toast({
+        title: "Say Hello to your new Counsellor!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+
+      navigate("/chats");
+    }catch(error){
+      console.log(error.message);
+    }
+  }
 
   useEffect(() => {
     axios
@@ -96,12 +134,12 @@ export default function Counsel() {
                           <h1 className="text-2xl font-bold mt-2 dark:text-white">
                             {counsellor.user.email}
                           </h1>
-                          <Link
-                            to={`/counsellor-profile/${counsellor._id}`}
+                          <button
+                            onClick={()=>handleChat(counsellor.user._id)}
                             className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-lg mt-4"
                           >
                             Let's Talk !
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     ))}
