@@ -5,7 +5,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaConnectdevelop } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { BsFilePost } from "react-icons/bs";
+import { BsFilePost, BsPostcard, BsFilePostFill } from "react-icons/bs";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import KG from "../data/KG.png";
 import UserProfile from "./UserProfile";
@@ -14,18 +14,18 @@ import SearchBar from "./homeSection/SearchBar";
 
 const NavButton = ({ customFunc, icon, color, dotColor }) => (
   // <TooltipComponent position="BottomCenter">
-    <button
-      type="button"
-      onClick={() => customFunc()}
-      style={{ color }}
-      className="relative text-xl rounded-full p-3 hover:bg-light-gray"
-    >
-      <span
-        style={{ background: dotColor }}
-        className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
-      />
-      {icon}
-    </button>
+  <button
+    type="button"
+    onClick={() => customFunc()}
+    style={{ color }}
+    className="relative text-xl rounded-full p-3 hover:bg-light-gray"
+  >
+    <span
+      style={{ background: dotColor }}
+      className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
+    />
+    {icon}
+  </button>
   // </TooltipComponent>
 );
 
@@ -79,6 +79,7 @@ export default function Navbar() {
         <div className="search flex w-1/2 justify-evenly">
           <Link
             to="/forum"
+            title="Forum"
             className={`${
               location.pathname === "/forum" ? "bg-pink-300" : "bg-white"
             } px-3 py-2 rounded-sm  mx-2 shadow-md`}
@@ -88,6 +89,7 @@ export default function Navbar() {
           </Link>
           <Link
             to="/Community"
+            title="Community"
             className={`${
               location.pathname === "/Community" ? "bg-pink-300" : "bg-white"
             } px-3 py-2 rounded-sm mx-2 shadow-md`}
@@ -97,12 +99,13 @@ export default function Navbar() {
           </Link>
           <Link
             to="/myforum"
+            title="My Forum"
             className={`${
               location.pathname === "/myforum" ? "bg-pink-300" : "bg-white"
             } px-3 py-2 rounded-sm mx-2 shadow-md`}
             style={{ borderRadius: "10px" }}
           >
-            <BsFilePost fontSize="20px" />
+            <BsPostcard fontSize="20px" />
           </Link>
           {/* <Input.Search
             placeholder="Type here to search ..."
