@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const commentsSchema = mongoose.Schema({
   postID: {
     type: String,

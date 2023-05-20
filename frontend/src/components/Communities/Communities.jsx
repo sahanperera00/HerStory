@@ -53,7 +53,7 @@ const Communities = () => {
                   <img
                     src={data.picture}
                     alt="profile"
-                    className="rounded-[15px] max-w-[10vw] max-h-[10vw] mb-[20px]"
+                    className="rounded-[15px] max-w-[18vw] max-h-[10vw] mb-[28px]"
                   />
                 </div>
 
