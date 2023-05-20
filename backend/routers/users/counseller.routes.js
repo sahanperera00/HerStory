@@ -4,8 +4,10 @@ import {
   createCounsellorInfo,
   updateCounsellorInfo,
   getNotApprovedCounsellorInfo,
+  getApproveCounsellorInfo,
   deleteCounsellorInfo,
   getCounsellorInfoById,
+  getCounsellorInfoByUserId,
 } from "../../controllers/users/counsellor.js";
 import { authenticate } from "../../middleware/authentication.js";
 
@@ -15,7 +17,9 @@ router.post("/", createCounsellorInfo);
 router.get("/", getCounsellorInfo);
 router.post("/:id", updateCounsellorInfo);
 router.get("/notApproved", getNotApprovedCounsellorInfo);
+router.get("/approved", getApproveCounsellorInfo);
 router.delete("/:id", deleteCounsellorInfo);
 router.get("/user/:id", getCounsellorInfoById);
+router.get("/user/user/:id", getCounsellorInfoByUserId);
 
 export default router;

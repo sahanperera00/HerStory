@@ -45,8 +45,7 @@ export default function SearchBar() {
         </div>
       </div>{" "}
       <div
-        className="h-[700px] overflow-scroll w-[40%] mt-20"
-        style={{ position: "absolute", top: 0 }}
+        className="h-[700px] overflow-scroll w-[40%] mt-20 absolute top-5 z-50"
         hidden={searchTerm === "" ? true : false}
       >
         {posts
@@ -72,6 +71,9 @@ export default function SearchBar() {
                     <h5 class="mb-2 text-[15px] font-bold tracking-tight text-gray-900 dark:text-white">
                       {data.title}
                     </h5>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
+                      {data.description}
+                    </p>
                   </div>
                 </a>
               </div>

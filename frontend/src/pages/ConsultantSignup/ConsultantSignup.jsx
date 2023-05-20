@@ -28,6 +28,7 @@ export default function ConsultantSignup() {
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const filepickerRef = useRef(null);
   const [images, setImages] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ export default function ConsultantSignup() {
             category,
             education,
             experience,
-            certifications : urls,
+            certifications: urls,
           })
           .then(() => {
             console.log("Counsellor registered successfully");
@@ -159,6 +160,17 @@ export default function ConsultantSignup() {
   const showModal2 = () => {
     setIsModalOpen2(true);
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8070/category")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="signup py-[50px] bg-gradient-to-t from-[#ccb1b1] to-[#ffdede]">
@@ -353,7 +365,7 @@ export default function ConsultantSignup() {
                         }}
                       >
                         <option value="">Select</option>
-                        <option value="legalConsultation">
+                        {/* <option value="legalConsultation">
                           Legal consultation
                         </option>
                         <option value="counselingAndTherapy">
@@ -367,7 +379,12 @@ export default function ConsultantSignup() {
                         </option>
                         <option value="safetyPlanningAndSupport">
                           Safety planning and support
-                        </option>
+                        </option> */}
+                        {categories.map((category) => (
+                          <option value={category._id}>
+                            {category.categoryName}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>

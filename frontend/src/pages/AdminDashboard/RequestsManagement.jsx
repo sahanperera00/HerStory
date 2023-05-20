@@ -119,12 +119,12 @@ export default function RequestsManagement() {
                               <TableData
                                 value={
                                   <div className="flex gap-4">
-                                    <button
+                                    {/* <button
                                       className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]"
                                       title="View"
                                     >
                                       <BiDetail />
-                                    </button>
+                                    </button> */}
                                     <button
                                       onClick={() => {
                                         axios
