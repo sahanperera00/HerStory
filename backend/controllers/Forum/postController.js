@@ -2,9 +2,10 @@ import Post from "../../models/Forum/postModel.js";
 import User from "../../models/users/userInfoModel.js";
 //import Comment from "../../models/Forum/commentModel.js";
 
+//creating a new post
 export const createPost = async (req, res) => {
   const {
-    postedBy,
+    
     image,
     title,
     category,
@@ -13,6 +14,7 @@ export const createPost = async (req, res) => {
     dateCreated,
     content,
   } = req.body;
+
   const newPost = new Post({
     postedBy: req.user,
     title,
@@ -31,6 +33,7 @@ export const createPost = async (req, res) => {
   }
 };
 
+//retreieves all posts
 export const getPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate("postedBy", "_id email ");
@@ -40,17 +43,19 @@ export const getPosts = async (req, res) => {
   }
 };
 
+//retrieves post by id
 export const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
       .populate("postedBy", "_id email")
-      .populate("comments.postedBy");
+      .populate("comments.postedBy"); //
     res.send(post);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+//deletes post
 export const deletePost = async (req, res) => {
   try {
     const result = await Post.deleteOne({ _id: req.params.id });
@@ -60,6 +65,7 @@ export const deletePost = async (req, res) => {
   }
 };
 
+//updates post
 export const updatePost = async (req, res) => {
   try {
     const updatedPost = req.body;
@@ -76,12 +82,13 @@ export const updatePost = async (req, res) => {
   }
 };
 
+//liking post 
 export const likePost = async (req, res) => {
   try {
     const response = await Post.findByIdAndUpdate(
       req.params.postId,
       {
-        $push: { likes: req.body.userId },
+        $push: { likes: req.body.userId }, 
       },
       {
         new: true,
@@ -93,6 +100,7 @@ export const likePost = async (req, res) => {
   }
 };
 
+//remove it from liking post so pull operator to remove from array
 export const UnlikePost = async (req, res) => {
   try {
     const response = await Post.findByIdAndUpdate(
@@ -110,12 +118,13 @@ export const UnlikePost = async (req, res) => {
   }
 };
 
+//downvote
 export const dislikePost = async (req, res) => {
   try {
     const response = await Post.findByIdAndUpdate(
       req.params.postId,
       {
-        $push: { dislikes: req.body.userId },
+        $push: { dislikes: req.body.userId },//add it to array
       },
       {
         new: true,
@@ -127,12 +136,13 @@ export const dislikePost = async (req, res) => {
   }
 };
 
+//deselect downnvote
 export const undislikePost = async (req, res) => {
   try {
     const response = await Post.findByIdAndUpdate(
       req.params.postId,
       {
-        $pull: { dislikes: req.body.userId },
+        $pull: { dislikes: req.body.userId }, //remove from array
       },
       {
         new: true,
@@ -144,11 +154,12 @@ export const undislikePost = async (req, res) => {
   }
 };
 
+//one comment is created, update post by id to display new comment
 export const makeComment = async (req, res) => {
   try {
-    const response = await Post.findByIdAndUpdate(req.params.postId, {
-      $push: { comments: req.body.comment },
-    }).populate("comments.postedBy");
+    const response = await Post.findByIdAndUpdate(req.params.postId, { 
+      $push: { comments: req.body.comment }, 
+    }).populate("comments.postedBy"); //populate user info
 
     res.json(response);
   } catch (error) {
@@ -156,6 +167,7 @@ export const makeComment = async (req, res) => {
   }
 };
 
+//get filteres posts according to data range
 export const getDateRangePosts = async (req, res) => {
   try {
     const DS = req.params.DS;
