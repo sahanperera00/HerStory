@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import CounsellorSidebar from "./CounsellorSidebar";
 import { Header, TableHeader, TableData } from "../../components";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
@@ -22,35 +24,22 @@ export default function Schedulings() {
     setThemeSettings,
   } = useStateContext();
 
-  /* 
-  ------------------------------------------------
-  YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
-  ------------------------------------------------
-  */
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const userInfo = jwtDecode(localStorage.getItem("token")).object;
 
-  const orders = [
-    {
-      id: 1,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
-    },
-    {
-      id: 2,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
-    },
-    {
-      id: 3,
-      client: "John Doe",
-      grossPrice: "1000",
-      commission: "100",
-      status: "Confirmed",
-    },
-  ];
+    axios
+      .get("http://localhost:8070/counsellor/user/user/" + userInfo._id)
+      .then((res) => {
+        if(!res.data.counsellorInfo.isApproved ) {
+          navigate("/counsellor-dashboard");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>

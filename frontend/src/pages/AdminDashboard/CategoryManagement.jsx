@@ -8,7 +8,6 @@ import { Header } from "../../components";
 import { RxDotsVertical, RxEyeOpen, RxEyeNone, RxPlus } from "react-icons/rx";
 import axios from "axios";
 import AddCategory from "../../components/Modal/AddCategory";
-import { MdOutlineCancel } from "react-icons/md";
 import UpdateCategory from "../../components/Modal/UpdateCategory";
 
 export default function CategoryManagement() {
@@ -26,21 +25,6 @@ export default function CategoryManagement() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [state, setState] = useState(false);
-
-  const handleDeleteCategory = (id) => {
-    axios
-      .delete(`http://localhost:8070/category/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setState(!state);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   useEffect(() => {
     axios
@@ -123,13 +107,6 @@ export default function CategoryManagement() {
                         key={category._id}
                         className="relative w-full px-5 bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:bg-[#fcfcfc] hover:shadow-lg"
                       >
-                        <MdOutlineCancel
-                          className="absolute right-1 top-1 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition duration-200 ease-in-out"
-                          onClick={() => {
-                            handleDeleteCategory(category._id);
-                          }}
-                          title="Delete this category"
-                        />
                         <div className="px-3 py-5">
                           <div className="items-center text-center flex flex-col gap-4">
                             <p className="text-md font-bold text-gray-600 dark:text-gray-400">

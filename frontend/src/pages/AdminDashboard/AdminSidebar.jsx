@@ -86,6 +86,19 @@ export default function AdminSidebar() {
             </NavLink>
 
             <NavLink
+              to="/admin/manage-requests"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : "",
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <BiGitPullRequest /> {/*  icon  */}
+              <span className="capitalize ">Requests Management</span>{" "}
+              {/*  link name  */}
+            </NavLink>
+
+            <NavLink
               to="/admin/manage-consultants"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
@@ -110,7 +123,7 @@ export default function AdminSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <BsPeople /> {/*  icon  */}
-              <span className="capitalize ">Community Management</span>{" "}
+              <span className="capitalize ">Her-Story Communities</span>{" "}
               {/*  link name  */}
             </NavLink>
             <NavLink
@@ -122,7 +135,7 @@ export default function AdminSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <MdOutlineForum /> {/*  icon  */}
-              <span className="capitalize ">Post Management</span>{" "}
+              <span className="capitalize ">Her-Story Posts</span>{" "}
               {/*  link name  */}
             </NavLink>
           </div>

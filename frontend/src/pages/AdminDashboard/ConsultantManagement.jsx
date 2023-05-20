@@ -93,8 +93,7 @@ export default function ConsultantManagement() {
                         <TableHeader value="Email" />
                         <TableHeader value="Category" />
                         <TableHeader value="Ratings" />
-                        <TableHeader value="Status" />
-                        <TableHeader value="Actions" />
+                        {/* <TableHeader value="Actions" /> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -120,18 +119,7 @@ export default function ConsultantManagement() {
                                   />
                                 }
                               />
-                              {data.status === "Active" ? (
-                                <TableData
-                                  color={"#79de79"}
-                                  value={data.status}
-                                />
-                              ) : (
-                                <TableData
-                                  color={"#fb6962"}
-                                  value={data.status}
-                                />
-                              )}
-                              <TableData
+                              {/* <TableData
                                 value={
                                   <div className="flex gap-4">
                                     <button
@@ -140,21 +128,9 @@ export default function ConsultantManagement() {
                                     >
                                       <RxEnvelopeClosed />
                                     </button>
-                                    <button
-                                      className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]"
-                                      title="Activate"
-                                    >
-                                      <RxEyeOpen />
-                                    </button>
-                                    <button
-                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
-                                      title="Deactivate"
-                                    >
-                                      <RxEyeNone />
-                                    </button>
                                   </div>
                                 }
-                              />
+                              /> */}
                             </tr>
                           );
                         })}

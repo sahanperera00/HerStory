@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { getUserBiobyEmail } from '../../controllers/users/clientUserInfo.js';
-import { getAllUsers, loginUser,registerUser, deleteUser } from '../../controllers/users/userController.js';
+import { getAllUsers, loginUser,registerUser, deleteUser, getUserById } from '../../controllers/users/userController.js';
 import { authenticate } from '../../middleware/authentication.js';
 
 
@@ -13,6 +13,7 @@ router.post('/register',registerUser);
 router.post('/login',loginUser);
 router.post('/getUserBiobyEmail',authenticate,getUserBiobyEmail);   //authenticate will authenticate if the logged in user is accessing the route
 router.delete('/:id', deleteUser)
+router.get('/:id', getUserById)
 
 
 export default router;

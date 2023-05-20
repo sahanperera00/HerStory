@@ -62,6 +62,10 @@ const counsellorSchema = mongoose.Schema({
       type: String,
     },
   ],
+  isApproved: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const CounsellorInfo = mongoose.model("CounsellorInfo", counsellorSchema);
