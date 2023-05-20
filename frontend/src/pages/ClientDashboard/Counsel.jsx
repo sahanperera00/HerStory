@@ -4,10 +4,10 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import AdminSidebar from "./AdminSidebar";
-import AdminProfile from "./AdminProfile";
+import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
+import axios from "axios";
 
-export default function AdminDashboard() {
+export default function Counsel() {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -17,6 +17,19 @@ export default function AdminDashboard() {
     themeSettings,
     setThemeSettings,
   } = useStateContext();
+
+  const [counsellors, setCounsellors] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8070/counsellor/approved")
+      .then((res) => {
+        setCounsellors(res.data.counsellorInfo);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
 
   return (
     <div>
@@ -39,11 +52,11 @@ export default function AdminDashboard() {
 
           {activeMenu ? ( // SIDEBAR IMPLEMENTATION
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg  bg-[#f9e9e9]">
-              <AdminSidebar />
+              <ClientSidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
-              <AdminSidebar />
+              <ClientSidebar />
             </div>
           )}
 
@@ -62,10 +75,40 @@ export default function AdminDashboard() {
             <div>
               {themeSettings && <ThemeSettings />}
               <div>
-                <AdminProfile />
+                {/* Show counsellor in the array as cards */}
+
+                <div className="flex flex-wrap gap-5 justify-center">
+                  {counsellors &&
+                    counsellors.length > 0 &&
+                    counsellors.map((counsellor) => (
+                      <div className="relative w-[350px] px-5 justify-center items-center bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:bg-[#fcfcfc] hover:shadow-lg">
+                        <div className="flex flex-col px-8 py-8 rounded-lg">
+                          <h1 className="text-2xl font-bold mt-2 dark:text-white">
+                            <img
+                              src={counsellor.user.pic}
+                              className="w-20 h-20 rounded-full"
+                              alt=""
+                            />
+                            <br />
+                            {counsellor.user.firstName}{" "}
+                            {counsellor.user.lastName}
+                          </h1>
+                          <h1 className="text-2xl font-bold mt-2 dark:text-white">
+                            {counsellor.user.email}
+                          </h1>
+                          <Link
+                            to={`/counsellor-profile/${counsellor._id}`}
+                            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-lg mt-4"
+                          >
+                            Let's Talk !
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </div>
+              <Footer />
             </div>
-            <Footer />
           </div>
         </div>
       </div>

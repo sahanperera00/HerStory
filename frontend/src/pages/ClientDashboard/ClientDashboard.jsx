@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, Sidebar, ThemeSettings } from "../../components";
+import { Navbar, Footer, ThemeSettings } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
 import ClientProfile from "../../components/ClientComponents/ClientProfile";

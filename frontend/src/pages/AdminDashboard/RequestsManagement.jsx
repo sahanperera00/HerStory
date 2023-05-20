@@ -6,8 +6,9 @@ import { Navbar, Footer, ThemeSettings, Button } from "../../components";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
-import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
-import {BiDetail} from "react-icons/bi";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { BiDetail } from "react-icons/bi";
+import axios from "axios";
 
 export default function RequestsManagement() {
   const {
@@ -20,24 +21,24 @@ export default function RequestsManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const orders = [
-    {
-      id: 1,
-      name: "Sahan Perera",
-      email: "sahan@gmail.com",
-      phoneNumber: "0778635445",
-      dob: "2000-01-31",
-      category: "Legal Consultation",
-    },
-    {
-      id: 2,
-      name: "Devindu Samarasinghe",
-      email: "devindu@gmail.com",
-      phoneNumber: "0715646235",
-      dob: "1999-05-12",
-      category: "Couseling & Therapy",
-    },
-  ];
+  const [requests, setRequests] = useState([]);
+  const [state, setState] = useState(false);
+
+  const getdob = (dob) => {
+    const date = new Date(dob).toISOString().substring(0, 10);
+    return date;
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8070/counsellor/notApproved")
+      .then((res) => {
+        setRequests(res.data.counsellorInfo);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [state]);
 
   return (
     <div>
@@ -98,28 +99,67 @@ export default function RequestsManagement() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders &&
-                        orders.map((data) => {
+                      {requests &&
+                        requests.length > 0 &&
+                        requests.map((data) => {
                           return (
                             <tr
-                              key={data.id}
+                              key={data._id}
                               className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
-                              <TableData value={data.name} />
-                              <TableData value={data.email} />
-                              <TableData value={data.dob} />
+                              <TableData
+                                value={
+                                  data.user.firstName + " " + data.user.lastName
+                                }
+                              />
+                              <TableData value={data.user.email} />
+                              <TableData value={getdob(data.dob)} />
                               <TableData value={data.category} />
                               <TableData value={data.phoneNumber} />
                               <TableData
                                 value={
                                   <div className="flex gap-4">
-                                  <button className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]" title="View">
-                                    <BiDetail />
-                                  </button>
-                                    <button className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]" title="Accept">
+                                    {/* <button
+                                      className="text-white bg-[#cbcb6d] p-2 rounded-full hover:bg-[#cbcb6d]"
+                                      title="View"
+                                    >
+                                      <BiDetail />
+                                    </button> */}
+                                    <button
+                                      onClick={() => {
+                                        axios
+                                          .post(
+                                            `http://localhost:8070/counsellor/${data._id}`,
+                                            { isApproved: "true" }
+                                          )
+                                          .then(() => {
+                                            setState(!state);
+                                          })
+                                          .catch((err) => {
+                                            console.log(err);
+                                          });
+                                      }}
+                                      className="text-white bg-[#79de79] p-2 rounded-full hover:bg-[#79de79]"
+                                      title="Accept"
+                                    >
                                       <AiOutlineCheck />
                                     </button>
-                                    <button className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]" title="Reject">
+                                    <button
+                                      onClick={() => {
+                                        axios
+                                          .delete(
+                                            `http://localhost:8070/counsellor/${data._id}`
+                                          )
+                                          .then(() => {
+                                            setState(!state);
+                                          })
+                                          .catch((err) => {
+                                            console.log(err);
+                                          });
+                                      }}
+                                      className="text-white bg-[#fb6962] p-2 rounded-full hover:bg-[#fb6962]"
+                                      title="Reject"
+                                    >
                                       <AiOutlineClose />
                                     </button>
                                   </div>

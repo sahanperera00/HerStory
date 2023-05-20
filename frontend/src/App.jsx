@@ -34,6 +34,8 @@ import ClientSignup from "./pages/ClientSignup/ClientSignup";
 import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import ClientForum from "./pages/Forum/ClientForum";
+import Premium from "./pages/ClientDashboard/Premium";
+import Counsel from "./pages/ClientDashboard/Counsel";
 
 
 
@@ -131,6 +133,7 @@ function App() {
         <Route path="/client/support" element={<ContactSupport/>}/>
         <Route path="/client/complaint" element={<ClientComplaint/>}/>
         <Route path='/chats' element={<ChatPage/>}/>
+        <Route path="/client/premium" element={<Premium/>}/>
 
 
 
@@ -243,6 +246,7 @@ function App() {
         <Route path="/counsellor/chats" element={<Chats />} />
         <Route path="/counsellor/transfers" element={<Transfers />} />
         <Route path="/counsellor/feedbacks" element={<Feedbacks />} />
+        <Route path="/counsel" element={<Counsel />} />
       </Routes>
     </div>
   );
