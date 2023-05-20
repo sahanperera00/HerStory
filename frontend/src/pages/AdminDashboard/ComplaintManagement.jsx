@@ -8,8 +8,11 @@ import AdminSidebar from "./AdminSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 import {BiDetail} from "react-icons/bi";
+import axios from 'axios';
 
 export default function ComplaintManagement() {
+
+  const [complaint, setcomplaint] = useState([]);
   var date = new Date().toISOString().split("T")[0];
   const {
     setCurrentColor,
@@ -21,23 +24,27 @@ export default function ComplaintManagement() {
     setThemeSettings,
   } = useStateContext();
 
-  const orders = [
-    {
-      id: 1,
-      name: "Sahan Perera",
-      email: "sahan@gmail.com",
-      phoneNumber: "0778635445",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      name: "Devindu Samarasinghe",
-      email: "devindu@gmail.com",
-      phoneNumber: "0715646235",
-      status: "Resolved",
-    },
-  ];
+ const getComplaints = async () => {
+   //getcommunity is the function to get the data from the backend
+   axios
+     .get("http://localhost:8070/complaint/")
+     .then((res) => {
+       setcomplaint(res.data); //setcommunity is used to update the state variable
+     })
+     .catch((err) => {
+       alert(err.message);
+     });
+ };
 
+ useEffect(() => {
+   getComplaints(); // <== CHANGE ACCORDING TO YOUR OWN FUNCTIONS, YOU CAN REMOVE THIS LINE IF YOU DON'T NEED IT
+   const currentThemeColor = localStorage.getItem("colorMode"); // KEEP THESE LINES
+   const currentThemeMode = localStorage.getItem("themeMode");
+   if (currentThemeColor && currentThemeMode) {
+     setCurrentColor(currentThemeColor);
+     setCurrentMode(currentThemeMode);
+   }
+ }, []);
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -96,14 +103,14 @@ export default function ComplaintManagement() {
                       </tr>
                     </thead>
                     <tbody>
-                      {orders &&
-                        orders.map((data) => {
+                      {complaint &&
+                        complaint.map((data) => {
                           return (
                             <tr
                               key={data.id}
                               className="bg-white hover:bg-[#fcfcfc] border-b-2 border-gray-200 dark:bg-slate-800"
                             >
-                              <TableData value={data.name} />
+                              <TableData value={data.firstname} />
                               <TableData value={data.email} />
                               <TableData value={data.phoneNumber} />
                               <TableData value={data.status} />
