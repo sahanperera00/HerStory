@@ -8,6 +8,7 @@ import ClientSidebar from "../../components/ClientComponents/ClientSidebar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useChatState } from "../../contexts/ChatProvider";
+import { Header } from "antd/es/layout/layout";
 
 import { useToast } from "@chakra-ui/react";
 
@@ -114,24 +115,30 @@ export default function Counsel() {
               {themeSettings && <ThemeSettings />}
               <div>
                 {/* Show counsellor in the array as cards */}
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+                        Meet your Counsellors
+                      </h2>
+                      <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+                        Raise your voice. You're not alone in this fight!
+                      </p>  
 
                 <div className="flex flex-wrap gap-5 justify-center">
                   {counsellors &&
                     counsellors.length > 0 &&
                     counsellors.map((counsellor) => (
                       <div className="relative w-[350px] px-5 justify-center items-center bg-white dark:bg-secondary-dark-bg rounded-lg shadow-md hover:bg-[#fcfcfc] hover:shadow-lg">
-                        <div className="flex flex-col px-8 py-8 rounded-lg">
+                        <div className="flex flex-col justify-center items-center px-8 py-8 rounded-lg">
                           <h1 className="text-2xl font-bold mt-2 dark:text-white">
                             <img
                               src={counsellor.user.pic}
-                              className="w-20 h-20 rounded-full"
+                              className="w-20 h-20 rounded-full mx-auto"
                               alt=""
                             />
                             <br />
                             {counsellor.user.firstName}{" "}
                             {counsellor.user.lastName}
                           </h1>
-                          <h3 className="text-2xl font-bold mt-2 dark:text-white">
+                          <h3 className="font-bold mt-2 dark:text-white">
                             {counsellor.user.email}
                           </h3>
                           <button
