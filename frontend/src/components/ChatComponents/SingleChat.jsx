@@ -29,7 +29,7 @@ import ProfileModal from "./ProfileModal";
 import io from "socket.io-client";
 
 //socket configuration 
-const ENDPOINT = 'http://127.0.0.1:8070'; //For now the local variable will be 8070
+const ENDPOINT = 'http://localhost:8070'; //For now the local variable will be 8070
 var socket, selectedChatCompare;
 
 const SingleChat = ({  }) => {
