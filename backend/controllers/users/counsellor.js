@@ -98,6 +98,17 @@ export const getNotApprovedCounsellorInfo = async (req, res) => {
   }
 };
 
+export const getApproveCounsellorInfo = async (req, res) => {
+  try {
+    const counsellorInfo = await CounsellorInfo.find({
+      isApproved: true,
+    }).populate("user");
+    res.status(200).json({ counsellorInfo });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const deleteCounsellorInfo = async (req, res) => {
   const { id } = req.params;
   try {

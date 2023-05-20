@@ -35,6 +35,7 @@ import Login from "./pages/Login/Login";
 import CounsellorDashboard from "./pages/CounsellorDashboard/CounsellorDashboard";
 import ClientForum from "./pages/Forum/ClientForum";
 import Premium from "./pages/ClientDashboard/Premium";
+import Counsel from "./pages/ClientDashboard/Counsel";
 
 
 
@@ -245,6 +246,7 @@ function App() {
         <Route path="/counsellor/chats" element={<Chats />} />
         <Route path="/counsellor/transfers" element={<Transfers />} />
         <Route path="/counsellor/feedbacks" element={<Feedbacks />} />
+        <Route path="/counsel" element={<Counsel />} />
       </Routes>
     </div>
   );
