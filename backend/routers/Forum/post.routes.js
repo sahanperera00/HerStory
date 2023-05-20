@@ -17,7 +17,7 @@ import {
 } from "../../controllers/Forum/postController.js";
 
 const router = express.Router();
-
+//routes for posts
 router.get("/", authenticate, getPosts);
 router.get("/:id", authenticate, getPost);
 router.get("/date/:DS/:DE", authenticate, getDateRangePosts);

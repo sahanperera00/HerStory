@@ -11,6 +11,8 @@ import {
 
 const router = express.Router();
 
+
+//routes for community
 router.post("/", createCommunity);
 router.get("/", getCommunities);
 router.get("/:id", getCommunity);

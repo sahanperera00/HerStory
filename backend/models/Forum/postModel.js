@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
+
 const postSchema = mongoose.Schema({
-  postedBy: {
+  postedBy: { //populate user
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },

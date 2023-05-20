@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//DAO
+
 const communitiesSchema = mongoose.Schema({
   comID: {
     type: String,
