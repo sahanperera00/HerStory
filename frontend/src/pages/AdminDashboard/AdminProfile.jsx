@@ -69,7 +69,7 @@ const AdminProfile = () => {
               <br /><br />
             </div>{" "}
           </div>{" "}
-          <div className="mt-20 text-center border-b pb-12">
+          <div className="mt-[8rem] text-center border-b pb-12">
             {" "}
             <h1 className="text-4xl font-medium text-gray-700 dark:text-gray-200">
               {user.firstName} {user.lastName},{" "}

@@ -96,7 +96,7 @@ export const getNotApprovedCounsellorInfo = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 export const deleteCounsellorInfo = async (req, res) => {
   const { id } = req.params;
@@ -108,7 +108,7 @@ export const deleteCounsellorInfo = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
-}
+};
 
 export const getCounsellorInfoById = async (req, res) => {
   const { id } = req.params;
@@ -118,4 +118,16 @@ export const getCounsellorInfoById = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
-}
+};
+
+export const getCounsellorInfoByUserId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const counsellorInfo = await CounsellorInfo.findOne({ user: id }).populate(
+      "user"
+    );
+    res.status(200).json({ counsellorInfo });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

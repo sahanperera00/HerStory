@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
@@ -8,6 +8,8 @@ import CounsellorSidebar from "./CounsellorSidebar";
 import { Header, TableHeader, TableData } from "../../components";
 import StarRatings from "react-star-ratings";
 import { RxEnvelopeClosed, RxEyeOpen, RxEyeNone } from "react-icons/rx";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 /* IMPORT ALL YOUR IMPORTS AS USUAL ABOVE HERE, REMOVE UNNECESSARY ONES*/
 
@@ -29,6 +31,8 @@ export default function Feedbacks() {
   YOUR AXIOS CALLS AND USE STATES GOES  ABOVE HERE 
   ------------------------------------------------
   */
+
+  const navigate = useNavigate();
 
   const orders = [
     {
@@ -81,6 +85,21 @@ export default function Feedbacks() {
     },
     
 ];
+  
+useEffect(() => {
+  const userInfo = jwtDecode(localStorage.getItem("token")).object;
+
+  axios
+    .get("http://localhost:8070/counsellor/user/user/" + userInfo._id)
+    .then((res) => {
+      if(!res.data.counsellorInfo.isApproved ) {
+        navigate("/counsellor-dashboard");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
 
   return (
     <div>

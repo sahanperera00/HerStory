@@ -93,7 +93,7 @@ export default function ConsultantManagement() {
                         <TableHeader value="Email" />
                         <TableHeader value="Category" />
                         <TableHeader value="Ratings" />
-                        <TableHeader value="Actions" />
+                        {/* <TableHeader value="Actions" /> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -119,7 +119,7 @@ export default function ConsultantManagement() {
                                   />
                                 }
                               />
-                              <TableData
+                              {/* <TableData
                                 value={
                                   <div className="flex gap-4">
                                     <button
@@ -130,7 +130,7 @@ export default function ConsultantManagement() {
                                     </button>
                                   </div>
                                 }
-                              />
+                              /> */}
                             </tr>
                           );
                         })}
