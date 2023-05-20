@@ -79,7 +79,7 @@ export default function CounsellorSidebar() {
             </NavLink> */}
 
             <NavLink
-              to="/counsellor/chats"
+              to="/chats"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
