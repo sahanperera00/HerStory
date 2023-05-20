@@ -56,3 +56,12 @@ export const updateCategory = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 }
+
+export const getVisibleCategories = async (req, res) => {
+  try {
+    const category = await Category.find({ visibility: true });
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
