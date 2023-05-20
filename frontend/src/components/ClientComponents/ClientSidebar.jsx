@@ -1,12 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
-import { FiUser,FiSettings } from "react-icons/fi";
+import { FiUser, FiSettings } from "react-icons/fi";
 import { BsPeople } from "react-icons/bs";
-import {CgCommunity} from "react-icons/cg"
-import {SlDiamond} from "react-icons/sl";
- 
-import {AiOutlineForm} from "react-icons/ai"
-import {CiSettings} from "react-icons/ci"
+import { CgCommunity } from "react-icons/cg";
+import { SlDiamond } from "react-icons/sl";
+
+import { AiOutlineForm } from "react-icons/ai";
+import { CiSettings } from "react-icons/ci";
 import { MdOutlineForum } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../../contexts/ContextProvider";
@@ -56,7 +56,6 @@ export default function ClientSidebar() {
               Services
             </p>
 
-
             <NavLink
               to="/client/complaint"
               onClick={handleCloseSideBar}
@@ -69,20 +68,20 @@ export default function ClientSidebar() {
               <span className="capitalize ">Official Complaints</span>
               {/*  link name  */}
             </NavLink>
-              
+
             <NavLink
-              to="/community"
+              to="/forum"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : "",
               })}
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
-              <CgCommunity /> {/*  icon  */}
-              <span className="capitalize ">Her-Story Community</span>{" "}
+              <MdOutlineForum /> {/*  icon  */}
+              <span className="capitalize ">Her-Story Forum</span>{" "}
               {/*  link name  */}
             </NavLink>
-            
+
             <NavLink
               to="/counsel"
               onClick={handleCloseSideBar}
@@ -138,18 +137,30 @@ export default function ClientSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <FiSettings /> {/*  icon  */}
-              <span className="capitalize ">Settings</span>{" "}
-              {/*  link name  */}
+              <span className="capitalize ">Settings</span> {/*  link name  */}
             </NavLink>
 
-            <div id="dropdown-cta" className="p-4 mt-6 rounded-lg mr-4 " role="alert" style={{background: currentColor, opacity: '50%'}}>
+            <div
+              id="dropdown-cta"
+              className="p-4 mt-6 rounded-lg mr-4 "
+              role="alert"
+              style={{ background: currentColor, opacity: "50%" }}
+            >
               <div className="flex items-center mb-3">
-                <span className="bg-orange-100 text-orange-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Beta</span>
+                <span className="bg-orange-100 text-orange-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">
+                  Beta
+                </span>
               </div>
               <p className="mb-3 text-sm text-black dark:text-black ">
-                The current version of HerStory is a prototype and we will be back with a bang! 
+                The current version of HerStory is a prototype and we will be
+                back with a bang!
               </p>
-              <a className="text-sm  underline hover:text-blue-900 text-white dark:hover:text-blue-300" href="https://www.linkedin.com/in/devindusamarasinghe/">Project by Code Crusaders</a>
+              <a
+                className="text-sm  underline hover:text-blue-900 text-white dark:hover:text-blue-300"
+                href="https://www.linkedin.com/in/devindusamarasinghe/"
+              >
+                Project by Code Crusaders
+              </a>
             </div>
           </div>
         </>
