@@ -131,9 +131,9 @@ export default function Counsel() {
                             {counsellor.user.firstName}{" "}
                             {counsellor.user.lastName}
                           </h1>
-                          <h1 className="text-2xl font-bold mt-2 dark:text-white">
+                          <h3 className="text-2xl font-bold mt-2 dark:text-white">
                             {counsellor.user.email}
-                          </h1>
+                          </h3>
                           <button
                             onClick={()=>handleChat(counsellor.user._id)}
                             className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-lg mt-4"
