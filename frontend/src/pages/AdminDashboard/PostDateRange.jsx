@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Input, Button, Upload } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Footer, ThemeSettings } from "../../components";
@@ -20,7 +20,7 @@ export default function PostDateRange() {
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [posts, setPosts] = useState([]);
 
   const toDateRange = () => {
@@ -46,7 +46,13 @@ export default function PostDateRange() {
 
     const getPosts = async () => {
       await axios
-        .get("http://localhost:8070/posts/date/"+location.state.DS+"/"+location.state.DE, header)
+        .get(
+          "http://localhost:8070/posts/date/" +
+            location.state.DS +
+            "/" +
+            location.state.DE,
+          header
+        )
         .then((res) => {
           setPosts(res.data);
         })
@@ -168,7 +174,7 @@ export default function PostDateRange() {
                   {" "}
                   <div className=" bg-slate-100 pt-1 rounded-lg px-5 w-56">
                     <DateRangePickerComponent
-                      //ref={dateRangeRef}
+                      ref={dateRangeRef}
                       placeholder="Select a date range"
                     />
                   </div>
@@ -253,7 +259,15 @@ export default function PostDateRange() {
                                 <TableData value={index + 1} />
                                 <TableData value={data.title} />
                                 <TableData value={data.postedBy.email} />
-                                <TableData value={data.dateCreated} />
+                                <TableData
+                                  value={
+                                    data.dateCreated
+                                      ? data.dateCreated
+                                          .toString()
+                                          .split("T")[0]
+                                      : ""
+                                  }
+                                />
                                 <TableData
                                   value={
                                     <div className="flex gap-4">

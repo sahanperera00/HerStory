@@ -10,6 +10,7 @@ function Modal({ setOpenModal, setSuccess, postId, post }) {
   const [tags, setTags] = useState(post?.tags || []);
   const [title, setTitle] = useState(post?.title || "");
   const [description, setDescription] = useState(post?.description || "");
+  const [category, setCategory] = useState(post?.category || "");
   const [content, setContent] = useState(post?.content || "");
   const [dateCreated, setdateCreated] = useState(post?.dateCreated || "");
   const [image, setImage] = useState(post?.image || "");
@@ -43,9 +44,11 @@ function Modal({ setOpenModal, setSuccess, postId, post }) {
     postedBy: user,
     title,
     description,
+    category,
     image,
     tags,
     content,
+    dateCreated
   };
 
   const handlePost = async () => {
@@ -109,6 +112,20 @@ function Modal({ setOpenModal, setSuccess, postId, post }) {
           onChange={(e) => setContent(e.target.value)}
           className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
         />
+        <label className="block text-black text-sm font-bold mt-4 mb-2">
+          Category
+        </label>
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full py-2 px-3 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline-blue"
+        >
+          <option value="Select">Select</option>
+          <option value="Survivor">Survival</option>
+          <option value="Legal">Legal</option>
+          <option value="Mental Health">Mental Health</option>
+          <option value="Education">Education</option>
+          <option value="Workplace Harassments">Workplace Harassments</option>
+        </select>
         <label className="block text-black text-sm font-bold mt-4 mb-2">
           Date Created
         </label>

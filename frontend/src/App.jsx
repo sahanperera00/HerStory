@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Forum from "./pages/Forum/Forum";
+import ForumSurvivor from "./pages/Forum/ForumSurvivor";
 import PostManagement from "./pages/AdminDashboard/PostManagement";
 import PostDateRange from "./pages/AdminDashboard/PostDateRange";
 import CommunityManagement from "./pages/AdminDashboard/CommunityManagement";
@@ -106,7 +107,8 @@ function App() {
         {/* chanu add here */}
         <Route path="/admin/manage-post" element={<PostManagement />} />
         <Route path ="admin/PostDateRange" element={<PostDateRange/>}/>
-        
+        <Route path="/forumSurvivor" element={<ForumSurvivor />} />
+       
         <Route
           path="/admin/manage-community"
           element={<CommunityManagement />}
