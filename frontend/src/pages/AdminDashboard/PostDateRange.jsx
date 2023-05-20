@@ -123,6 +123,37 @@ export default function PostDateRange() {
     }
   };
 
+  const confirmFunc1 = async () => {
+    Swal.fire({
+      title: "Are you sure you want to remove all the posts?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      color: "#f8f9fa",
+      background: "#6c757d",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Remove all!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(`http://localhost:8070/posts/`, header);
+        if (res.status === 200) {
+          setPosts(posts.filter((p) => p._id !== postId));
+        }
+        Swal.fire({
+          icon: "success",
+          title: "Posts Successfully Deleted",
+          color: "#f8f9fa",
+          background: "#6c757d",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else {
+        navigate("/admin/manage-post");
+      }
+    });
+  };
+
   return (
     <div>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -185,6 +216,15 @@ export default function PostDateRange() {
                       onClick={() => filterDate()}
                     >
                       Filter
+                    </button>
+                  </div>
+                  <div className="ml-5">
+                    <button
+                      type="button"
+                      className="py-2 px-4 rounded-lg text-white bg-pink-400"
+                      onClick={() => confirmFunc1()}
+                    >
+                      Remove all
                     </button>
                   </div>
                   <div className=" mr-0 ml-auto">
