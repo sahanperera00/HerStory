@@ -123,7 +123,7 @@ export default function AdminSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <BsPeople /> {/*  icon  */}
-              <span className="capitalize ">Community Management</span>{" "}
+              <span className="capitalize ">Her-Story Communities</span>{" "}
               {/*  link name  */}
             </NavLink>
             <NavLink
@@ -135,7 +135,7 @@ export default function AdminSidebar() {
               className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               <MdOutlineForum /> {/*  icon  */}
-              <span className="capitalize ">Post Management</span>{" "}
+              <span className="capitalize ">Her-Story Posts</span>{" "}
               {/*  link name  */}
             </NavLink>
           </div>
