@@ -81,7 +81,7 @@ const CounsellorProfile = () => {
               Colombo, Sri Lanka
             </p>{" "}
             <p className="mt-8 text-gray-500">
-              System Admin
+              System {user.role}
             </p>
           </div>{" "}
           <div className="mt-12 flex flex-col justify-center">
