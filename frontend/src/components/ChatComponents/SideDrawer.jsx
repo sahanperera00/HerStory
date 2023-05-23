@@ -136,7 +136,7 @@ const SideDrawer = () => {
       );
 
       if (!chats.find((chat) => chat._id === data._id))
-        setChats([data, ...chats]); //If we already have the chat we are creating, dont duplicate it. Just show the same we have created before.
+        setChats([data, ...chats]); //add new chat to chats array: does not duplicate *Check controller
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
