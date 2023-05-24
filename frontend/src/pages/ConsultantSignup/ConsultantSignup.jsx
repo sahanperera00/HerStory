@@ -163,9 +163,10 @@ export default function ConsultantSignup() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8070/category")
+      .get("http://localhost:8070/category/visible")
       .then((res) => {
         setCategories(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -365,24 +366,9 @@ export default function ConsultantSignup() {
                         }}
                       >
                         <option value="">Select</option>
-                        {/* <option value="legalConsultation">
-                          Legal consultation
-                        </option>
-                        <option value="counselingAndTherapy">
-                          Counseling and therapy
-                        </option>
-                        <option value="selfDefenseAndSafetyTraining">
-                          Self-defense and safety training
-                        </option>
-                        <option value="workplaceHarassmentConsultation">
-                          Workplace harassment consultation
-                        </option>
-                        <option value="safetyPlanningAndSupport">
-                          Safety planning and support
-                        </option> */}
-                        {categories.map((category) => (
+                        {categories && categories.map((category) => (
                           <option value={category._id}>
-                            {category.categoryName}
+                            {category.name}
                           </option>
                         ))}
                       </select>
